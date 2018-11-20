@@ -1,0 +1,34 @@
+main
+{
+	int a[2];
+	int b;
+	char ch;
+	read(a[1]);
+	write(b);
+	b = 1;
+	if (b == 1)
+	{
+		b = a[1] * (2 + 1 - 3 / 5);
+	}
+	else
+	{
+		while (b >= 3)
+		{
+			b = 1;
+		}
+		while (b <= 3)
+		{
+			b = 2;
+		}
+		while (b != 3)
+		{
+			if (b > 1)
+			{
+				b = 1;
+			}
+			if (b < 1)
+			{
+				b = 1;
+			}
+		}
+	}a
