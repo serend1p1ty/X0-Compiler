@@ -19,8 +19,28 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="getSym.c" />
     <ClCompile Include="global.c" />
+    <ClCompile Include="lexicalAnalysis\getSym.c" />
+    <ClCompile Include="syntacticAnalysis\additive_expr.c" />
+    <ClCompile Include="syntacticAnalysis\compound_stat.c" />
+    <ClCompile Include="syntacticAnalysis\declaration_list.c" />
+    <ClCompile Include="syntacticAnalysis\declaration_stat.c" />
+    <ClCompile Include="syntacticAnalysis\enter.c" />
+    <ClCompile Include="syntacticAnalysis\error.c" />
+    <ClCompile Include="syntacticAnalysis\expression.c" />
+    <ClCompile Include="syntacticAnalysis\expression_stat.c" />
+    <ClCompile Include="syntacticAnalysis\factor.c" />
+    <ClCompile Include="syntacticAnalysis\findPosition.c" />
+    <ClCompile Include="syntacticAnalysis\if_stat.c" />
+    <ClCompile Include="syntacticAnalysis\read_stat.c" />
+    <ClCompile Include="syntacticAnalysis\simple_expr.c" />
+    <ClCompile Include="syntacticAnalysis\statement.c" />
+    <ClCompile Include="syntacticAnalysis\statement_list.c" />
+    <ClCompile Include="syntacticAnalysis\term.c" />
+    <ClCompile Include="syntacticAnalysis\type.c" />
+    <ClCompile Include="syntacticAnalysis\var.c" />
+    <ClCompile Include="syntacticAnalysis\while_stat.c" />
+    <ClCompile Include="syntacticAnalysis\write_stat.c" />
     <ClCompile Include="x0Compiler.c" />
   </ItemGroup>
   <ItemGroup>

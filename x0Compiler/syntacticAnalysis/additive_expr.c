@@ -1,0 +1,14 @@
+#include "../global.h"
+
+/*
+ * additive_expr”Ô∑®∑÷Œˆ≥Ã–Ú
+ */
+void additive_expr ()
+{
+	term ();
+	while (sym == plus || sym == minus)
+	{
+		getSym ();
+		term ();
+	}
+}

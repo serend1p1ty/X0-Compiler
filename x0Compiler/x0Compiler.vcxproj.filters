@@ -9,9 +9,11 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="资源文件">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="源文件\lexicalAnalysis">
+      <UniqueIdentifier>{9fc66e39-c83c-46f0-978e-e7c098230299}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\syntacticAnalysis">
+      <UniqueIdentifier>{3d43cb2a-d46e-42fa-a9b7-abc3de557520}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -21,8 +23,68 @@
     <ClCompile Include="global.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="getSym.c">
-      <Filter>源文件</Filter>
+    <ClCompile Include="lexicalAnalysis\getSym.c">
+      <Filter>源文件\lexicalAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\additive_expr.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\compound_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\declaration_list.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\declaration_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\enter.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\error.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\expression.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\expression_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\factor.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\findPosition.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\if_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\read_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\simple_expr.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\statement.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\statement_list.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\term.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\type.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\var.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\while_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
+    </ClCompile>
+    <ClCompile Include="syntacticAnalysis\write_stat.c">
+      <Filter>源文件\syntacticAnalysis</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

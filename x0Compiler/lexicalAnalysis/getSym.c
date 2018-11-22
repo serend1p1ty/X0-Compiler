@@ -1,25 +1,48 @@
-#include "global.h"
+#include "../global.h"
 
 /*
  * 从输入文件中读取一个字符
  */
 void getCh ()
 {
-	if (feof (fin)) // 文件已到末尾
+	if (posCh == chNum)	/* 判断缓冲区中是否有字符，若无字符，则读入下一行字符(包括换行符)到缓冲区中 */
 	{
-		return;
+		/* 初始化计数器 */
+		chNum = 0;
+		posCh = 0;
+
+		/* 此处要注意feof的操作 */
+		char temp = fgetc(fin);
+		while (!feof (fin))
+		{
+			if (chNum >= MAX_SIZE_LINE)	/* 输入文件一行的字符太多 */
+			{
+				error (1);
+			}
+
+			printf ("%c", temp);
+			lineCache[chNum++] = temp;
+
+			if (temp == '\n')
+			{
+				break;
+			}
+
+			temp = fgetc (fin);
+		}
 	}
-	fscanf (fin, "%c", &ch);
+	if (posCh != chNum)
+		ch = lineCache[posCh++];
 }
 
 /*
- * 词法分析，读取一个终结符
+ * 词法分析程序：一次读取一个终结符
  */
 void getSym ()
 {
 	int i, j, k;
 
-	while (ch == ' ' || ch == 10 || ch == 9)	/* 过滤空格、换行和制表符 */
+	while (ch == ' ' || ch == '\n' || ch == 9)	/* 过滤空格、换行和制表符 */
 	{
 		getCh ();
 	}
@@ -34,10 +57,9 @@ void getSym ()
 			{
 				temp[k++] = ch;
 			}
-			else
+			else /* 标识符长度太长 */
 			{
-				printf ("标识符长度太长\n");
-				exit (0);
+				error (2);
 			}
 			getCh ();
 		} while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'));
@@ -85,8 +107,7 @@ void getSym ()
 				k++;
 				if (k > MAX_SIZE_NUMBER)	/* 数字位数太多 */
 				{
-					printf ("数字位数太多\n");
-					exit (0);
+					error (3);
 				}
 				getCh ();
 			} while (ch >= '0' && ch <= '9');
@@ -170,7 +191,7 @@ void test_getSym ()
 {
 	
 	int i = 1;
-	while (!feof(fin))
+	for (int i = 1; i <= 100; i++)
 	{
 		printf ("读取的第%d个终结符是: ", i++);
 		getSym ();
@@ -261,6 +282,9 @@ void test_getSym ()
 			break;
 		case 28:
 			printf ("%d", num);
+			break;
+		case 29:
+			printf ("#");
 			break;
 		}
 		printf ("\n");
