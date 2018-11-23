@@ -90,6 +90,9 @@ void error (int error_code)
 		case 26:
 			printf ("标识符不是int或char数组\n");
 			break;
+		case 27:
+			printf ("程序太长\n");
+			break;
 		default:
 			printf ("不存在的错误码!");
 	}

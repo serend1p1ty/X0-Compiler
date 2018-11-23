@@ -5,15 +5,24 @@
  */
 void compile ()
 {
+	gen (jmp, 0, 1);
 	getSym ();
+
 	if (sym == mainsym)
 	{
 		getSym ();
+
 		if (sym == lbrace)
 		{
 			getSym ();
-			declaration_list ();
+
+			int offset = 3;	/* 局部变量相对于活动记录开始位置的偏移 */
+			declaration_list (&offset);
+
+			gen (ini, 0, offset); /* 声明结束的时候就知道了需要预留多少空间 */
+
 			statement_list ();
+
 			if (sym == rbrace)
 			{
 				printf ("\n***************\n");
@@ -55,9 +64,18 @@ int main ()
 		fclose (fin);
 		return 1;
 	}
-	rewind (fin);
 
 	compile ();	/* 编译 */
+
+	FILE* fout = fopen ("./testSamples/output.txt", "w");
+	
+	for (int i = 0; i < iterCode; i++)
+	{
+		fprintf (fout, "[%d] %s %d %d\n", i, fctCode_string[code[i].fct], code[i].lev_dif, code[i].offset);
+	}
+
+	fclose (fout);
+
 
 	return 0;
 }

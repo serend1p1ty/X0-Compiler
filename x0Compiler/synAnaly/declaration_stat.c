@@ -3,10 +3,10 @@
 /*
  * declaration_stat语法分析程序
  */
-void declaration_stat ()
+void declaration_stat (int* ptr_offset)
 {
 	/* 
-	 * 保存现在的符号类型, 1: char, 0: int 
+	 * 保存现在的符号类型, 1: char, 0: int
 	 */
 	int isChar = (sym == charsym);
 
@@ -20,13 +20,13 @@ void declaration_stat ()
 			/* 声明的是char变量 */	
 			if (isChar)
 			{
-				enum objectKind temp = charVar;
-				enter (temp);
+				enter (charVar, *ptr_offset, 1);
+				*ptr_offset = *ptr_offset + 1;
 			}
 			else /* 声明的是int变量 */
 			{
-				enum objectKind temp = intVar;
-				enter (temp);
+				enter (intVar, *ptr_offset, 1);
+				*ptr_offset = *ptr_offset + 1;
 			}
 
 			getSym ();
@@ -45,13 +45,13 @@ void declaration_stat ()
 						/* 声明的是char数组 */
 						if (isChar)
 						{
-							enum objectKind temp = charArray;
-							enter (temp);
+							enter (charArray, *ptr_offset, num);
+							*ptr_offset = *ptr_offset + num;
 						}
 						else /* 声明的是int数组 */
 						{
-							enum objectKind temp = intArray;
-							enter (temp);
+							enter (intArray, *ptr_offset, num);
+							*ptr_offset = *ptr_offset + num;
 						}
 						
 						getSym ();

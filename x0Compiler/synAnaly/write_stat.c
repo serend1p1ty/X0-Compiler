@@ -9,6 +9,7 @@ void write_stat ()
 	{
 		getSym ();
 		expression ();
+
 		if (sym == semic)
 		{
 			getSym ();
@@ -17,6 +18,8 @@ void write_stat ()
 		{
 			error (10);
 		}
+
+		gen (opr, 0, 15); /* 将栈顶元素输出 */
 	}
 	else /* 缺少write */
 	{

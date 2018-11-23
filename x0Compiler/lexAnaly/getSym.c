@@ -32,7 +32,9 @@ void getCh ()
 		}
 	}
 	if (posCh != chNum)
+	{
 		ch = lineCache[posCh++];
+	}
 }
 
 /*
@@ -183,112 +185,3 @@ void getSym ()
 		}
 	}
 }
-
-#define DEBUG 0
-#if DEBUG == 1
-
-void test_getSym ()
-{
-	
-	int i = 1;
-	for (int i = 1; i <= 100; i++)
-	{
-		printf ("读取的第%d个终结符是: ", i++);
-		getSym ();
-		switch (sym)
-		{
-		case 0:
-			printf ("nul");
-		case 1:
-			printf ("%s", id);
-			break;
-		case 2:
-			printf ("main");
-			break;
-		case 3:
-			printf ("char");
-			break;
-		case 4:
-			printf ("int");
-			break;
-		case 5:
-			printf ("if");
-			break;
-		case 6:
-			printf ("else");
-			break;
-		case 7:
-			printf ("while");
-			break;
-		case 8:
-			printf ("read");
-			break;
-		case 9:
-			printf ("write");
-			break;
-		case 10:
-			printf ("+");
-			break;
-		case 11:
-			printf ("-");
-			break;
-		case 12:
-			printf ("*");
-			break;
-		case 13:
-			printf ("/");
-			break;
-		case 14:
-			printf ("(");
-			break;
-		case 15:
-			printf (")");
-			break;
-		case 16:
-			printf ("[");
-			break;
-		case 17:
-			printf ("]");
-			break;
-		case 18:
-			printf ("{");
-			break;
-		case 19:
-			printf ("}");
-			break;
-		case 20:
-			printf (";");
-			break;
-		case 21:
-			printf ("=");
-			break;
-		case 22:
-			printf (">");
-			break;
-		case 23:
-			printf ("<");
-			break;
-		case 24:
-			printf (">=");
-			break;
-		case 25:
-			printf ("<=");
-			break;
-		case 26:
-			printf ("==");
-			break;
-		case 27:
-			printf ("!=");
-			break;
-		case 28:
-			printf ("%d", num);
-			break;
-		case 29:
-			printf ("#");
-			break;
-		}
-		printf ("\n");
-	}
-}
-
-#endif
