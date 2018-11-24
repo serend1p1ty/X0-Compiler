@@ -8,7 +8,7 @@ void error (int error_code)
 	/* 出错时当前终结符已经读完, ch为当前终结符的下一个字符, posCh指着当前终结符的下下一个字符 */
 	space[posCh - 2] = '\0';
 
-	printf ("%s^", space);
+	printf ("%s^", space); /* 标记错误位置 */
 
 	switch (error_code)
 	{
@@ -91,10 +91,25 @@ void error (int error_code)
 			printf ("标识符不是int或char数组\n");
 			break;
 		case 27:
-			printf ("程序太长\n");
+			printf ("程序太长!\n");
+			break;
+		case 28:
+			printf ("不合法的opr操作数!\n");
+			break;
+		case 29:
+			printf ("不合法的指令码!\n");
+			break;
+		case 30:
+			printf ("不合法的运算符!\n");
+			break;
+		case 31:
+			printf ("缺少for\n");
+			break;
+		case 32:
+			printf ("\n");
 			break;
 		default:
-			printf ("不存在的错误码!");
+			printf ("不存在的错误码!\n");
 	}
 	printf ("\ntip: ^所指即出错位置\n");
 	exit (0);

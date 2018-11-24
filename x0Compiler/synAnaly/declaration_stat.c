@@ -17,7 +17,7 @@ void declaration_stat (int* ptr_offset)
 		getSym ();
 		if (sym == semic)
 		{
-			/* 声明的是char变量 */	
+			/* 声明的是char变量 */
 			if (isChar)
 			{
 				enter (charVar, *ptr_offset, 1);

@@ -6,7 +6,7 @@
 void expression_stat ()
 {
 	/* 如果sym属于first(expression)，就执行expression语法分析程序 */
-	if (sym == hashsym || sym == ident|| sym == lparen || sym == number)
+	if (sym == hashsym || sym == ident|| sym == lparen || sym == number || sym == minus)
 	{
 		expression ();
 		if (sym == semic)

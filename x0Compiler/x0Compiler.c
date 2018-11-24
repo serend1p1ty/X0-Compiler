@@ -25,6 +25,8 @@ void compile ()
 
 			if (sym == rbrace)
 			{
+				gen (opr, 0, 0); /* 返回调用过程 */
+
 				printf ("\n***************\n");
 				printf ("语法正确!\n");
 				printf ("***************\n");
@@ -65,7 +67,7 @@ int main ()
 		return 1;
 	}
 
-	compile ();	/* 编译 */
+	compile ();	/* 检查语法是否正确，并编译成中间代码 */
 
 	FILE* fout = fopen ("./testSamples/output.txt", "w");
 	
@@ -76,6 +78,7 @@ int main ()
 
 	fclose (fout);
 
+	Interpret (); /* 解释执行生成的中间代码 */
 
 	return 0;
 }

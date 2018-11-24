@@ -7,7 +7,8 @@ void simple_expr ()
 {
 	additive_expr ();
 	if (sym == great || sym == less || sym == greateql
-		|| sym == lesseql || sym == eqleql || sym == neql)
+		|| sym == lesseql || sym == eqleql || sym == neql
+		|| sym == andsym || sym == orsym)
 	{
 		enum symbol tempSym = sym; /* 保存此时的sym */
 		getSym ();
@@ -33,9 +34,14 @@ void simple_expr ()
 			case neql:
 				gen (opr, 0, 9);
 				break;
-			default:
-				printf ("不是正确的比较符号\n");
+			case andsym:
+				gen (opr, 0, 16);
+				break;
+			case orsym:
+				gen (opr, 0, 17);
+				break;
+			default: /* 不合法的运算符 */
+				error (30);
 		}
-
 	}
 }

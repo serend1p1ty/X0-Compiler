@@ -26,9 +26,13 @@ void statement ()
 		compound_stat ();
 	}
 	else if (sym == semic || sym == ident || sym == hashsym
-		|| sym == lparen || sym == number)	/* expression语句 */
+		|| sym == lparen || sym == number || sym == minus)	/* expression语句 */
 	{
 		expression_stat ();
+	}
+	else if (sym == forsym) /* for语句 */
+	{
+		for_stat ();
 	}
 	else /* 缺少if或while或read或write或{或;或标识符或数字或#或( */
 	{

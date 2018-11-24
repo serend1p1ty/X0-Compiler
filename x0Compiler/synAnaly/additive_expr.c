@@ -5,7 +5,17 @@
  */
 void additive_expr ()
 {
-	term ();
+	if (sym == minus) /* 这里减号看作负号 */
+	{
+		getSym ();
+		term ();
+		gen (opr, 0, 1);
+	}
+	else
+	{
+		term ();
+	}
+
 	while (sym == plus || sym == minus)
 	{
 		enum symbol tempSym = sym; /* 保存此时的符号 */

@@ -95,6 +95,9 @@
     <ClCompile Include="lexAnaly\getSym.c">
       <Filter>源文件\lexAnaly</Filter>
     </ClCompile>
+    <ClCompile Include="synAnaly\for_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

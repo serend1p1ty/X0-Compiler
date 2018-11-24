@@ -32,6 +32,7 @@
     <ClCompile Include="synAnaly\expression_stat.c" />
     <ClCompile Include="synAnaly\factor.c" />
     <ClCompile Include="synAnaly\findPosition.c" />
+    <ClCompile Include="synAnaly\for_stat.c" />
     <ClCompile Include="synAnaly\gen.c" />
     <ClCompile Include="synAnaly\if_stat.c" />
     <ClCompile Include="synAnaly\read_stat.c" />

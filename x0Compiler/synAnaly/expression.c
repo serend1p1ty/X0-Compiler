@@ -33,7 +33,7 @@ void expression ()
 			error (11);
 		}
 	}
-	else if (sym == lparen || sym == number || sym == ident)	/* symÊôÓÚfirst(simple_expr) */
+	else if (sym == lparen || sym == number || sym == ident || sym == minus)	/* symÊôÓÚfirst(simple_expr) */
 	{
 		simple_expr ();
 	}
