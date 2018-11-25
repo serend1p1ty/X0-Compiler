@@ -20,8 +20,8 @@ void term ()
 			case slash:
 				gen (opr, 0, 5);
 				break;
-			default:
-				printf ("符号应该为*或/\n");
+			default: /* 不合法的运算符 */
+				error (30);
 		}
 	}
 }

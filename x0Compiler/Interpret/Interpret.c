@@ -53,8 +53,9 @@ void Interpret ()
 						t = t - 1;
 						s[t] = s[t] / s[t + 1];
 						break;
-					case 6: /* 栈顶元素的奇偶判断 */
-						s[t] = s[t] % 2;
+					case 6: /* 取模 */
+						t = t - 1;
+						s[t] = s[t] % s[t + 1];
 						break;
 					case 8: /* 次栈顶项与栈顶项是否相等 */
 						t = t - 1;
@@ -96,7 +97,7 @@ void Interpret ()
 						t = t - 1;
 						s[t] = s[t] || s[t + 1];
 						break;
-					case 18: /* 逻辑取反 */
+					case 18: /* 逻辑非 */
 						s[t] = !s[t];
 						break;
 					default: /* 不合法的opr操作数 */

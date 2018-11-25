@@ -16,7 +16,7 @@ void additive_expr ()
 		term ();
 	}
 
-	while (sym == plus || sym == minus)
+	while (sym == plus || sym == minus || sym == modsym)
 	{
 		enum symbol tempSym = sym; /* 保存此时的符号 */
 		getSym ();
@@ -30,8 +30,11 @@ void additive_expr ()
 			case minus:
 				gen (opr, 0, 3);
 				break;
-			default:
-				printf ("符号应该为+或-\n");
+			case modsym:
+				gen (opr, 0, 6);
+				break;
+			default: /* 不合法的运算符 */
+				error (30);
 		}
 	}
 }

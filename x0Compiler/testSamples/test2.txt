@@ -1,0 +1,23 @@
+main
+{
+    int a;
+    int b;
+    int max;
+    int ans;
+    
+    read a;
+    read b;
+
+    if (a > b)
+    {
+        #max = a;
+    }
+    else
+    {
+        #max = b;
+    }
+
+    for (#ans = max; ans % a != 0 || ans % b != 0; #ans = ans + 1);
+
+    write ans;
+}

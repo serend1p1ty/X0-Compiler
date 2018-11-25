@@ -37,7 +37,7 @@ void for_stat ()
 					if (sym == rparen)
 					{
 						getSym ();
-						compound_stat ();
+						statement ();
 						gen (jmp, 0, L1);
 						
 						/* »ØÌî */

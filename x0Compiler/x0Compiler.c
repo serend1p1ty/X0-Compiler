@@ -52,7 +52,7 @@ int main ()
 	//printf ("请输入x0文件名：");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "./testSamples/test_synAnaly.txt");
+	strcpy (fileName, "./testSamples/test1.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* 文件无法打开 */
 	{
