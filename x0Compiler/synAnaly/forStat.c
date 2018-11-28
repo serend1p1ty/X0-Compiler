@@ -3,7 +3,7 @@
 /*
  * forÓï¾äÓï·¨·ÖÎö³ÌĞò
  */
-void for_stat ()
+void forStat ()
 {
 	if (sym == forsym)
 	{

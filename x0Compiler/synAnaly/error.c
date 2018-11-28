@@ -46,16 +46,16 @@ void error (int error_code)
 			printf ("缺少=\n");
 			break;
 		case 12:
-			printf ("缺少#或(或数字或标识符\n");
+			printf ("缺少#或标识符或(或数字或-或++或--或odd或!\n");
 			break;
 		case 13:
-			printf ("缺少#或标识符或数字或(或;\n");
+			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或;\n");
 			break;
 		case 14:
 			printf ("缺少)\n");
 			break;
 		case 15:
-			printf ("缺少(或标识符或数字\n");
+			printf ("缺少(或标识符或数字或!或++或--\n");
 			break;
 		case 16:
 			printf ("缺少(\n");
@@ -67,7 +67,7 @@ void error (int error_code)
 			printf ("缺少read\n");
 			break;
 		case 19:
-			printf ("缺少if或while或read或write或{或;或标识符或数字或#或(\n");
+			printf ("缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或;\n");
 			break;
 		case 20:
 			printf ("缺少char或int\n");
@@ -106,7 +106,10 @@ void error (int error_code)
 			printf ("缺少for\n");
 			break;
 		case 32:
-			printf ("\n");
+			printf ("赋值语句左边不能是自增或者自减变量\n");
+			break;
+		case 33:
+			printf ("read不能读取自增/减变量\n");
 			break;
 		default:
 			printf ("不存在的错误码!\n");

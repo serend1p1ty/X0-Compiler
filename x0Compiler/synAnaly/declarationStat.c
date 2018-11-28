@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * declaration_stat语法分析程序
+ * declarationStat语法分析程序
  */
-void declaration_stat (int* ptr_offset)
+void declarationStat (int* ptr_offset)
 {
 	/* 
 	 * 保存现在的符号类型, 1: char, 0: int

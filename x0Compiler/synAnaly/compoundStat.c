@@ -1,14 +1,14 @@
 #include "../global.h"
 
 /*
- * compound_stat语法分析程序
+ * compoundStat语法分析程序
  */
-void compound_stat ()
+void compoundStat ()
 {
 	if (sym == lbrace)
 	{
 		getSym ();
-		statement_list ();
+		statementList ();
 		if (sym == rbrace)
 		{
 			getSym ();

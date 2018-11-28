@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * var语法分析程序
+ * simpleVariable语法分析程序
  */
-void var (int* ptr_offset, int* ptr_isArray)
+void simpleVariable (int* ptr_offset, int* ptr_isArray)
 {
 	if (sym == ident)
 	{
@@ -20,6 +20,7 @@ void var (int* ptr_offset, int* ptr_isArray)
 		{
 			getSym ();
 			expression ();
+
 			if (sym == rbracket)
 			{
 				/* 标识符不是int或char数组 */

@@ -3,7 +3,7 @@
 /*
  * writeÓï¾äÓï·¨·ÖÎö³ÌĞò
  */
-void write_stat ()
+void writeStat ()
 {
 	if (sym == writesym)
 	{

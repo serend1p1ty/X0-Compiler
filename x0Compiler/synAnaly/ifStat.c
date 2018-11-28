@@ -3,7 +3,7 @@
 /*
  * ifÓï¾äÓï·¨·ÖÎö³ÌĞò
  */
-void if_stat ()
+void ifStat ()
 {
 	if (sym == ifsym)
 	{

@@ -100,6 +100,13 @@ void Interpret ()
 					case 18: /* 逻辑非 */
 						s[t] = !s[t];
 						break;
+					case 19: /* 异或 */
+						t = t - 1;
+						s[t] = s[t] ^ s[t + 1];
+						break;
+					case 20: /* 判断栈顶元素是否为奇数 */
+						s[t] = s[t] % 2;
+						break;
 					default: /* 不合法的opr操作数 */
 						error (28);
 				}
@@ -108,16 +115,31 @@ void Interpret ()
 				t = t + 1;
 				s[t] = s[1 + i.offset];
 				break;
-			case lodf:	/* 取数组值到栈顶，数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t] */
+			case lof:	/* 取数组值到栈顶，数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t] */
 				s[t] = s[1 + i.offset + s[t]];
 				break;
 			case sto:	/* 栈顶的值存到相对于当前活动记录基地址偏移量为offset的变量 */
 				s[1 + i.offset] = s[t];
 				t = t - 1;
 				break;
-			case stof:	/* 栈顶的值存到数组元素里，数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t] */
+			case stf:	/* 栈顶的值存到数组元素里，数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t - 1] */
 				s[1 + i.offset + s[t - 1]] = s[t];
 				t = t - 2;
+				break;
+			case add:	/* 将相对于当前活动记录基地址偏移量为offset的变量的值加上1 */
+				s[1 + i.offset] += 1;
+				break;
+			case adf:	/* 将数组元素(数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t]的那个元素)的值加上1 */
+				s[1 + i.offset + s[t]] += 1;
+				break;
+			case mis:	/* 将相对于当前活动记录基地址偏移量为offset的变量的值减去1 */
+				s[1 + i.offset] -= 1;
+				break;
+			case mif:	/* 将数组元素(数组基地址为当前活动记录基地址+offset，数组内部偏移量为s[t]的那个元素)的值减去1 */
+				s[1 + i.offset + s[t]] -= 1;
+				break;
+			case tad:	/* 栈顶元素加上offset */
+				s[t] += i.offset;
 				break;
 			case cal:	/* 调用子过程 */
 				break;

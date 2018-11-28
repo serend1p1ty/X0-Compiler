@@ -3,7 +3,7 @@
 /*
  * whileÓï¾äÓï·¨·ÖÎö³ÌĞò
  */
-void while_stat ()
+void whileStat ()
 {
 	if (sym == whilesym)
 	{

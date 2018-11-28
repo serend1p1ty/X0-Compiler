@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * additive_expr语法分析程序
+ * additiveExpr语法分析程序
  */
-void additive_expr ()
+void additiveExpr ()
 {
 	if (sym == minus) /* 这里减号看作负号 */
 	{
@@ -16,7 +16,7 @@ void additive_expr ()
 		term ();
 	}
 
-	while (sym == plus || sym == minus || sym == modsym)
+	while (sym == plus || sym == minus)
 	{
 		enum symbol tempSym = sym; /* 保存此时的符号 */
 		getSym ();
@@ -29,9 +29,6 @@ void additive_expr ()
 				break;
 			case minus:
 				gen (opr, 0, 3);
-				break;
-			case modsym:
-				gen (opr, 0, 6);
 				break;
 			default: /* 不合法的运算符 */
 				error (30);

@@ -17,11 +17,11 @@ void compile ()
 			getSym ();
 
 			int offset = 3;	/* 局部变量相对于活动记录开始位置的偏移 */
-			declaration_list (&offset);
+			declarationList (&offset);
 
 			gen (ini, 0, offset); /* 声明结束的时候就知道了需要预留多少空间 */
 
-			statement_list ();
+			statementList ();
 
 			if (sym == rbrace)
 			{
@@ -52,7 +52,7 @@ int main ()
 	//printf ("请输入x0文件名：");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "./testSamples/test1.txt");
+	strcpy (fileName, "./testSamples/test2.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* 文件无法打开 */
 	{

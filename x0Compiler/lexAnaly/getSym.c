@@ -191,23 +191,55 @@ void getSym ()
 							}
 							else
 							{
-								if (ch == '!')	/* 检测不等于或逻辑非符号 */
+								if (ch == '+')	/* 检测自增符号 */
 								{
 									getCh ();
-									if (ch == '=')
+									if (ch == '+')
 									{
-										sym = neql;
+										sym = incsym;
 										getCh ();
 									}
 									else
 									{
-										sym = nul;
+										sym = plus;
 									}
 								}
 								else
 								{
-									sym = ssym[ch];	/* 当符号不满足上述条件时，全部按照单字符符号处理 */
-									getCh ();
+									if (ch == '-')	/* 检测自减符号 */
+									{
+										getCh ();
+										if (ch == '-')
+										{
+											sym = decsym;
+											getCh ();
+										}
+										else
+										{
+											sym = minus;
+										}
+									}
+									else
+									{
+										if (ch == '!')	/* 检测不等于或逻辑非符号 */
+										{
+											getCh ();
+											if (ch == '=')
+											{
+												sym = neql;
+												getCh ();
+											}
+											else
+											{
+												sym = notsym;
+											}
+										}
+										else
+										{
+											sym = ssym[ch];	/* 当符号不满足上述条件时，全部按照单字符符号处理 */
+											getCh ();
+										}
+									}
 								}
 							}
 						}

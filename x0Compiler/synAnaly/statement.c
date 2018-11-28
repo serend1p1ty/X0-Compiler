@@ -7,34 +7,35 @@ void statement ()
 {
 	if (sym == ifsym)	/* if语句 */
 	{
-		if_stat ();
+		ifStat ();
 	}
 	else if (sym == whilesym)	/* while语句 */
 	{
-		while_stat ();
+		whileStat ();
 	}
 	else if (sym == readsym)	/* read语句 */
 	{
-		read_stat ();
+		readStat ();
 	}
 	else if (sym == writesym)	/* write语句 */
 	{
-		write_stat ();
+		writeStat ();
 	}
 	else if (sym == lbrace)	/* compound语句 */
 	{
-		compound_stat ();
+		compoundStat ();
 	}
 	else if (sym == semic || sym == ident || sym == hashsym
-		|| sym == lparen || sym == number || sym == minus)	/* expression语句 */
+		|| sym == lparen || sym == number || sym == minus
+		|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym)	/* expression语句 */
 	{
-		expression_stat ();
+		expressionStat ();
 	}
 	else if (sym == forsym) /* for语句 */
 	{
-		for_stat ();
+		forStat ();
 	}
-	else /* 缺少if或while或read或write或{或;或标识符或数字或#或( */
+	else /* 缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或; */
 	{
 		error (19);
 	}
