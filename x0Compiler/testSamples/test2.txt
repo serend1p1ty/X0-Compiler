@@ -3,12 +3,13 @@ main
 	int i;
 	int j;
 	int ans;
-
+	
 	for (#i = 0; i <= 10; i++)
 	{
-		if (!(odd(i)) && i <= 8)
+		if (i == 5)
 		{
-			write i;
+			continue;
 		}
+		write i;
 	}
 }

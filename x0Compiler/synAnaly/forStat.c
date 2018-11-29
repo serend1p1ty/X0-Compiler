@@ -5,6 +5,9 @@
  */
 void forStat ()
 {
+	int startBreakNum = iterBreakList; /* 记录for语句分析开始时需要回填的break语句数量 */
+	int startContinueNum = iterCtnList; /* 记录while语句分析开始时需要回填的continue语句数量 */
+
 	if (sym == forsym)
 	{
 		getSym ();
@@ -38,6 +41,14 @@ void forStat ()
 					{
 						getSym ();
 						statement ();
+
+						/* 回填continue语句 */
+						for (int i = startContinueNum; i < iterCtnList; i++)
+						{
+							int pos = continueList[i];
+							code[pos].offset = iterCode;
+						}
+
 						gen (jmp, 0, L1);
 						
 						/* 回填 */
@@ -67,5 +78,12 @@ void forStat ()
 	else /* 缺少for */
 	{
 		error (31);
+	}
+
+	/* 回填break语句 */
+	for (int i = startBreakNum; i < iterBreakList; i++)
+	{
+		int pos = breakList[i];
+		code[pos].offset = iterCode;
 	}
 }

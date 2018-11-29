@@ -104,6 +104,15 @@
     <ClCompile Include="synAnaly\valueExpr.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
+    <ClCompile Include="synAnaly\breakStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\exitStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\continueStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

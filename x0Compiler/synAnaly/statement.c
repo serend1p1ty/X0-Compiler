@@ -35,6 +35,18 @@ void statement ()
 	{
 		forStat ();
 	}
+	else if (sym == brksym) /* break语句 */
+	{
+		breakStat ();
+	}
+	else if (sym == exitsym) /* exit语句 */
+	{
+		exitStat ();
+	}
+	else if (sym == ctnsym) /* continue语句 */
+	{
+		continueStat ();
+	}
 	else /* 缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或; */
 	{
 		error (19);

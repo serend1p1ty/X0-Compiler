@@ -23,11 +23,14 @@
     <ClCompile Include="Interpret\Interpret.c" />
     <ClCompile Include="lexAnaly\getSym.c" />
     <ClCompile Include="synAnaly\additiveExpr.c" />
+    <ClCompile Include="synAnaly\breakStat.c" />
     <ClCompile Include="synAnaly\compoundStat.c" />
+    <ClCompile Include="synAnaly\continueStat.c" />
     <ClCompile Include="synAnaly\declarationList.c" />
     <ClCompile Include="synAnaly\declarationStat.c" />
     <ClCompile Include="synAnaly\enter.c" />
     <ClCompile Include="synAnaly\error.c" />
+    <ClCompile Include="synAnaly\exitStat.c" />
     <ClCompile Include="synAnaly\expression.c" />
     <ClCompile Include="synAnaly\expressionStat.c" />
     <ClCompile Include="synAnaly\factor.c" />

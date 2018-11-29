@@ -57,6 +57,10 @@ void Interpret ()
 						t = t - 1;
 						s[t] = s[t] % s[t + 1];
 						break;
+					case 7: /* exit */
+						t = t - 1;
+						exit (s[t + 1]);
+						break;
 					case 8: /* 次栈顶项与栈顶项是否相等 */
 						t = t - 1;
 						s[t] = (s[t] == s[t + 1]);

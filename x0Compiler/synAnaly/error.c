@@ -111,6 +111,15 @@ void error (int error_code)
 		case 33:
 			printf ("read不能读取自增/减变量\n");
 			break;
+		case 34:
+			printf ("缺少break\n");
+			break;
+		case 35:
+			printf ("缺少break\n");
+			break;
+		case 36:
+			printf ("缺少continue\n");
+			break;
 		default:
 			printf ("不存在的错误码!\n");
 	}

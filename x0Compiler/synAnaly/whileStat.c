@@ -5,9 +5,13 @@
  */
 void whileStat ()
 {
+	int startBreakNum = iterBreakList; /* 记录while语句分析开始时需要回填的break语句数量 */
+	int startContinueNum = iterCtnList; /* 记录while语句分析开始时需要回填的continue语句数量 */
+
 	if (sym == whilesym)
 	{
 		getSym ();
+
 		if (sym == lparen)
 		{
 			int pos1 = iterCode; /* 保存现在的iterCode值 */
@@ -20,6 +24,14 @@ void whileStat ()
 				gen (jpc, 0, 0);  /* 跳转的位置还不确定，待会回填 */
 				getSym ();
 				statement ();
+
+				/* 回填continue语句 */
+				for (int i = startContinueNum; i < iterCtnList; i++)
+				{
+					int pos = continueList[i];
+					code[pos].offset = iterCode;
+				}
+
 				gen (jmp, 0, pos1);
 				code[pos2].offset = iterCode;
 			}
@@ -36,5 +48,12 @@ void whileStat ()
 	else /* 缺少while */
 	{
 		error (21);
+	}
+
+	/* 回填break语句 */
+	for (int i = startBreakNum; i < iterBreakList; i++)
+	{
+		int pos = breakList[i];
+		code[pos].offset = iterCode;
 	}
 }
