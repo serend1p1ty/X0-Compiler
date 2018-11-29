@@ -113,6 +113,15 @@
     <ClCompile Include="synAnaly\continueStat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
+    <ClCompile Include="synAnaly\switchStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\dowhileStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\repeatStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

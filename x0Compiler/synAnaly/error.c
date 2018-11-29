@@ -120,6 +120,15 @@ void error (int error_code)
 		case 36:
 			printf ("缺少continue\n");
 			break;
+		case 37:
+			printf ("缺少switch\n");
+			break;
+		case 38:
+			printf ("缺少:\n");
+			break;
+		case 39:
+			printf ("缺少do\n");
+			break;
 		default:
 			printf ("不存在的错误码!\n");
 	}

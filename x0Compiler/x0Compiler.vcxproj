@@ -28,6 +28,7 @@
     <ClCompile Include="synAnaly\continueStat.c" />
     <ClCompile Include="synAnaly\declarationList.c" />
     <ClCompile Include="synAnaly\declarationStat.c" />
+    <ClCompile Include="synAnaly\dowhileStat.c" />
     <ClCompile Include="synAnaly\enter.c" />
     <ClCompile Include="synAnaly\error.c" />
     <ClCompile Include="synAnaly\exitStat.c" />
@@ -39,10 +40,12 @@
     <ClCompile Include="synAnaly\gen.c" />
     <ClCompile Include="synAnaly\ifStat.c" />
     <ClCompile Include="synAnaly\readStat.c" />
+    <ClCompile Include="synAnaly\repeatStat.c" />
     <ClCompile Include="synAnaly\simpleValue.c" />
     <ClCompile Include="synAnaly\simpleVariable.c" />
     <ClCompile Include="synAnaly\statement.c" />
     <ClCompile Include="synAnaly\statementList.c" />
+    <ClCompile Include="synAnaly\switchStat.c" />
     <ClCompile Include="synAnaly\term.c" />
     <ClCompile Include="synAnaly\type.c" />
     <ClCompile Include="synAnaly\valueExpr.c" />

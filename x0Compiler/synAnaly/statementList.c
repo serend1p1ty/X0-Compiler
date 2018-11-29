@@ -10,8 +10,9 @@ void statementList ()
 		|| sym == writesym || sym == lbrace || sym == semic
 		|| sym == ident || sym == lparen || sym == number
 		|| sym == hashsym || sym == minus || sym == forsym
-		|| sym == incsym || sym == decsym || sym == oddsym 
-		|| sym == notsym || sym == brksym || sym == exitsym || sym == ctnsym)
+		|| sym == incsym || sym == decsym || sym == oddsym
+		|| sym == notsym || sym == brksym || sym == exitsym
+		|| sym == ctnsym || sym == swtcsym || sym == dosym || sym == reptsym)
 	{
 		statement ();
 	}

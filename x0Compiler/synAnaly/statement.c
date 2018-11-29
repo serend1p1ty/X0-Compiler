@@ -47,6 +47,18 @@ void statement ()
 	{
 		continueStat ();
 	}
+	else if (sym == swtcsym) /* switch语句 */
+	{
+		switchStat ();
+	}
+	else if (sym == dosym) /* do-while语句 */
+	{
+		dowhileStat ();
+	}
+	else if (sym == reptsym) /* repeat-until语句 */
+	{
+		repeatStat ();
+	}
 	else /* 缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或; */
 	{
 		error (19);
