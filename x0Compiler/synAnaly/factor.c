@@ -6,6 +6,7 @@
 void factor ()
 {
 	int flag = 0; /* flag = 1代表出现过逻辑非 */
+
 	if (sym == notsym)
 	{
 		flag = 1;
@@ -16,6 +17,7 @@ void factor ()
 	{
 		getSym ();
 		expression ();
+
 		if (sym == rparen)
 		{
 			getSym ();
@@ -97,7 +99,12 @@ void factor ()
 		gen (lit, 0, num);
 		getSym ();
 	}
-	else /* 缺少(或标识符或数字或!或++或-- */
+	else if (sym == truesym || sym == falsesym)
+	{
+		gen (lit, 0, sym == truesym); /* true的值为1, false的值为0 */
+		getSym ();
+	}
+	else /* 缺少(或标识符或数字或!或++或--或true或false */
 	{
 		error (15);
 	}

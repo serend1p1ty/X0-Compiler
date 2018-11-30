@@ -2,7 +2,7 @@ program = "main" "{" declarationList statementList "}".
 
 declarationList = [declarationStat declarationList].
 declarationStat = type ID (";" | "[" NUM "]" ";").
-type = "int" | "char".
+type = "int" | "char" | "bool".
 
 statementList = [statement statementList].
 statement = ifStat | whileStat | readStat | writeStat | compoundStat | expressionStat | forStat | switchStat | breakStat | exitStat | continueStat | dowhileStat | repeatStat.
@@ -27,4 +27,4 @@ valueExpr = simpleValue {("&&" | "||" | "XOR") simpleValue}.
 simpleValue = odd additiveExpr | additiveExpr [(">" | "<" | ">=" | "<=" | "==" | "!=") additiveExpr].
 additiveExpr = ["-"] term {("+"|"-") term}.
 term = factor {("*"|"/"|"%") factor}.
-factor = ["!"] ("(" expression ")"| variable | NUM).
+factor = ["!"] ("(" expression ")"| variable | NUM | "true" | "false").

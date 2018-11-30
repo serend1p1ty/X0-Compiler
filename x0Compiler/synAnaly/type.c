@@ -5,7 +5,7 @@
  */
 void type ()
 {
-	if (sym != charsym && sym != intsym) /* 缺少char或int */
+	if (sym != charsym && sym != intsym && sym != bolsym) /* 缺少char或int或bool */
 	{
 		error (20);
 	}

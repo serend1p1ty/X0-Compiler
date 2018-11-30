@@ -46,16 +46,16 @@ void error (int error_code)
 			printf ("缺少=\n");
 			break;
 		case 12:
-			printf ("缺少#或标识符或(或数字或-或++或--或odd或!\n");
+			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或true或false\n");
 			break;
 		case 13:
-			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或;\n");
+			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或;或true或false\n");
 			break;
 		case 14:
 			printf ("缺少)\n");
 			break;
 		case 15:
-			printf ("缺少(或标识符或数字或!或++或--\n");
+			printf ("缺少(或标识符或数字或!或++或--或true或false\n");
 			break;
 		case 16:
 			printf ("缺少(\n");
@@ -67,10 +67,10 @@ void error (int error_code)
 			printf ("缺少read\n");
 			break;
 		case 19:
-			printf ("缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或;\n");
+			printf ("缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或;或true或false\n");
 			break;
 		case 20:
-			printf ("缺少char或int\n");
+			printf ("缺少char或int或bool\n");
 			break;
 		case 21:
 			printf ("缺少while\n");

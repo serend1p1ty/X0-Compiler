@@ -6,9 +6,22 @@
 void declarationStat (int* ptr_offset)
 {
 	/* 
-	 * 保存现在的符号类型, 1: char, 0: int
+	 * 保存现在的符号类型, 1: int, 2: char, 3: bool
 	 */
-	int isChar = (sym == charsym);
+	int typeSym;
+
+	switch (sym)
+	{
+		case intsym:
+			typeSym = 1;
+			break;
+		case charsym:
+			typeSym = 2;
+			break;
+		case bolsym:
+			typeSym = 3;
+			break;
+	}
 
 	type ();
 
@@ -18,14 +31,19 @@ void declarationStat (int* ptr_offset)
 		if (sym == semic)
 		{
 			/* 声明的是char变量 */
-			if (isChar)
+			if (typeSym == 2)
 			{
 				enter (charVar, *ptr_offset, 1);
 				*ptr_offset = *ptr_offset + 1;
 			}
-			else /* 声明的是int变量 */
+			else if (typeSym == 1) /* 声明的是int变量 */
 			{
 				enter (intVar, *ptr_offset, 1);
+				*ptr_offset = *ptr_offset + 1;
+			}
+			else /* 声明的是bool变量 */
+			{
+				enter (boolVar, *ptr_offset, 1);
 				*ptr_offset = *ptr_offset + 1;
 			}
 
@@ -43,14 +61,19 @@ void declarationStat (int* ptr_offset)
 					if (sym == semic)
 					{
 						/* 声明的是char数组 */
-						if (isChar)
+						if (typeSym == 2)
 						{
 							enter (charArray, *ptr_offset, num);
 							*ptr_offset = *ptr_offset + num;
 						}
-						else /* 声明的是int数组 */
+						else if(typeSym == 1) /* 声明的是int数组 */
 						{
 							enter (intArray, *ptr_offset, num);
+							*ptr_offset = *ptr_offset + num;
+						}
+						else /* 声明的是bool数组 */
+						{
+							enter (boolArray, *ptr_offset, num);
 							*ptr_offset = *ptr_offset + num;
 						}
 						

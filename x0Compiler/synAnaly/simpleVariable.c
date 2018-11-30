@@ -24,7 +24,8 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray)
 			if (sym == rbracket)
 			{
 				/* 标识符不是int或char数组 */
-				if (table[pos].kind != intArray && table[pos].kind != charArray)
+				if (table[pos].kind != intArray && table[pos].kind != charArray
+					&& table[pos].kind != boolArray)
 				{
 					error (26);
 				}
@@ -41,7 +42,8 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray)
 		else
 		{
 			/* 标识符不是int或char变量 */
-			if (table[pos].kind != intVar && table[pos].kind != charVar)
+			if (table[pos].kind != intVar && table[pos].kind != charVar
+				&& table[pos].kind != boolVar)
 			{
 				error (25);
 			}

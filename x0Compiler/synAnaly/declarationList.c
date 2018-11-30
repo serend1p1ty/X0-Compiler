@@ -6,7 +6,7 @@
 void declarationList (int* ptr_offset)
 {	
 	/* 如果sym属于first(declarationStat)，就执行declarationStat分析程序 */
-	while (sym == charsym || sym == intsym)
+	while (sym == charsym || sym == intsym || sym == bolsym)
 	{
 		declarationStat (ptr_offset);
 	}

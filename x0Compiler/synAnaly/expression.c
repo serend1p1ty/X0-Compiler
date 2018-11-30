@@ -45,11 +45,12 @@ void expression ()
 		}
 	}
 	else if (sym == lparen || sym == number || sym == ident || sym == minus
-			|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym)	/* sym属于first(valueExpr) */
+			|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym
+			|| sym == truesym || sym == falsesym)	/* sym属于first(valueExpr) */
 	{
 		valueExpr ();
 	}
-	else /* 缺少#或标识符或(或数字或-或++或--或odd或! */
+	else /* 缺少#或标识符或(或数字或-或++或--或odd或!或true或false */
 	{
 		error (12);
 	}
