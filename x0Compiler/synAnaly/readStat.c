@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * read语句语法分析程序
+ * readStat syntactical analyzer
  */
 void readStat ()
 {
@@ -9,24 +9,23 @@ void readStat ()
 	{
 		getSym ();
 		
-		/*
-		* 通过传地址的方式知道：变量在活动记录中的偏移、该变量是否是数组、该变量是否自增/减
-		* (IncOrDec：1后自增、2后自减、3前自增、4前自减、5无增减)
-		*/
-		int offset;
-		int isArray;
-		int IncOrDec;
-		variable (&offset, &isArray, &IncOrDec);
+		int offset;    /* the offset relative to the base address of current activity record */
+		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
+		int IncOrDec;  /* 1: auto-adding after variable   2: auto-decreasing after variable
+					    * 3: auto-adding before variable  4: auto-decreasing before variable
+					    * 5: without auto-adding or auto-decreasing */
+		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
+		variable (&offset, &isArray, &IncOrDec, &identType);
 
-		/* read不能读取自增/减变量 */
+		/* 'read' function can't read auto-adding or auto-decreasing variable */
 		if (IncOrDec != 5)
 		{
 			error (33);
 		}
 
-		gen (opr, 0, 14); /* 用scanf读取一个数字 */
+		gen (opr, identType, 14); /* read a variable using scanf function */
 		
-		/* 根据是单变量还是数组选择不同的存储指令 */
+		/* store the value of top element in variable */
 		if (isArray)
 		{
 			gen (stf, 0, offset);
@@ -40,12 +39,12 @@ void readStat ()
 		{
 			getSym ();
 		}
-		else /* 缺少; */
+		else /* the lack of ';' */
 		{
 			error (10);
 		}
 	}
-	else /* 缺少read */
+	else /* the lack of 'read' */
 	{
 		error (18);
 	}

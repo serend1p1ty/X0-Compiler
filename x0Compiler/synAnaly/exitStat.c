@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * exitStat语法分析程序
+ * exitStat syntactical analyzer
  */
 void exitStat ()
 {
@@ -13,9 +13,10 @@ void exitStat ()
 		{
 			getSym ();
 
-			if (sym == number)
+			if (sym == intnum)
 			{
 				getSym ();
+				gen (lit, 1, intNum);
 
 				if (sym == rparen)
 				{
@@ -26,27 +27,27 @@ void exitStat ()
 						getSym ();
 						gen (opr, 0, 7);
 					}
-					else /* 缺少; */
+					else /* the lack of ';' */
 					{
 						error (10);
 					}
 				}
-				else /* 缺少) */
+				else /* the lack of ')' */
 				{
 					error (14);
 				}
 			}
-			else /* 缺少数字 */
+			else /* the lack of INT number */
 			{
 				error (8);
 			}
 		}
-		else /* 缺少( */
+		else /* the lack of '(' */
 		{
 			error (16);
 		}
 	}
-	else /* 缺少exit */
+	else /* the lack of 'exit' */
 	{
 		error (35);
 	}

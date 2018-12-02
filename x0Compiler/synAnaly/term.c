@@ -1,14 +1,14 @@
 #include "../global.h"
 
 /*
- * term语法分析程序
+ * term syntactical analyzer
  */
 void term ()
 {
 	factor ();
 	while (sym == times || sym == slash || sym == modsym)
 	{
-		enum symbol tempSym = sym; /* 保存此时的符号 */
+		enum symbol tempSym = sym; /* save current value of sym */
 		getSym ();
 		factor ();
 
@@ -23,7 +23,7 @@ void term ()
 			case modsym:
 				gen (opr, 0, 6);
 				break;
-			default: /* 不合法的运算符 */
+			default: /* illegal operator */
 				error (30);
 		}
 	}

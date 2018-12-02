@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * breakStat语法分析程序
+ * breakStat syntactical analyzer
  */
 void breakStat ()
 {
@@ -15,12 +15,12 @@ void breakStat ()
 			gen (jmp, 0, 0);
 			breakList[iterBreakList++] = iterCode - 1;
 		}
-		else /* 缺少; */
+		else /* the lack of ';' */
 		{
 			error (10);
 		}
 	}
-	else /* 缺少break */
+	else /* the lack of 'break' */
 	{
 		error (34);
 	}

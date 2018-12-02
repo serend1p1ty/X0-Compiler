@@ -1,8 +1,8 @@
 #include "../global.h"
 
 /*
- * 查找标识符在符号表中的位置, 找到则返回在符号表中的位置, 否则返回-1
- * identName: 要查找的名字
+ * input: identName  the name of identifier which we want to search
+ * output: the position of this identifier in symbol table
  */
 int findPosition (char* identName)
 {

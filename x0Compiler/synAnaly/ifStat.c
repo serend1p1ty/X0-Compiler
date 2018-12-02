@@ -1,20 +1,20 @@
 #include "../global.h"
 
 /*
- * if语句语法分析程序
+ * ifStat syntactical analyzer
  */
 void ifStat ()
 {
 	if (sym == ifsym)
 	{
 		getSym ();
+
 		if (sym == lparen)
 		{
 			getSym ();
 			expression ();
-
-			int pos1 = iterCode; /* 保存现在的iterCode值，回填的时候使用 */
-			gen (jpc, 0, 0);  /* 跳转的位置还不确定，待会回填 */
+			int pos1 = iterCode; /* save current value of iterCode for backfilling */
+			gen (jpc, 0, 0);  /* the position where program jump to hasn't been determined. we'll backfill it later. */
 
 			if (sym == rparen)
 			{
@@ -23,32 +23,29 @@ void ifStat ()
 
 				if (sym == elsesym)
 				{
-					int pos2 = iterCode; /* 保存现在的iterCode值，回填的时候使用 */
-					gen (jmp, 0, 0);  /* 跳转的位置还不确定，待会回填 */
-					
-					code[pos1].offset = iterCode; /* 回填 */
-
+					int pos2 = iterCode; /* save current value of iterCode for backfilling */
+					gen (jmp, 0, 0);  /* the position where program jump to hasn't been determined. we'll backfill it later. */
+					code[pos1].offset = iterCode; /* backfill */
 					getSym ();
 					statement ();
-
-					code[pos2].offset = iterCode; /* 回填 */
+					code[pos2].offset = iterCode; /* backfill */
 				}
 				else
 				{
-					code[pos1].offset = iterCode; /* 回填 */
+					code[pos1].offset = iterCode; /* backfill */
 				}
 			}
-			else /* 缺少) */
+			else /* the lack of ')' */
 			{
 				error (14);
 			}
 		}
-		else /* 缺少( */
+		else /* the lack of '(' */
 		{
 			error (16);
 		}
 	}
-	else /* 缺少if */
+	else /* the lack of 'if' */
 	{
 		error (17);
 	}

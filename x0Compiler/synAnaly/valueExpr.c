@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * valueExpr语法分析程序
+ * valueExpr syntactical analyzer
  */
 void valueExpr ()
 {
@@ -9,7 +9,7 @@ void valueExpr ()
 
 	while (sym == andsym || sym == orsym || sym == xorsym)
 	{
-		enum symbol tempSym = sym; /* 保存此时的sym */
+		enum symbol tempSym = sym; /* save current value of sym */
 		getSym ();
 		simpleValue ();
 
@@ -24,7 +24,7 @@ void valueExpr ()
 			case xorsym:
 				gen (opr, 0, 19);
 				break;
-			default: /* 不合法的运算符 */
+			default: /* illegal operator */
 				error (30);
 		}
 	}

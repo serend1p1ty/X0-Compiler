@@ -1,15 +1,16 @@
 #include "../global.h"
 
 /*
-* 生成中间代码
-*
-* fct: 函数码
-* lev_dif: 引用层与声明层的层次差
-* offset: 如果是lod指令，offset为相对于活动记录开始位置的偏移, 如果是cal指令，offset为被调用函数在中间代码中的开始位置
+* input:
+* fct: function code
+* lev_dif: the level difference between reference-level and declare-level
+* offset: if 'lod' instruction is generated, 'offset' is the offset relative to the base address of current activity record.
+*         if 'cal' instruction is generated, 'offset' is the position where called function starts in the intermidiate code.
+* function: generate an intermidiate code.
 */
-void gen (enum fctCode fct, int lev_dif, int offset)
+void gen (enum fctCode fct, int lev_dif, double offset)
 {
-	if (iterCode >= MAX_SIZE_CODE) /* 生成的虚拟机代码程序过长 */
+	if (iterCode >= MAX_SIZE_CODE) /* the program is too long */
 	{
 		error (27);
 	}

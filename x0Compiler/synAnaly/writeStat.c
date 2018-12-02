@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * write语句语法分析程序
+ * writeStat syntactical analyzer
  */
 void writeStat ()
 {
@@ -14,14 +14,14 @@ void writeStat ()
 		{
 			getSym ();
 		}
-		else /* 缺少; */
+		else /* the lack of ';' */
 		{
 			error (10);
 		}
 
-		gen (opr, 0, 15); /* 将栈顶元素输出 */
+		gen (opr, 0, 15); /* output the top element */
 	}
-	else /* 缺少write */
+	else /* the lack of 'write' */
 	{
 		error (22);
 	}

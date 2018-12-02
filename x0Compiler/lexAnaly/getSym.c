@@ -1,21 +1,22 @@
 #include "../global.h"
 
 /*
- * 从输入文件中读取一个字符
+ * read a character from input file
  */
 void getCh ()
 {
-	if (posCh == chNum)	/* 判断缓冲区中是否有字符，若无字符，则读入下一行字符(包括换行符)到缓冲区中 */
+	if (posCh == chNum)	/* cache is empty. read a new line into the cache. */
 	{
-		/* 初始化计数器 */
+		/* initialization */
 		chNum = 0;
 		posCh = 0;
 
-		/* 此处要注意feof的操作 */
+		/* pay attention to the operation of 'feof' function */
 		char temp = fgetc(fin);
+
 		while (!feof (fin))
 		{
-			if (chNum >= MAX_SIZE_LINE)	/* 输入文件一行的字符太多 */
+			if (chNum >= MAX_SIZE_LINE)	/* too many character in one line of input file */
 			{
 				error (1);
 			}
@@ -38,43 +39,46 @@ void getCh ()
 }
 
 /*
- * 词法分析程序：一次读取一个终结符
+ * lexical analyzer：read a terminal symbol
  */
 void getSym ()
 {
 	int i, j, k;
 
-	while (ch == ' ' || ch == '\n' || ch == 9)	/* 过滤空格、换行和制表符 */
+	while (ch == ' ' || ch == '\n' || ch == 9)	/* filter out ' ', '\n' and tab */
 	{
 		getCh ();
 	}
 
-	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))	/* 当前的单词是标识符或是保留字 */
+	if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z'))	/* identifier or reserved word */
 	{
-		char temp[MAX_SIZE_IDENT + 1];	/* temp保存着读取的标识符/保留字的名字 */
-		k = 0;
+		char temp[MAX_SIZE_IDENT + 1];	/* 'temp' saves the name of identifier/reserved word */
+		
+		k = 0;		
 		do 
 		{
 			if (k < MAX_SIZE_IDENT)
 			{
 				temp[k++] = ch;
 			}
-			else /* 标识符长度太长 */
+			else /* the identifier is too long */
 			{
 				error (2);
 			}
+
 			getCh ();
-		} while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'));
+		} while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'));	
 		temp[k] = 0;
 
-		strcpy (id, temp);	/* 将标识符/保留字的名字拷贝到id里面 */
+		strcpy (id, temp);	/* store the name of identifier/reserved word in 'id' */
 		
-		/* 搜索当前单词是否为保留字，使用二分法查找 */
+		/* check whether current word is a reserved word with binary-search */
 		i = 0;
 		j = RESERVE_WORD_NUM - 1;
 		do
 		{
 			k = (i + j) / 2;
+
 			if (strcmp (id, reserveWord[k]) <= 0)
 			{
 				j = k - 1;
@@ -84,41 +88,64 @@ void getSym ()
 				i = k + 1;
 			}
 		} while (i <= j);
-
-		if (i - 1 > j)	/* 当前的单词是保留字 */
-		{
-			sym = wsym[k];
-		}
-		else  /* 当前的单词是标识符 */
-		{
-			sym = ident;
-		}
+		sym = (i - 1) > j ? wsym[k] : ident;
 	}
 	else
 	{
-		if (ch >= '0' && ch <= '9')	/* 当前的单词是数字 */
+		if (ch >= '0' && ch <= '9')	/* number */
 		{
 			k = 0;
-			num = 0;
-			sym = number;
+			intNum = 0;
+			int flagDecPoint = 0; /* 1: denotes decimal point has appeared */
+			double decimal = 0;   /* decimal part of floatNumber */
+			double weight = 0.1;  /* weight of decimal part */
 
-			/* 获取数字的值 */
+			/* read number */
 			do 
 			{
-				num = 10 * num + ch - '0';
-				k++;
-				if (k > MAX_SIZE_NUMBER)	/* 数字位数太多 */
+				if (!flagDecPoint)
 				{
-					error (3);
+					intNum = 10 * intNum + ch - '0';
+					k++;
+
+					if (k > MAX_SIZE_NUMBER) /* the number is too large */
+					{
+						error (3);
+					}
 				}
+				else
+				{
+					decimal += weight * (ch - '0');
+					weight *= 0.1;
+				}
+
 				getCh ();
+				
+				if (ch == '.' && !flagDecPoint)
+				{
+					getCh ();
+					flagDecPoint = 1;
+					
+					if (ch < '0' || ch > '9') /* illegal number */
+					{
+						error (48);
+					}
+				}
 			} while (ch >= '0' && ch <= '9');
+
+			if (flagDecPoint) /* current sym is floatnumber */
+			{
+				floatNum = intNum + decimal;
+			}
+
+			sym = flagDecPoint ? doublenum : intnum;
 		}
 		else
 		{
-			if (ch == '=')		/* 检测=或==符号 */
+			if (ch == '=') /* detect '=' or '==' */
 			{
 				getCh ();
+
 				if (ch == '=')
 				{
 					sym = eqleql;
@@ -131,9 +158,10 @@ void getSym ()
 			}
 			else
 			{
-				if (ch == '<')	/* 检测小于或小于等于符号 */
+				if (ch == '<')	/* detect '<' or '<=' */
 				{
 					getCh ();
+
 					if (ch == '=')
 					{
 						sym = lesseql;
@@ -146,9 +174,10 @@ void getSym ()
 				}
 				else
 				{
-					if (ch == '>')	/* 检测大于或大于等于符号 */
+					if (ch == '>')	/* detect '>' or '>=' */
 					{
 						getCh ();
+
 						if (ch == '=')
 						{
 							sym = greateql;
@@ -161,9 +190,10 @@ void getSym ()
 					}
 					else
 					{
-						if (ch == '&')	/* 检测逻辑与符号 */
+						if (ch == '&')	/* detect '&&' */
 						{
 							getCh ();
+
 							if (ch == '&')
 							{
 								sym = andsym;
@@ -171,14 +201,15 @@ void getSym ()
 							}
 							else
 							{
-								sym = nul; /* 不能识别的符号 */
+								sym = nul; /* unrecognized symbol */
 							}
 						}
 						else
 						{
-							if (ch == '|')	/* 检测逻辑或符号 */
+							if (ch == '|')	/* detect '||' */
 							{
 								getCh ();
+
 								if (ch == '|')
 								{
 									sym = orsym;
@@ -186,14 +217,15 @@ void getSym ()
 								}
 								else
 								{
-									sym = nul; /* 不能识别的符号 */
+									sym = nul; /* unrecognized symbol */
 								}
 							}
 							else
 							{
-								if (ch == '+')	/* 检测自增符号 */
+								if (ch == '+')	/* detect '++' */
 								{
 									getCh ();
+
 									if (ch == '+')
 									{
 										sym = incsym;
@@ -206,9 +238,10 @@ void getSym ()
 								}
 								else
 								{
-									if (ch == '-')	/* 检测自减符号 */
+									if (ch == '-')	/* detect '--' */
 									{
 										getCh ();
+
 										if (ch == '-')
 										{
 											sym = decsym;
@@ -221,9 +254,10 @@ void getSym ()
 									}
 									else
 									{
-										if (ch == '!')	/* 检测不等于或逻辑非符号 */
+										if (ch == '!')	/* detect '!=' or '!' */
 										{
 											getCh ();
+
 											if (ch == '=')
 											{
 												sym = neql;
@@ -236,7 +270,8 @@ void getSym ()
 										}
 										else
 										{
-											sym = ssym[ch];	/* 当符号不满足上述条件时，全部按照单字符符号处理 */
+											sym = ssym[ch];	/* symbol will be handled as single character
+															 * if it can't satisfy conditions above */
 											getCh ();
 										}
 									}

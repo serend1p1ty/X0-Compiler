@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * expression语法分析程序
+ * expression syntactical analyzer
  */
 void expression ()
 {
@@ -9,16 +9,15 @@ void expression ()
 	{
 		getSym ();
 
-		/* 
-		 * 通过传地址的方式知道：变量在活动记录中的偏移、该变量是否是数组、该变量是否自增/减
-		 * (IncOrDec：1后自增、2后自减、3前自增、4前自减、5无增减)
-		 */
-		int offset;
-		int isArray;
-		int IncOrDec;
-		variable (&offset, &isArray, &IncOrDec);
+		int offset;    /* the offset relative to the base address of current activity record */
+		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
+		int IncOrDec;  /* 1: auto-adding after variable   2: auto-decreasing after variable 
+					    * 3: auto-adding before variable  4: auto-decreasing before variable 
+					    * 5: without auto-adding or auto-decreasing */
+		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
+		variable (&offset, &isArray, &IncOrDec, &identType);
 
-		/* 赋值语句左边不能是自增或者自减变量 */
+		/* auto-adding or auto-decreasing variable can't be left of assignment statement */
 		if (IncOrDec != 5)
 		{
 			error (32);
@@ -29,7 +28,7 @@ void expression ()
 			getSym ();
 			expression ();
 
-			/* 将expression的值存储到var里 */
+			/* store the value of top element in variable */
 			if (isArray)
 			{
 				gen (stf, 0, offset);
@@ -39,18 +38,18 @@ void expression ()
 				gen (sto, 0, offset);
 			}
 		}
-		else /* 缺少= */
+		else /* the lack of '=' */
 		{
 			error (11);
 		}
 	}
-	else if (sym == lparen || sym == number || sym == ident || sym == minus
+	else if (sym == lparen || sym == intnum || sym == ident || sym == minus
 			|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym
-			|| sym == truesym || sym == falsesym)	/* sym属于first(valueExpr) */
+			|| sym == truesym || sym == falsesym || sym == doublenum)	/* sym belong to first(valueExpr) */
 	{
 		valueExpr ();
 	}
-	else /* 缺少#或标识符或(或数字或-或++或--或odd或!或true或false */
+	else /* sym isn't belong to first(expression) */
 	{
 		error (12);
 	}

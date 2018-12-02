@@ -1,13 +1,15 @@
 #include "../global.h"
 
 /*
- * type语法分析程序
+ * type syntactical analyzer
  */
 void type ()
 {
-	if (sym != charsym && sym != intsym && sym != bolsym) /* 缺少char或int或bool */
+	/* sym isn't belong to first(type) */
+	if (sym != charsym && sym != intsym && sym != bolsym && sym != dblsym)
 	{
 		error (20);
 	}
+
 	getSym ();
 }

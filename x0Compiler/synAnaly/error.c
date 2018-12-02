@@ -1,137 +1,172 @@
 #include "../global.h"
 
+/* error handler */
 void error (int error_code)
 {
 	char space[81];
 	memset (space, 32, sizeof(space));
 
-	/* 出错时当前终结符已经读完, ch为当前终结符的下一个字符, posCh指着当前终结符的下下一个字符 */
+	/* current symbol has been read when error occurs, 'ch' is the following character of current symbol, 
+	 * 'posCh' is the position of the following character of 'ch' */
 	space[posCh - 2] = '\0';
 
-	printf ("%s^", space); /* 标记错误位置 */
+	printf ("%s^", space); /* mark the position of error */
 
 	switch (error_code)
 	{
 		case 1:
-			printf ("输入文件一行的字符太多\n");
+			printf ("too many character in one line of input file !\n");
 			break;
 		case 2:
-			printf ("标识符长度太长\n");
+			printf ("the identifier is too long !\n");
 			break;
 		case 3:
-			printf ("数字位数太多\n");
+			printf ("the number is too large !\n");
 			break;
 		case 4:
-			printf ("缺少}\n");
+			printf ("the lack of '}' !\n");
 			break;
 		case 5:
-			printf ("缺少{\n");
+			printf ("the lack of '{' !\n");
 			break;
 		case 6:
-			printf ("缺少标识符\n");
+			printf ("the lack of identifier !\n");
 			break;
 		case 7:
-			printf ("缺少;或[\n");
+			printf ("the lack of ';' or '[' !\n");
 			break;
 		case 8:
-			printf ("缺少数字\n");
+			printf ("the lack of INT number !\n");
 			break;
 		case 9:
-			printf ("缺少]\n");
+			printf ("the lack of ']' !\n");
 			break;
 		case 10:
-			printf ("缺少;\n");
+			printf ("the lack of ';' !\n");
 			break;
 		case 11:
-			printf ("缺少=\n");
+			printf ("the lack of '=' !\n");
 			break;
 		case 12:
-			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或true或false\n");
+			printf ("sym isn't belong to first(expression) !\n");
 			break;
 		case 13:
-			printf ("缺少#或标识符或(或数字或-或++或--或odd或!或;或true或false\n");
+			printf ("sym isn't belong to first(expressionStat) !\n");
 			break;
 		case 14:
-			printf ("缺少)\n");
+			printf ("the lack of ')' !\n");
 			break;
 		case 15:
-			printf ("缺少(或标识符或数字或!或++或--或true或false\n");
+			printf ("sym isn't belong to first(factor) !\n");
 			break;
 		case 16:
-			printf ("缺少(\n");
+			printf ("the lack of '(' !\n");
 			break;
 		case 17:
-			printf ("缺少if\n");
+			printf ("the lack of 'if' !\n");
 			break;
 		case 18:
-			printf ("缺少read\n");
+			printf ("the lack of 'read' !\n");
 			break;
 		case 19:
-			printf ("缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或;或true或false\n");
+			printf ("sym isn't belong to first(statement) !\n");
 			break;
 		case 20:
-			printf ("缺少char或int或bool\n");
+			printf ("sym isn't belong to first(type) !\n");
 			break;
 		case 21:
-			printf ("缺少while\n");
+			printf ("the lack of 'while' !\n");
 			break;
 		case 22:
-			printf ("缺少write\n");
+			printf ("the lack of 'write' !\n");
 			break;
 		case 23:
-			printf ("缺少main\n");
+			printf ("the lack of 'main' !\n");
 			break;
 		case 24:
-			printf ("标识符未声明\n");
+			printf ("the identifier hasn't been declared !\n");
 			break;
 		case 25:
-			printf ("标识符不是int或char变量\n");
+			printf ("identifier isn't INT/CHAR/BOOL/DOUBLE variable !\n");
 			break;
 		case 26:
-			printf ("标识符不是int或char数组\n");
+			printf ("identifier isn't INT/CHAR/BOOL/DOUBLE array !\n");
 			break;
 		case 27:
-			printf ("程序太长!\n");
+			printf ("the program is too long !\n");
 			break;
 		case 28:
-			printf ("不合法的opr操作数!\n");
+			printf ("illegal operand of 'opr' instruction !\n");
 			break;
 		case 29:
-			printf ("不合法的指令码!\n");
+			printf ("illegal function code !\n");
 			break;
 		case 30:
-			printf ("不合法的运算符!\n");
+			printf ("illegal operator !\n");
 			break;
 		case 31:
-			printf ("缺少for\n");
+			printf ("the lack of 'for' !\n");
 			break;
 		case 32:
-			printf ("赋值语句左边不能是自增或者自减变量\n");
+			printf ("auto-adding or auto-decreasing variable can't be left of assignment statement !\n");
 			break;
 		case 33:
-			printf ("read不能读取自增/减变量\n");
+			printf ("'read' function can't read auto-adding or auto-decreasing variable !\n");
 			break;
 		case 34:
-			printf ("缺少break\n");
+			printf ("the lack of 'break' !\n");
 			break;
 		case 35:
-			printf ("缺少break\n");
+			printf ("the lack of 'exit' !\n");
 			break;
 		case 36:
-			printf ("缺少continue\n");
+			printf ("the lack of 'continue' !\n");
 			break;
 		case 37:
-			printf ("缺少switch\n");
+			printf ("the lack of 'switch' !\n");
 			break;
 		case 38:
-			printf ("缺少:\n");
+			printf ("the lack of ':' !\n");
 			break;
 		case 39:
-			printf ("缺少do\n");
+			printf ("the lack of 'do' !\n");
+			break;
+		case 40:
+			printf ("the operand of mod operation must be integer !\n");
+			break;
+		case 41:
+			printf ("the parameter of exit function must be integer !\n");
+			break;
+		case 42:
+			printf ("the operand of && must be integer !\n");
+			break;
+		case 43:
+			printf ("the operand of || must be integer !\n");
+			break;
+		case 44:
+			printf ("the operand of ! must be integer !\n");
+			break;
+		case 45:
+			printf ("the operand of XOR must be integer !\n");
+			break;
+		case 46:
+			printf ("the operand of ODD must be integer !\n");
+			break;
+		case 47:
+			printf ("the subscript of array must be integer !\n");
+			break;
+		case 48:
+			printf ("illegal number !\n");
+			break;
+		case 49:
+			printf ("error type of symbol-table object !\n");
+			break;
+		case 50:
+			printf ("auto-adding or auto-decreasing variable must be INT !\n");
 			break;
 		default:
-			printf ("不存在的错误码!\n");
+			printf ("illegal error code !\n");
 	}
-	printf ("\ntip: ^所指即出错位置\n");
+	printf ("\ntip: '^' point to the position where error occurs\n");
 	exit (0);
 }

@@ -1,11 +1,12 @@
 main
 {
-	bool i;
+	int i;
+	char ch;
 	
 	#i = 1;
-	
-	if (i)
+	read ch;
+	while (i <= 3)
 	{
-		write 66;
+		write ch + i++;
 	}
 }

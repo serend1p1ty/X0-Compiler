@@ -1,15 +1,15 @@
 #include "../global.h"
 
 /*
- * expressionStat语法分析程序
+ * expressionStat syntactical analyzer
  */
 void expressionStat ()
 {
-	/* 如果sym属于first(expression)，就执行expression语法分析程序 */
+	/* execute expression syntactical analyzer if sym belong to first(expression) */
 	if (sym == hashsym || sym == ident|| sym == lparen 
-		|| sym == number || sym == minus || sym == incsym 
+		|| sym == intnum || sym == minus || sym == incsym 
 		|| sym == decsym || sym == oddsym || sym == notsym
-		|| sym == truesym || sym == falsesym)
+		|| sym == truesym || sym == falsesym || sym == doublenum)
 	{
 		expression ();
 
@@ -17,7 +17,7 @@ void expressionStat ()
 		{
 			getSym ();
 		}
-		else /* 缺少; */
+		else /* the lack of ';' */
 		{
 			error (10);
 		}
@@ -26,7 +26,7 @@ void expressionStat ()
 	{
 		getSym ();
 	}
-	else /* 缺少#或标识符或(或数字或-或++或--或odd或!或;或true或false */
+	else /* sym isn't belong to first(expressionStat) */
 	{
 		error (13);
 	}

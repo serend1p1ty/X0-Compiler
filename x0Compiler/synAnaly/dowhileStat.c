@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * dowhileStat语法分析程序
+ * dowhileStat syntactical analyzer
  */
 void dowhileStat ()
 {
@@ -12,9 +12,7 @@ void dowhileStat ()
 		if (sym == lbrace)
 		{
 			getSym ();
-
-			int pos = iterCode; /* 记录下statementList第一条代码的位置 */
-
+			int pos = iterCode; /* save the position of fist code of statementList */ 
 			statementList ();
 
 			if (sym == rbrace)
@@ -40,37 +38,37 @@ void dowhileStat ()
 							{
 								getSym ();
 							}
-							else /* 缺少; */
+							else /* the lack of ';' */
 							{
 								error (10);
 							}
 						}
-						else /* 缺少) */
+						else /* the lack of '}' */
 						{
 							error (14);
 						}
 					}
-					else /* 缺少( */
+					else /* the lack of '(' */
 					{
 						error (16);
 					}
 				}
-				else /* 缺少while */
+				else /* the lack of 'while' */
 				{
 					error (21);
 				}
 			}
-			else /* 缺少} */
+			else /* the lack of '}' */
 			{
 				error (4);
 			}
 		}
-		else /* 缺少{ */
+		else /* the lack of '{' */
 		{
 			error (5);
 		}
 	}
-	else /* 缺少do */
+	else /* the lack of 'do' */
 	{
 		error (39);
 	}

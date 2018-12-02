@@ -1,21 +1,33 @@
 #include "../global.h"
 
 /*
- * var语法分析程序
+ * variable syntactical analyzer
  */
-void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec)
+void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_identType)
 {
 	if (sym == ident)
 	{
-		simpleVariable (ptr_offset, ptr_isArray);
+		simpleVariable (ptr_offset, ptr_isArray, ptr_identType);
 
 		if (sym == incsym)
 		{
+			/* auto-adding or auto-decreasing variable must be INT */
+			if (*ptr_identType != 1)
+			{
+				error (50);
+			}
+
 			*ptr_IncOrDec = 1;
 			getSym ();
 		}
 		else if (sym == decsym)
 		{
+			/* auto-adding or auto-decreasing variable must be INT */
+			if (*ptr_identType != 1)
+			{
+				error (50);
+			}
+
 			*ptr_IncOrDec = 2;
 			getSym ();
 		}
@@ -36,9 +48,15 @@ void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec)
 		}
 
 		getSym ();
-		simpleVariable (ptr_offset, ptr_isArray);
+		simpleVariable (ptr_offset, ptr_isArray, ptr_identType);
+
+		/* auto-adding or auto-decreasing variable must be INT */
+		if (*ptr_identType != 1)
+		{
+			error (50);
+		}
 	}
-	else /* 缺少标识符 */
+	else /* the lack of identifier */
 	{
 		error (6);
 	}

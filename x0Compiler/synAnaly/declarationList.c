@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * declaration_list语法分析程序
+ * declaration_list syntactical analyzer
  */
 void declarationList (int* ptr_offset)
 {	
-	/* 如果sym属于first(declarationStat)，就执行declarationStat分析程序 */
-	while (sym == charsym || sym == intsym || sym == bolsym)
+	/* execute declarationStat syntactical analyzer if sym belong to first(declarationStat) */
+	while (sym == charsym || sym == intsym || sym == bolsym || sym == dblsym)
 	{
 		declarationStat (ptr_offset);
 	}

@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * compoundStat语法分析程序
+ * compoundStat syntactical analyzer
  */
 void compoundStat ()
 {
@@ -9,16 +9,17 @@ void compoundStat ()
 	{
 		getSym ();
 		statementList ();
+
 		if (sym == rbrace)
 		{
 			getSym ();
 		}
-		else /* 缺少} */
+		else /* the lack of '}' */
 		{
 			error (4);
 		}
 	}
-	else /* 缺少{ */
+	else /* the lack of '{' */
 	{
 		error (5);
 	}

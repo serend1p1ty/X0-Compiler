@@ -1,11 +1,11 @@
 #include "../global.h"
 
 /*
- * factor语法分析程序
+ * factor syntactical analyzer
  */
 void factor ()
 {
-	int flag = 0; /* flag = 1代表出现过逻辑非 */
+	int flag = 0; /* flag = 1 means logical inversion operator has appeared */
 
 	if (sym == notsym)
 	{
@@ -22,23 +22,22 @@ void factor ()
 		{
 			getSym ();
 		}
-		else /* 缺少) */
+		else /* the lack of ')' */
 		{
 			error (14);
 		}
 	}
-	else if (sym == ident || sym == incsym || sym == decsym) /* sym属于first(variable) */
+	else if (sym == ident || sym == incsym || sym == decsym) /* sym belong to first(variable) */
 	{
-		/*
-		* 通过传地址的方式知道：变量在活动记录中的偏移、该变量是否是数组、该变量是否自增/减
-		* (IncOrDec：1后自增、2后自减、3前自增、4前自减、5无增减)
-		*/
-		int offset;
-		int isArray;
-		int IncOrDec;
-		variable (&offset, &isArray, &IncOrDec);
+		int offset;     /* the offset relative to the base address of current activity record */
+		int isArray;    /* 1: 'variable' is array element   0: 'variable' is just a variable */
+		int IncOrDec;   /* 1: auto-adding after variable   2: auto-decreasing after variable
+					     * 3: auto-adding before variable  4: auto-decreasing before variable
+					     * 5: without auto-adding or auto-decreasing */
+		int identType;  /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
+		variable (&offset, &isArray, &IncOrDec, &identType);
 
-		/* 加载变量 */
+		/* load variable */
 		if (isArray)
 		{
 			switch (IncOrDec)
@@ -94,22 +93,27 @@ void factor ()
 			}
 		}
 	}
-	else if (sym == number)
+	else if (sym == intnum)
 	{
-		gen (lit, 0, num);
+		gen (lit, 1, intNum);
+		getSym ();
+	}
+	else if (sym == doublenum)
+	{
+		gen (lit, 2, floatNum);
 		getSym ();
 	}
 	else if (sym == truesym || sym == falsesym)
 	{
-		gen (lit, 0, sym == truesym); /* true的值为1, false的值为0 */
+		gen (lit, 4, sym == truesym); /* the value of 'true' is 1, value of 'false' is 0 */
 		getSym ();
 	}
-	else /* 缺少(或标识符或数字或!或++或--或true或false */
+	else /* sym isn't belong to first(factor) */
 	{
 		error (15);
 	}
 
-	/* 如果出现过逻辑非 */
+	/* logic inversion operator has appeared */
 	if (flag)
 	{
 		gen (opr, 0, 18);

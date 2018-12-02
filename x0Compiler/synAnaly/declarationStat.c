@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * declarationStat语法分析程序
+ * declarationStat syntactical analyzer
  */
 void declarationStat (int* ptr_offset)
 {
 	/* 
-	 * 保存现在的符号类型, 1: int, 2: char, 3: bool
+	 * current type of symbol, 1: INT, 2: DOUBLE, 3: CHAR, 4: BOOL
 	 */
 	int typeSym;
 
@@ -16,10 +16,13 @@ void declarationStat (int* ptr_offset)
 			typeSym = 1;
 			break;
 		case charsym:
-			typeSym = 2;
+			typeSym = 3;
 			break;
 		case bolsym:
-			typeSym = 3;
+			typeSym = 4;
+			break;
+		case dblsym:
+			typeSym = 2;
 			break;
 	}
 
@@ -28,22 +31,28 @@ void declarationStat (int* ptr_offset)
 	if (sym == ident)
 	{
 		getSym ();
+
 		if (sym == semic)
 		{
-			/* 声明的是char变量 */
-			if (typeSym == 2)
+			/* CHAR variable is declared */
+			if (typeSym == 3)
 			{
 				enter (charVar, *ptr_offset, 1);
 				*ptr_offset = *ptr_offset + 1;
 			}
-			else if (typeSym == 1) /* 声明的是int变量 */
+			else if (typeSym == 1) /* INT variable is declared */
 			{
 				enter (intVar, *ptr_offset, 1);
 				*ptr_offset = *ptr_offset + 1;
 			}
-			else /* 声明的是bool变量 */
+			else if (typeSym == 4) /* BOOL variable is declared */
 			{
 				enter (boolVar, *ptr_offset, 1);
+				*ptr_offset = *ptr_offset + 1;
+			}
+			else /* DOUBLE variable is declared */
+			{
+				enter (doubleVar, *ptr_offset, 1);
 				*ptr_offset = *ptr_offset + 1;
 			}
 
@@ -52,7 +61,7 @@ void declarationStat (int* ptr_offset)
 		else if (sym == lbracket)
 		{
 			getSym ();
-			if (sym == number)
+			if (sym == intnum)
 			{
 				getSym ();
 				if (sym == rbracket)
@@ -60,46 +69,51 @@ void declarationStat (int* ptr_offset)
 					getSym ();
 					if (sym == semic)
 					{
-						/* 声明的是char数组 */
-						if (typeSym == 2)
+						/* CHAR array is declared */
+						if (typeSym == 3)
 						{
-							enter (charArray, *ptr_offset, num);
-							*ptr_offset = *ptr_offset + num;
+							enter (charArray, *ptr_offset, intNum);
+							*ptr_offset = *ptr_offset + intNum;
 						}
-						else if(typeSym == 1) /* 声明的是int数组 */
+						else if(typeSym == 1) /* INT array is declared */
 						{
-							enter (intArray, *ptr_offset, num);
-							*ptr_offset = *ptr_offset + num;
+							enter (intArray, *ptr_offset, intNum);
+							*ptr_offset = *ptr_offset + intNum;
 						}
-						else /* 声明的是bool数组 */
+						else if (typeSym == 4) /* BOOL array is declared */
 						{
-							enter (boolArray, *ptr_offset, num);
-							*ptr_offset = *ptr_offset + num;
+							enter (boolArray, *ptr_offset, intNum);
+							*ptr_offset = *ptr_offset + intNum;
+						}
+						else /* DOUBLE array is declared */
+						{
+							enter (doubleArray, *ptr_offset, intNum);
+							*ptr_offset = *ptr_offset + intNum;
 						}
 						
 						getSym ();
 					}
-					else /* 缺少; */
+					else /* the lack of ';' */
 					{
 						error (10);
 					}
 				}
-				else /* 缺少] */
+				else /* the lack of ']' */
 				{
 					error (9);
 				}
 			}
-			else /* 缺少数字 */
+			else /* the lack of INT number */
 			{
 				error (8);
 			}
 		}
-		else /* 缺少;或[ */
+		else /* the lack of ';' or '[' */
 		{
 			error (7);
 		}
 	}
-	else /* 缺少标识符 */
+	else /* the lack of identifier */
 	{
 		error (6);
 	}

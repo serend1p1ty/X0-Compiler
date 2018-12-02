@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * continueStat语法分析程序
+ * continueStat syntactical analyzer
  */
 void continueStat ()
 {
@@ -15,12 +15,12 @@ void continueStat ()
 			gen (jmp, 0, 0);
 			continueList[iterCtnList++] = iterCode - 1;
 		}
-		else /* 缺少; */
+		else /* the lack of ';' */
 		{
 			error (10);
 		}
 	}
-	else /* 缺少continue */
+	else /* the lack of 'continue' */
 	{
 		error (36);
 	}

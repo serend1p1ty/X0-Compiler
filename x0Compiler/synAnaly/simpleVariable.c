@@ -1,15 +1,14 @@
 #include "../global.h"
 
 /*
- * simpleVariable语法分析程序
+ * simpleVariable syntactical analyzer
  */
-void simpleVariable (int* ptr_offset, int* ptr_isArray)
+void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType)
 {
 	if (sym == ident)
 	{
 		int pos = findPosition (id);
-
-		if (pos == -1)	/* 标识符未声明 */
+		if (pos == -1)	/* the identifier hasn't been declared */
 		{
 			error (24);
 		}
@@ -23,36 +22,69 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray)
 
 			if (sym == rbracket)
 			{
-				/* 标识符不是int或char数组 */
+				/* identifier isn't INT/CHAR/BOOL/DOUBLE array */
 				if (table[pos].kind != intArray && table[pos].kind != charArray
-					&& table[pos].kind != boolArray)
+					&& table[pos].kind != boolArray && table[pos].kind != doubleArray)
 				{
 					error (26);
 				}
 
 				*ptr_offset = table[pos].offset;
 				*ptr_isArray = 1;
+
+				switch (table[pos].kind)
+				{
+					case intArray:
+						*ptr_identType = 1;
+						break;
+					case doubleArray:
+						*ptr_identType = 2;
+						break;
+					case charArray:
+						*ptr_identType = 3;
+						break;
+					case boolArray:
+						*ptr_identType = 4;
+						break;
+				}
+
 				getSym ();
 			}
-			else /* 缺少] */
+			else /* the lack of ']' */
 			{
 				error (9);
 			}
 		}
 		else
 		{
-			/* 标识符不是int或char变量 */
+			/* identifier isn't INT/CHAR/BOOL/DOUBLE variable */
 			if (table[pos].kind != intVar && table[pos].kind != charVar
-				&& table[pos].kind != boolVar)
+				&& table[pos].kind != boolVar && table[pos].kind != doubleVar)
 			{
 				error (25);
 			}
 
 			*ptr_offset = table[pos].offset;
 			*ptr_isArray = 0;
+
+			switch (table[pos].kind)
+			{
+				case intVar:
+					*ptr_identType = 1;
+					break;
+				case doubleVar:
+					*ptr_identType = 2;
+					break;
+				case charVar:
+					*ptr_identType = 3;
+					break;
+				case boolVar:
+					*ptr_identType = 4;
+					break;
+			}
 		}
 	}
-	else /* 缺少标识符 */
+	else /* the lack of identifier */
 	{
 		error (6);
 	}

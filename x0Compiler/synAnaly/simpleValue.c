@@ -1,7 +1,7 @@
 #include "../global.h"
 
 /*
- * simpleValue语法分析程序
+ * simpleValue syntactical analyzer
  */
 void simpleValue ()
 {
@@ -9,7 +9,7 @@ void simpleValue ()
 	{
 		getSym ();
 		additiveExpr ();
-		gen (opr, 0, 20);
+		gen (opr, 0, 20); /* ODD operation */
 	}
 	else
 	{
@@ -17,7 +17,7 @@ void simpleValue ()
 		if (sym == great || sym == less || sym == greateql
 			|| sym == lesseql || sym == eqleql || sym == neql)
 		{
-			enum symbol tempSym = sym; /* 保存此时的sym */
+			enum symbol tempSym = sym; /* save current value of sym */
 			getSym ();
 			additiveExpr ();
 
@@ -42,7 +42,7 @@ void simpleValue ()
 				case neql:
 					gen (opr, 0, 9);
 					break;
-				default: /* 不合法的运算符 */
+				default: /* illegal operator */
 					error (30);
 			}
 		}

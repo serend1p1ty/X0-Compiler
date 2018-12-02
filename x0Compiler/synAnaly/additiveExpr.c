@@ -1,11 +1,11 @@
 #include "../global.h"
 
 /*
- * additiveExpr语法分析程序
+ * additiveExpr syntactical analyzer
  */
 void additiveExpr ()
 {
-	if (sym == minus) /* 这里减号看作负号 */
+	if (sym == minus) /* here see '-' as negtive sign */
 	{
 		getSym ();
 		term ();
@@ -18,7 +18,7 @@ void additiveExpr ()
 
 	while (sym == plus || sym == minus)
 	{
-		enum symbol tempSym = sym; /* 保存此时的符号 */
+		enum symbol tempSym = sym; /* save current symbol */
 		getSym ();
 		term ();
 
@@ -30,7 +30,7 @@ void additiveExpr ()
 			case minus:
 				gen (opr, 0, 3);
 				break;
-			default: /* 不合法的运算符 */
+			default: /* illegal operator */
 				error (30);
 		}
 	}

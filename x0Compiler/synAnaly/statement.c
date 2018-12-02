@@ -1,66 +1,66 @@
 #include "../global.h"
 
 /*
- * statement语法分析程序
+ * statement syntactical analyzer
  */
 void statement ()
 {
-	if (sym == ifsym)	/* if语句 */
+	if (sym == ifsym) /* if statement */
 	{
 		ifStat ();
 	}
-	else if (sym == whilesym)	/* while语句 */
+	else if (sym == whilesym) /* while statement */
 	{
 		whileStat ();
 	}
-	else if (sym == readsym)	/* read语句 */
+	else if (sym == readsym) /* read statement */
 	{
 		readStat ();
 	}
-	else if (sym == writesym)	/* write语句 */
+	else if (sym == writesym) /* write statement */
 	{
 		writeStat ();
 	}
-	else if (sym == lbrace)	/* compound语句 */
+	else if (sym == lbrace)	/* compound statement */
 	{
 		compoundStat ();
 	}
 	else if (sym == semic || sym == ident || sym == hashsym
-		|| sym == lparen || sym == number || sym == minus
+		|| sym == lparen || sym == intnum || sym == minus
 		|| sym == incsym || sym == decsym || sym == oddsym 
-		|| sym == notsym || sym == truesym || sym == falsesym)	/* expression语句 */
+		|| sym == notsym || sym == truesym || sym == falsesym || sym == doublenum)	/* expression statement */
 	{
 		expressionStat ();
 	}
-	else if (sym == forsym) /* for语句 */
+	else if (sym == forsym) /* for statement */
 	{
 		forStat ();
 	}
-	else if (sym == brksym) /* break语句 */
+	else if (sym == brksym) /* break statement */
 	{
 		breakStat ();
 	}
-	else if (sym == exitsym) /* exit语句 */
+	else if (sym == exitsym) /* exit statement */
 	{
 		exitStat ();
 	}
-	else if (sym == ctnsym) /* continue语句 */
+	else if (sym == ctnsym) /* continue statement */
 	{
 		continueStat ();
 	}
-	else if (sym == swtcsym) /* switch语句 */
+	else if (sym == swtcsym) /* switch statement */
 	{
 		switchStat ();
 	}
-	else if (sym == dosym) /* do-while语句 */
+	else if (sym == dosym) /* do-while statement */
 	{
 		dowhileStat ();
 	}
-	else if (sym == reptsym) /* repeat-until语句 */
+	else if (sym == reptsym) /* repeat-until statement */
 	{
 		repeatStat ();
 	}
-	else /* 缺少if或while或read或write或{或for或#或标识符或(或数字或-或++或--或odd或!或;或true或false */
+	else /* sym isn't belong to first(statement) */
 	{
 		error (19);
 	}

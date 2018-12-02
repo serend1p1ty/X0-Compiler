@@ -1,13 +1,12 @@
 #include "../global.h"
 
 /*
- * while语句语法分析程序
+ * whileStat syntactical analyzer
  */
 void whileStat ()
 {
-	int startBreakNum = iterBreakList; /* 记录while语句分析开始时需要回填的break语句数量 */
-
-	int startContinueNum = iterCtnList; /* 记录while语句分析开始时需要回填的continue语句数量 */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing whileStat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing whileStat */
 
 	if (sym == whilesym)
 	{
@@ -15,53 +14,51 @@ void whileStat ()
 
 		if (sym == lparen)
 		{
-			int pos1 = iterCode; /* 保存现在的iterCode值 */
+			int pos1 = iterCode; /* save current value of iterCode */
 
 			getSym ();
 			expression ();
 
 			if (sym == rparen)
 			{
-				int pos2 = iterCode; /* 保存现在的iterCode值，回填的时候使用 */
-
-				gen (jpc, 0, 0);  /* 跳转的位置还不确定，待会回填 */
-				
+				int pos2 = iterCode; /* save current value of iterCode for backfilling */
+				gen (jpc, 0, 0); /* the position where program jump to hasn't been determined. we'll backfill it later. */
 				getSym ();
 				statement ();
 
-				/* 回填continue语句 */
+				/* backfill continue statement */
 				for (int i = startContinueNum; i < iterCtnList; i++)
 				{
 					int pos = continueList[i];
 					code[pos].offset = iterCode;
 				}
-
-				iterCtnList = startContinueNum; /* 将iterCtnList设置为刚开始的值 */
+				iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
+												 * that is before analysing whileStat */
 
 				gen (jmp, 0, pos1);
-				code[pos2].offset = iterCode;
+				code[pos2].offset = iterCode; /* backfill */
 			}
-			else /* 缺少) */
+			else /* the lack of ')' */
 			{
 				error (14);
 			}
 		}
-		else /* 缺少( */
+		else /* the lack of '(' */
 		{
 			error (16);
 		}
 	}
-	else /* 缺少while */
+	else /* the lack of 'while' */
 	{
 		error (21);
 	}
 
-	/* 回填break语句 */
+	/* backfill break statement */
 	for (int i = startBreakNum; i < iterBreakList; i++)
 	{
 		int pos = breakList[i];
 		code[pos].offset = iterCode;
 	}
-
-	iterBreakList = startBreakNum; /* 将iterBreakList设置为刚开始的值 */
+	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
+									* that is before analysing whileStat */
 }

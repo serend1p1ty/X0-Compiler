@@ -1,11 +1,11 @@
 #include "../global.h"
 
 /*
- * switchStat语法分析程序
+ * switchStat syntactical analyzer
  */
 void switchStat ()
 {
-	int startBreakNum = iterBreakList; /* 记录switch语句分析开始时需要回填的break语句数量 */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing switchStat */
 	
 	if (sym == swtcsym)
 	{
@@ -23,22 +23,22 @@ void switchStat ()
 				if (sym == lbrace)
 				{
 					getSym ();
-					int pos1 = -1; /* 上一个case语句待回填的jpc位置 */
-					int pos2 = -1; /* 上一个case语句待回填的jmp位置 */
+					int pos1 = -1; /* the position of 'jpc' in previous 'case' statement */
+					int pos2 = -1; /* the position of 'jmp' in previous 'case' statement */
 
 					while (sym == cassym)
 					{
 						if (pos1 != -1)
 						{
-							code[pos1].offset = iterCode; /* 回填 */
+							code[pos1].offset = iterCode; /* backfill */
 						}
 						
 						getSym ();
 
-						if (sym == number)
+						if (sym == intnum)
 						{
-							gen (lit, 0, num);
-							gen (opr, 0, 21);
+							gen (lit, 1, intNum);
+							gen (opr, 0, 21); /* '==' operation */
 							gen (jpc, 0, 0);
 							pos1 = iterCode - 1;
 							getSym ();
@@ -49,19 +49,19 @@ void switchStat ()
 
 								if (pos2 != -1)
 								{
-									code[pos2].offset = iterCode; /* 回填 */
+									code[pos2].offset = iterCode; /* backfill */
 								}
 
 								statementList ();
 								gen (jmp, 0, 0);
 								pos2 = iterCode - 1;
 							}
-							else /* 缺少: */
+							else /* the lack of ':' */
 							{
 								error (38);
 							}
 						}
-						else /* 缺少数字 */
+						else /* the lack of INT number */
 						{
 							error (8);
 						}
@@ -69,12 +69,12 @@ void switchStat ()
 
 					if (pos1 != -1)
 					{
-						code[pos1].offset = iterCode; /* 回填 */
+						code[pos1].offset = iterCode; /* backfill */
 					}
 
 					if (pos2 != -1)
 					{
-						code[pos2].offset = iterCode; /* 回填 */
+						code[pos2].offset = iterCode; /* backfill */
 					}
 
 					if (sym == defausym)
@@ -86,7 +86,7 @@ void switchStat ()
 							getSym ();
 							statementList ();
 						}
-						else /* 缺少: */
+						else /* the lack of ':' */
 						{
 							error (38);
 						}
@@ -96,37 +96,37 @@ void switchStat ()
 					{
 						getSym ();
 					}
-					else /* 缺少} */
+					else /* the lack of '}' */
 					{
 						error (4);
 					}
 				}
-				else /* 缺少{ */
+				else /* the lack of '{' */
 				{
 					error (5);
 				}
 			}
-			else /* 缺少) */
+			else /* the lack of ')' */
 			{
 				error (14);
 			}
 		}
-		else /* 缺少( */
+		else /* the lack of '(' */
 		{
 			error (16);
 		}
 	}
-	else /* 缺少switch */
+	else /* the lack of 'switch' */
 	{
 		error (37);
 	}
 
-	/* 回填break语句 */
+	/* backfill break statement */
 	for (int i = startBreakNum; i < iterBreakList; i++)
 	{
 		int pos = breakList[i];
 		code[pos].offset = iterCode;
 	}
-
-	iterBreakList = startBreakNum; /* 将iterBreakList设置为刚开始的值 */
+	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
+									* that is before analysing switchStat */
 }
