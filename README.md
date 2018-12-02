@@ -1,6 +1,8 @@
 # x0Compiler
-项目：编译原理实践课大作业(x0语言的编译器)
+Project name: x0 compiler
 
-编程语言：c
+Programming language: c
 
 IDE：visual studio 2017
+
+Contact the author: zjli1997@qq.com
