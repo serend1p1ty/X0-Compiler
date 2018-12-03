@@ -100,7 +100,7 @@ void factor ()
 	}
 	else if (sym == doublenum)
 	{
-		gen (lit, 2, floatNum);
+		gen (lit, 2, doubleNum);
 		getSym ();
 	}
 	else if (sym == truesym || sym == falsesym)

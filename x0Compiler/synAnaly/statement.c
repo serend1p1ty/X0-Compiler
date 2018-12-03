@@ -25,10 +25,10 @@ void statement ()
 	{
 		compoundStat ();
 	}
-	else if (sym == semic || sym == ident || sym == hashsym
+	else if (sym == semic || sym == ident || sym == doublenum
 		|| sym == lparen || sym == intnum || sym == minus
-		|| sym == incsym || sym == decsym || sym == oddsym 
-		|| sym == notsym || sym == truesym || sym == falsesym || sym == doublenum)	/* expression statement */
+		|| sym == incsym || sym == decsym || sym == oddsym
+		|| sym == notsym || sym == truesym || sym == falsesym)	/* expression statement */
 	{
 		expressionStat ();
 	}

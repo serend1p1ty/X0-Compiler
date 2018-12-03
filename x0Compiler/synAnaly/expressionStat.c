@@ -6,10 +6,10 @@
 void expressionStat ()
 {
 	/* execute expression syntactical analyzer if sym belong to first(expression) */
-	if (sym == hashsym || sym == ident|| sym == lparen 
-		|| sym == intnum || sym == minus || sym == incsym 
-		|| sym == decsym || sym == oddsym || sym == notsym
-		|| sym == truesym || sym == falsesym || sym == doublenum)
+	if (sym == ident|| sym == lparen || sym == intnum 
+		|| sym == minus || sym == incsym || sym == decsym 
+		|| sym == oddsym || sym == notsym || sym == truesym 
+		|| sym == falsesym || sym == doublenum)
 	{
 		expression ();
 

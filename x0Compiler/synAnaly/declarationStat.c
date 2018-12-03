@@ -61,12 +61,15 @@ void declarationStat (int* ptr_offset)
 		else if (sym == lbracket)
 		{
 			getSym ();
+
 			if (sym == intnum)
 			{
 				getSym ();
+
 				if (sym == rbracket)
 				{
 					getSym ();
+
 					if (sym == semic)
 					{
 						/* CHAR array is declared */

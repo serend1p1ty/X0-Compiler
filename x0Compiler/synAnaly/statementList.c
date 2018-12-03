@@ -9,11 +9,11 @@ void statementList ()
 	while (sym == ifsym || sym == whilesym || sym == readsym
 		|| sym == writesym || sym == lbrace || sym == semic
 		|| sym == ident || sym == lparen || sym == intnum
-		|| sym == hashsym || sym == minus || sym == forsym
+		|| sym == doublenum || sym == minus || sym == forsym
 		|| sym == incsym || sym == decsym || sym == oddsym
 		|| sym == notsym || sym == brksym || sym == exitsym
 		|| sym == ctnsym || sym == swtcsym || sym == dosym 
-		|| sym == reptsym || sym == truesym || sym == falsesym || sym == doublenum)
+		|| sym == reptsym || sym == truesym || sym == falsesym)
 	{
 		statement ();
 	}

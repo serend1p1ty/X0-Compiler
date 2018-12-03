@@ -5,25 +5,16 @@
  */
 void expression ()
 {
-	if (sym == hashsym)	/* sym == '#' */	
+	if (sym == ident) /* need to read more symbols to determine whether current statement is assignment statement */
 	{
-		getSym ();
+		backup (); /* backup the status of lexical analysing */
 
 		int offset;    /* the offset relative to the base address of current activity record */
 		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
-		int IncOrDec;  /* 1: auto-adding after variable   2: auto-decreasing after variable 
-					    * 3: auto-adding before variable  4: auto-decreasing before variable 
-					    * 5: without auto-adding or auto-decreasing */
 		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
-		variable (&offset, &isArray, &IncOrDec, &identType);
+		simpleVariable (&offset, &isArray, &identType);
 
-		/* auto-adding or auto-decreasing variable can't be left of assignment statement */
-		if (IncOrDec != 5)
-		{
-			error (32);
-		}
-
-		if (sym == eql)
+		if (sym == eql) /* current statement is assignment statement */
 		{
 			getSym ();
 			expression ();
@@ -38,9 +29,10 @@ void expression ()
 				gen (sto, 0, offset);
 			}
 		}
-		else /* the lack of '=' */
+		else /* current statement is valueExpr */
 		{
-			error (11);
+			recover (); /* recover the status of lexical analysing from backups */
+			valueExpr ();
 		}
 	}
 	else if (sym == lparen || sym == intnum || sym == ident || sym == minus

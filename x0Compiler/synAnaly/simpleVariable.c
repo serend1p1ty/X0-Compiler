@@ -8,6 +8,7 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType)
 	if (sym == ident)
 	{
 		int pos = findPosition (id);
+
 		if (pos == -1)	/* the identifier hasn't been declared */
 		{
 			error (24);

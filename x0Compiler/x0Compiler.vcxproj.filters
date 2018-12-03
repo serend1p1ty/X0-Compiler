@@ -122,6 +122,12 @@
     <ClCompile Include="synAnaly\repeatStat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
+    <ClCompile Include="lexAnaly\backup.c">
+      <Filter>源文件\lexAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="lexAnaly\recover.c">
+      <Filter>源文件\lexAnaly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

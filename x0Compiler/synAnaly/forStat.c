@@ -15,31 +15,51 @@ void forStat ()
 		if (sym == lparen)
 		{
 			getSym ();
-			expression ();
-			int L0 = iterCode; /* jumping label */
+			
+			if (sym != semic)
+			{
+				expression ();
+			}
 
 			if (sym == semic)
 			{
 				getSym ();
-				expression ();
-				int pos1 = iterCode; /* save current value of iterCode for backfilling */
-				
-				/* the position where program jump to hasn't been determined. we'll backfill it later. */
-				gen (jpc, 0, 0); 
-				gen (jmp, 0, 0);
-				
-				int L1 = iterCode; /* jumping label */
+				int L0 = iterCode; /* jumping label */
+
+				int pos1;
+				int isEmpty = 1; /* isEmpty = 1 means judgement statement is empty */
+				if (sym != semic)
+				{
+					isEmpty = 0;
+					expression ();
+					pos1 = iterCode; /* save current value of iterCode for backfilling */
+					gen (jpc, 0, 0); /* the position where program jump to hasn't been determined. 
+									  * we'll backfill it later */
+				}
+				else
+				{
+					pos1 = iterCode;
+				}
+
+				gen (jmp, 0, 0); /* the position where program jump to hasn't been determined. 
+							      * we'll backfill it later */
 
 				if (sym == semic)
 				{
 					getSym ();
-					expression ();
+					int L1 = iterCode; /* jumping label */
+
+					if (sym != rparen)
+					{
+						expression ();
+					}
+					
 					gen (jmp, 0, L0);
-					int L2 = iterCode; /* jumping label */
 
 					if (sym == rparen)
 					{
 						getSym ();
+						int L2 = iterCode; /* jumping label */
 						statement ();
 
 						/* backfill continue statement */
@@ -54,8 +74,15 @@ void forStat ()
 						gen (jmp, 0, L1);
 						
 						/* backfill the position where program jump to */
-						code[pos1].offset = iterCode;
-						code[pos1 + 1].offset = L2;
+						if (!isEmpty)
+						{
+							code[pos1].offset = iterCode;
+							code[pos1 + 1].offset = L2;
+						}
+						else
+						{
+							code[pos1].offset = L2;
+						}
 					}
 					else /* the lack of ')' */
 					{

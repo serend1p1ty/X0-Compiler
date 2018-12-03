@@ -135,7 +135,7 @@ void getSym ()
 
 			if (flagDecPoint) /* current sym is floatnumber */
 			{
-				floatNum = intNum + decimal;
+				doubleNum = intNum + decimal;
 			}
 
 			sym = flagDecPoint ? doublenum : intnum;

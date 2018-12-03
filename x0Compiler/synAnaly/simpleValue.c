@@ -14,6 +14,7 @@ void simpleValue ()
 	else
 	{
 		additiveExpr ();
+
 		if (sym == great || sym == less || sym == greateql
 			|| sym == lesseql || sym == eqleql || sym == neql)
 		{

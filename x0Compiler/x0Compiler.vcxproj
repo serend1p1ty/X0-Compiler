@@ -21,7 +21,9 @@
   <ItemGroup>
     <ClCompile Include="global.c" />
     <ClCompile Include="Interpret\Interpret.c" />
+    <ClCompile Include="lexAnaly\backup.c" />
     <ClCompile Include="lexAnaly\getSym.c" />
+    <ClCompile Include="lexAnaly\recover.c" />
     <ClCompile Include="synAnaly\additiveExpr.c" />
     <ClCompile Include="synAnaly\breakStat.c" />
     <ClCompile Include="synAnaly\compoundStat.c" />
