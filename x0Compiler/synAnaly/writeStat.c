@@ -19,7 +19,7 @@ void writeStat ()
 			error (10);
 		}
 
-		gen (opr, 0, 15); /* output the top element */
+		gen (opr, 15, 0, 0); /* output the top element */
 	}
 	else /* the lack of 'write' */
 	{

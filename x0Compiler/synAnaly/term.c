@@ -15,13 +15,13 @@ void term ()
 		switch (tempSym)
 		{
 			case times:
-				gen (opr, 0, 4);
+				gen (opr, 4, 0, 0);
 				break;
 			case slash:
-				gen (opr, 0, 5);
+				gen (opr, 5, 0, 0);
 				break;
 			case modsym:
-				gen (opr, 0, 6);
+				gen (opr, 6, 0, 0);
 				break;
 			default: /* illegal operator */
 				error (30);

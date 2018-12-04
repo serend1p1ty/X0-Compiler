@@ -9,7 +9,7 @@ void additiveExpr ()
 	{
 		getSym ();
 		term ();
-		gen (opr, 0, 1);
+		gen (opr, 1, 0, 0);
 	}
 	else
 	{
@@ -25,10 +25,10 @@ void additiveExpr ()
 		switch (tempSym)
 		{
 			case plus:
-				gen (opr, 0, 2);
+				gen (opr, 2, 0, 0);
 				break;
 			case minus:
-				gen (opr, 0, 3);
+				gen (opr, 3, 0, 0);
 				break;
 			default: /* illegal operator */
 				error (30);

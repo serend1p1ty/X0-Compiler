@@ -16,13 +16,13 @@ void valueExpr ()
 		switch (tempSym)
 		{
 			case andsym:
-				gen (opr, 0, 16);
+				gen (opr, 16, 0, 0);
 				break;
 			case orsym:
-				gen (opr, 0, 17);
+				gen (opr, 17, 0, 0);
 				break;
 			case xorsym:
-				gen (opr, 0, 19);
+				gen (opr, 19, 0, 0);
 				break;
 			default: /* illegal operator */
 				error (30);

@@ -30,16 +30,16 @@ void switchStat ()
 					{
 						if (pos1 != -1)
 						{
-							code[pos1].offset = iterCode; /* backfill */
+							code[pos1].operand1 = iterCode; /* backfill */
 						}
 						
 						getSym ();
 
 						if (sym == intnum)
 						{
-							gen (lit, 1, intNum);
-							gen (opr, 0, 21); /* '==' operation */
-							gen (jpc, 0, 0);
+							gen (lit, 1, intNum, 0);
+							gen (opr, 21, 0, 0); /* '==' operation */
+							gen (jpc, 0, 0, 0);
 							pos1 = iterCode - 1;
 							getSym ();
 
@@ -49,11 +49,11 @@ void switchStat ()
 
 								if (pos2 != -1)
 								{
-									code[pos2].offset = iterCode; /* backfill */
+									code[pos2].operand1 = iterCode; /* backfill */
 								}
 
 								statementList ();
-								gen (jmp, 0, 0);
+								gen (jmp, 0, 0, 0);
 								pos2 = iterCode - 1;
 							}
 							else /* the lack of ':' */
@@ -69,12 +69,12 @@ void switchStat ()
 
 					if (pos1 != -1)
 					{
-						code[pos1].offset = iterCode; /* backfill */
+						code[pos1].operand1 = iterCode; /* backfill */
 					}
 
 					if (pos2 != -1)
 					{
-						code[pos2].offset = iterCode; /* backfill */
+						code[pos2].operand1 = iterCode; /* backfill */
 					}
 
 					if (sym == defausym)
@@ -125,7 +125,7 @@ void switchStat ()
 	for (int i = startBreakNum; i < iterBreakList; i++)
 	{
 		int pos = breakList[i];
-		code[pos].offset = iterCode;
+		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
 									* that is before analysing switchStat */

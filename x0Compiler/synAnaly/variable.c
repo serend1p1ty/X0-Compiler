@@ -3,11 +3,11 @@
 /*
  * variable syntactical analyzer
  */
-void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_identType)
+void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_identType, int* ptr_size)
 {
 	if (sym == ident)
 	{
-		simpleVariable (ptr_offset, ptr_isArray, ptr_identType);
+		simpleVariable (ptr_offset, ptr_isArray, ptr_identType, ptr_size);
 
 		if (sym == incsym)
 		{
@@ -48,7 +48,7 @@ void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_id
 		}
 
 		getSym ();
-		simpleVariable (ptr_offset, ptr_isArray, ptr_identType);
+		simpleVariable (ptr_offset, ptr_isArray, ptr_identType, ptr_size);
 
 		/* auto-adding or auto-decreasing variable must be INT */
 		if (*ptr_identType != 1)

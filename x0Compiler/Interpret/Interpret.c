@@ -82,25 +82,24 @@ void Interpret ()
 	{
 		i = code[p];  /* read current instruction */
 		p = p + 1;
-		int intOffset = (int)(i.offset + (i.offset > 0 ? 0.5 : -0.5)); /* convert i.offset to integer */
 
 		switch (i.fct)
 		{
 			case lit:	/* place the constant on top of the stack */
 				t = t + 1;
-				if (i.lev_dif == 1)
+				if (i.operand1 == 1)
 				{
 					s[t].dataType = 1;
-					s[t].intData = intOffset;
+					s[t].intData = i.operand2;
 				}
 				else
 				{
 					s[t].dataType = 2;
-					s[t].dblData = i.offset;
+					s[t].dblData = i.operand3;
 				}
 				break;
 			case opr:	/* mathematical¡¢logical¡¢read/write operation */
-				switch (intOffset)
+				switch (i.operand1)
 				{
 					case 0: /* return to the location where current function is called */
 						t = b - 1;
@@ -227,12 +226,12 @@ void Interpret ()
 						break;
 					case 14: /* read a integer and place it on top of the data stack */
 						t = t + 1;
-						s[t].dataType = i.lev_dif;
-						if (i.lev_dif == 1 || i.lev_dif == 4) /* read int/bool */
+						s[t].dataType = i.operand2;
+						if (i.operand2 == 1 || i.operand2 == 4) /* read int/bool */
 						{
 							scanf ("%d", &(s[t].intData));
 						}
-						else if (i.lev_dif == 3)
+						else if (i.operand2 == 3)
 						{
 							scanf ("%c", &charTmp);
 							getchar (); /* absorb '\n' produced by scanf function */
@@ -315,63 +314,66 @@ void Interpret ()
 						error (28);
 				}
 				break;
-			case lod: /* set a variable which has a offset(intOffset) relative to the base of current
+			case lod: /* set a variable which has a offset(i.operand1) relative to the base of current
 					   * activity record on top of stack */
 				t = t + 1;
-				s[t] = s[1 + intOffset];
+				s[t] = s[1 + i.operand1];
 				break;
-			case lof: /* set a array element which has a offset(intOffset + s[t].intData) relative to 
-					   * the base of current activity record on top of stack */
+			case lod2: /* set a array element which has a offset(i.operand1 + s[t].intData) relative to 
+					    * the base of current activity record on top of stack */
 				/* the subscript of array must be integer */
 				if (s[t].dataType == 2)
 				{
 					error (47);
 				}
-				s[t] = s[1 + intOffset + s[t].intData];
+				/* array subscript is beyond bound */
+				if (s[t].intData >= i.operand2)
+				{
+					error (51);
+				}
+				s[t] = s[1 + i.operand1 + s[t].intData];
 				break;
-			case sto: /* store the top element in the variable which has a offset(intOffset) relative to 
-					   * the base of current activity record */ 
-				store (s, 1 + intOffset, t);
+			case sto: /* store the top element in the variable which has a offset(i.operand1) relative to 
+					   * the base of current activity record */
+				store (s, 1 + i.operand1, t);
 				t = t - 1;
 				break;
-			case stf: /* store the top element in the array element which has a offset(intOffset + s[t - 1].intData) 
-					   * relative to the base of current activity record */ 
+			case sto2: /* store the top element in the array element which has a offset(i.operand1 + s[t - 1].intData) 
+					    * relative to the base of current activity record */ 
 				/* the subscript of array must be integer */
 				if (s[t - 1].dataType == 2)
 				{
 					error (47);
 				}
-				store (s, 1 + intOffset + s[t - 1].intData, t);
+				/* array subscript is beyond bound */
+				if (s[t - 1].intData >= i.operand2)
+				{
+					error (51);
+				}
+				store (s, 1 + i.operand1 + s[t - 1].intData, t);
 				t = t - 2;
 				break;
-			case add: /* add one to the value of the variable which has a offset(intOffset) 
+			case add: /* add one to the value of the variable which has a offset(i.operand1) 
 					   * relative to the base of current activity record */
-				s[1 + intOffset].intData += 1;
+				s[1 + i.operand1].intData += i.operand2;
 				break;
-			case adf: /* add one to the value of the array element which has a offset(intOffset + s[t].intData) 
-					   * relative to the base of current activity record */
+			case add2: /* add one to the value of the array element which has a offset(i.operand1 + s[t].intData) 
+					    * relative to the base of current activity record */
 				/* the subscript of array must be integer */
 				if (s[t].dataType == 2)
 				{
 					error (47);
 				}
-				s[1 + intOffset + s[t].intData].intData += 1;
-				break;
-			case mis: /* subtract one from the value of the variable which has a offset(intOffset) 
-					   * relative to the base of current activity record */
-				s[1 + intOffset].intData -= 1;
-				break;
-			case mif: /* subtract one from the value of the array element which has a offset(intOffset + s[t].intData) 
-					   * relative to the base of current activity record */
-				/* the subscript of array must be integer */
-				if (s[t].dataType == 2)
+				/* array subscript is beyond bound */
+				if (s[t].intData >= i.operand2)
 				{
-					error (47);
+					error (51);
 				}
-				s[1 + intOffset + s[t].intData].intData -= 1;
+				double temp = i.operand3 > 0 ? 0.5 : -0.5;
+				s[1 + i.operand1 + s[t].intData].intData += (int)(i.operand3 + temp);
 				break;
 			case tad: /* add intOffset to the value of top element */
-				s[t].intData += intOffset;
+				s[t].intData += i.operand1;
 				break;
 			case cal: /* call function */
 				break;
@@ -414,15 +416,15 @@ void Interpret ()
 						}
 					}
 				}
-				t = t + intOffset;
+				t = t + i.operand1;
 				break;
 			case jmp: /* unconditionaly jump */
-				p = intOffset;
+				p = i.operand1;
 				break;
 			case jpc: /* conditionaly jump */
 				if (s[t].intData == 0)
 				{
-					p = intOffset;
+					p = i.operand1;
 				}
 				t = t - 1;
 				break;

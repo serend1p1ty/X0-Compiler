@@ -33,16 +33,16 @@ void forStat ()
 					isEmpty = 0;
 					expression ();
 					pos1 = iterCode; /* save current value of iterCode for backfilling */
-					gen (jpc, 0, 0); /* the position where program jump to hasn't been determined. 
-									  * we'll backfill it later */
+					gen (jpc, 0, 0, 0); /* the position where program jump to hasn't been determined. 
+									     * we'll backfill it later */
 				}
 				else
 				{
 					pos1 = iterCode;
 				}
 
-				gen (jmp, 0, 0); /* the position where program jump to hasn't been determined. 
-							      * we'll backfill it later */
+				gen (jmp, 0, 0, 0); /* the position where program jump to hasn't been determined. 
+							         * we'll backfill it later */
 
 				if (sym == semic)
 				{
@@ -54,7 +54,7 @@ void forStat ()
 						expression ();
 					}
 					
-					gen (jmp, 0, L0);
+					gen (jmp, L0, 0, 0);
 
 					if (sym == rparen)
 					{
@@ -66,22 +66,22 @@ void forStat ()
 						for (int i = startContinueNum; i < iterCtnList; i++)
 						{
 							int pos = continueList[i];
-							code[pos].offset = iterCode;
+							code[pos].operand1 = iterCode;
 						}
 						iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
 														 * that is before analysing forStat */
 						
-						gen (jmp, 0, L1);
+						gen (jmp, L1, 0, 0);
 						
 						/* backfill the position where program jump to */
 						if (!isEmpty)
 						{
-							code[pos1].offset = iterCode;
-							code[pos1 + 1].offset = L2;
+							code[pos1].operand1 = iterCode;
+							code[pos1 + 1].operand1 = L2;
 						}
 						else
 						{
-							code[pos1].offset = L2;
+							code[pos1].operand1 = L2;
 						}
 					}
 					else /* the lack of ')' */
@@ -113,7 +113,7 @@ void forStat ()
 	for (int i = startBreakNum; i < iterBreakList; i++)
 	{
 		int pos = breakList[i];
-		code[pos].offset = iterCode;
+		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
 									* that is before analysing forStat */

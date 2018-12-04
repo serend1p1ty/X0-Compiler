@@ -27,7 +27,7 @@ void repeatStat ()
 					{
 						getSym ();
 						expression ();
-						gen (jpc, 0, pos);
+						gen (jpc, pos, 0, 0);
 
 						if (sym == rparen)
 						{

@@ -29,13 +29,14 @@ void factor ()
 	}
 	else if (sym == ident || sym == incsym || sym == decsym) /* sym belong to first(variable) */
 	{
+		int size;       /* 'size' is the space distributed to 'variable' */
 		int offset;     /* the offset relative to the base address of current activity record */
 		int isArray;    /* 1: 'variable' is array element   0: 'variable' is just a variable */
 		int IncOrDec;   /* 1: auto-adding after variable   2: auto-decreasing after variable
 					     * 3: auto-adding before variable  4: auto-decreasing before variable
 					     * 5: without auto-adding or auto-decreasing */
 		int identType;  /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
-		variable (&offset, &isArray, &IncOrDec, &identType);
+		variable (&offset, &isArray, &IncOrDec, &identType, &size);
 
 		/* load variable */
 		if (isArray)
@@ -43,25 +44,25 @@ void factor ()
 			switch (IncOrDec)
 			{
 				case 1:
-					gen (adf, 0, offset);
-					gen (lof, 0, offset);
-					gen (tad, 0, -1);
+					gen (add2, offset, size, 1);
+					gen (lod2, offset, size, 0);
+					gen (tad, -1, 0, 0);
 					break;
 				case 2:
-					gen (mif, 0, offset);
-					gen (lof, 0, offset);
-					gen (tad, 0, 1);
+					gen (add2, offset, size, -1);
+					gen (lod2, offset, size, 0);
+					gen (tad, 1, 0, 0);
 					break;
 				case 3:
-					gen (adf, 0, offset);
-					gen (lof, 0, offset);
+					gen (add2, offset, size, 1);
+					gen (lod2, offset, size, 0);
 					break;
 				case 4:
-					gen (mif, 0, offset);
-					gen (lof, 0, offset);
+					gen (add2, offset, size, -1);
+					gen (lod2, offset, size, 0);
 					break;
 				case 5:
-					gen (lof, 0, offset);
+					gen (lod2, offset, size, 0);
 					break;
 			}
 		}
@@ -70,42 +71,42 @@ void factor ()
 			switch (IncOrDec)
 			{
 				case 1:
-					gen (add, 0, offset);
-					gen (lod, 0, offset);
-					gen (tad, 0, -1);
+					gen (add, offset, 1, 0);
+					gen (lod, offset, 0, 0);
+					gen (tad, -1, 0, 0);
 					break;
 				case 2:
-					gen (mis, 0, offset);
-					gen (lod, 0, offset);
-					gen (tad, 0, 1);
+					gen (add, offset, -1, 0);
+					gen (lod, offset, 0, 0);
+					gen (tad, 1, 0, 0);
 					break;
 				case 3:
-					gen (add, 0, offset);
-					gen (lod, 0, offset);
+					gen (add, offset, 1, 0);
+					gen (lod, offset, 0, 0);
 					break;
 				case 4:
-					gen (mis, 0, offset);
-					gen (lod, 0, offset);
+					gen (add, offset, -1, 0);
+					gen (lod, offset, 0, 0);
 					break;
 				case 5:
-					gen (lod, 0, offset);
+					gen (lod, offset, 0, 0);
 					break;
 			}
 		}
 	}
 	else if (sym == intnum)
 	{
-		gen (lit, 1, intNum);
+		gen (lit, 1, intNum, 0);
 		getSym ();
 	}
 	else if (sym == doublenum)
 	{
-		gen (lit, 2, doubleNum);
+		gen (lit, 2, 0, doubleNum);
 		getSym ();
 	}
 	else if (sym == truesym || sym == falsesym)
 	{
-		gen (lit, 4, sym == truesym); /* the value of 'true' is 1, value of 'false' is 0 */
+		gen (lit, 1, sym == truesym, 0); /* the value of 'true' is 1, value of 'false' is 0 */
 		getSym ();
 	}
 	else /* sym isn't belong to first(factor) */
@@ -116,6 +117,6 @@ void factor ()
 	/* logic inversion operator has appeared */
 	if (flag)
 	{
-		gen (opr, 0, 18);
+		gen (opr, 18, 0, 0);
 	}
 }

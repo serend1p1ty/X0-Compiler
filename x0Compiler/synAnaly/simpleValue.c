@@ -9,7 +9,7 @@ void simpleValue ()
 	{
 		getSym ();
 		additiveExpr ();
-		gen (opr, 0, 20); /* ODD operation */
+		gen (opr, 20, 0, 0); /* ODD operation */
 	}
 	else
 	{
@@ -26,22 +26,22 @@ void simpleValue ()
 			switch (tempSym)
 			{
 				case great:
-					gen (opr, 0, 12);
+					gen (opr, 12, 0, 0);
 					break;
 				case less:
-					gen (opr, 0, 10);
+					gen (opr, 10, 0, 0);
 					break;
 				case greateql:
-					gen (opr, 0, 11);
+					gen (opr, 11, 0, 0);
 					break;
 				case lesseql:
-					gen (opr, 0, 13);
+					gen (opr, 13, 0, 0);
 					break;
 				case eqleql:
-					gen (opr, 0, 8);
+					gen (opr, 8, 0, 0);
 					break;
 				case neql:
-					gen (opr, 0, 9);
+					gen (opr, 9, 0, 0);
 					break;
 				default: /* illegal operator */
 					error (30);

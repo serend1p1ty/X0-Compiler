@@ -12,7 +12,7 @@ void continueStat ()
 		if (sym == semic)
 		{
 			getSym ();
-			gen (jmp, 0, 0);
+			gen (jmp, 0, 0, 0);
 			continueList[iterCtnList++] = iterCode - 1;
 		}
 		else /* the lack of ';' */

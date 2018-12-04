@@ -5,7 +5,7 @@
  */
 void compile ()
 {
-	gen (jmp, 0, 1);
+	gen (jmp, 1, 0, 0);
 	getSym ();
 
 	if (sym == mainsym)
@@ -17,12 +17,12 @@ void compile ()
 			getSym ();
 			int offset = 3;	/* offset of local variable relative to the base address of current activity record */
 			declarationList (&offset); /* offset is increasing when analysing declarationList */
-			gen (ini, 0, offset); /* initialize a space in the stack for current activity record */
+			gen (ini, offset, 0, 0); /* initialize a space in the stack for current activity record */
 			statementList ();
 
 			if (sym == rbrace)
 			{
-				gen (opr, 0, 0); /* return to the location where current function is called */
+				gen (opr, 0, 0, 0); /* return to the location where current function is called */
 
 				printf ("\n***************\n");
 				printf ("Compile successfully!\n");
@@ -69,7 +69,7 @@ int main ()
 	FILE* fout = fopen ("./testSamples/output.txt", "w");
 	for (int i = 0; i < iterCode; i++)
 	{
-		fprintf (fout, "[%d] %s %d %f\n", i, fctCode_string[code[i].fct], code[i].lev_dif, code[i].offset);
+		fprintf (fout, "[%d] %s %d %f\n", i, fctCode_string[code[i].fct], code[i].operand1, code[i].operand3);
 	}
 	fclose (fout);
 

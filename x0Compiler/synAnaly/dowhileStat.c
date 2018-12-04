@@ -27,8 +27,8 @@ void dowhileStat ()
 					{
 						getSym ();
 						expression ();
-						gen (jpc, 0, iterCode + 2);
-						gen (jmp, 0, pos);
+						gen (jpc, iterCode + 2, 0, 0);
+						gen (jmp, pos, 0, 0);
 
 						if (sym == rparen)
 						{

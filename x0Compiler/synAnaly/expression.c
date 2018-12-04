@@ -9,10 +9,11 @@ void expression ()
 	{
 		backup (); /* backup the status of lexical analysing */
 
+		int size;      /* 'size' is the space distributed to 'variable' */
 		int offset;    /* the offset relative to the base address of current activity record */
 		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
 		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
-		simpleVariable (&offset, &isArray, &identType);
+		simpleVariable (&offset, &isArray, &identType, &size);
 
 		if (sym == eql) /* current statement is assignment statement */
 		{
@@ -22,11 +23,11 @@ void expression ()
 			/* store the value of top element in variable */
 			if (isArray)
 			{
-				gen (stf, 0, offset);
+				gen (sto2, offset, size, 0);
 			}
 			else
 			{
-				gen (sto, 0, offset);
+				gen (sto, offset, 0, 0);
 			}
 		}
 		else /* current statement is valueExpr */

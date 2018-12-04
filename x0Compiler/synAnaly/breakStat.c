@@ -12,7 +12,7 @@ void breakStat ()
 		if (sym == semic)
 		{
 			getSym ();
-			gen (jmp, 0, 0);
+			gen (jmp, 0, 0, 0);
 			breakList[iterBreakList++] = iterCode - 1;
 		}
 		else /* the lack of ';' */

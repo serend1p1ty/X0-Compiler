@@ -6,11 +6,17 @@ void error (int error_code)
 	char space[81];
 	memset (space, 32, sizeof(space));
 
-	/* current symbol has been read when error occurs, 'ch' is the following character of current symbol, 
-	 * 'posCh' is the position of the following character of 'ch' */
-	space[posCh - 2] = '\0';
+	/* mark the position of error */
+	if (posCh - 2 >= 0)
+	{
+		space[posCh - 2] = '\0';
+	}
+	else
+	{
+		space[0] = '\0';
+	}
 
-	printf ("%s^", space); /* mark the position of error */
+	printf ("%s^", space);
 
 	switch (error_code)
 	{
@@ -163,6 +169,9 @@ void error (int error_code)
 			break;
 		case 50:
 			printf ("auto-adding or auto-decreasing variable must be INT !\n");
+			break;
+		case 51:
+			printf ("array subscript is beyond bound !\n");
 			break;
 		default:
 			printf ("illegal error code !\n");

@@ -3,7 +3,7 @@
 /*
  * simpleVariable syntactical analyzer
  */
-void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType)
+void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType, int* ptr_size)
 {
 	if (sym == ident)
 	{
@@ -32,6 +32,7 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType)
 
 				*ptr_offset = table[pos].offset;
 				*ptr_isArray = 1;
+				*ptr_size = table[pos].size;
 
 				switch (table[pos].kind)
 				{
@@ -67,6 +68,7 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType)
 
 			*ptr_offset = table[pos].offset;
 			*ptr_isArray = 0;
+			*ptr_size = table[pos].size;
 
 			switch (table[pos].kind)
 			{

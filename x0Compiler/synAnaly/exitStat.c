@@ -16,7 +16,7 @@ void exitStat ()
 			if (sym == intnum)
 			{
 				getSym ();
-				gen (lit, 1, intNum);
+				gen (lit, 1, intNum, 0);
 
 				if (sym == rparen)
 				{
@@ -25,7 +25,7 @@ void exitStat ()
 					if (sym == semic)
 					{
 						getSym ();
-						gen (opr, 0, 7);
+						gen (opr, 7, 0, 0); /* execute 'exit' function */
 					}
 					else /* the lack of ';' */
 					{
