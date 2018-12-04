@@ -49,7 +49,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "./testSamples/input.txt");
+	strcpy (fileName, "../../testSamples/input.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
@@ -66,10 +66,11 @@ int main ()
 
 	compile ();	/* check whether the syntax is correct, and generate intermidiate code */
 
-	FILE* fout = fopen ("./testSamples/output.txt", "w");
+	FILE* fout = fopen ("../../testSamples/output.txt", "w");
 	for (int i = 0; i < iterCode; i++)
 	{
-		fprintf (fout, "[%d] %s %d %f\n", i, fctCode_string[code[i].fct], code[i].operand1, code[i].operand3);
+		fprintf (fout, "[%d] %s %d %d %.2f\n", i, fctCode_string[code[i].fct], code[i].operand1, 
+											code[i].operand2, code[i].operand3);
 	}
 	fclose (fout);
 

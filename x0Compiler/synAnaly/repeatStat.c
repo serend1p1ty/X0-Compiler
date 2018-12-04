@@ -5,6 +5,9 @@
  */
 void repeatStat ()
 {
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing repeatStat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing repeatStat */
+
 	if (sym == reptsym)
 	{
 		getSym ();
@@ -14,6 +17,15 @@ void repeatStat ()
 			getSym ();
 			int pos = iterCode; /* save the position of statementList's first code */
 			statementList ();
+
+			/* backfill continue statement */
+			for (int i = startContinueNum; i < iterCtnList; i++)
+			{
+				int pos = continueList[i];
+				code[pos].operand1 = iterCode;
+			}
+			iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
+											 * that is before analysing repeatStat */
 
 			if (sym == rbrace)
 			{
@@ -71,4 +83,13 @@ void repeatStat ()
 	{
 		error (39);
 	}
+
+	/* backfill break statement */
+	for (int i = startBreakNum; i < iterBreakList; i++)
+	{
+		int pos = breakList[i];
+		code[pos].operand1 = iterCode;
+	}
+	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
+								    * that is before analysing repeatStat */
 }
