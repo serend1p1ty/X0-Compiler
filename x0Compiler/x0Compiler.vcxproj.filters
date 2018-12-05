@@ -65,12 +65,6 @@
     <ClCompile Include="synAnaly\compoundStat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\declarationList.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\declarationStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
     <ClCompile Include="synAnaly\expressionStat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
@@ -127,6 +121,18 @@
     </ClCompile>
     <ClCompile Include="lexAnaly\recover.c">
       <Filter>源文件\lexAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\varDeclarationStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\varDeclarationList.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\constDeclarationList.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\constDeclarationStat.c">
+      <Filter>源文件\synAnaly</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

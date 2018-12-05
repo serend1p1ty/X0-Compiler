@@ -388,6 +388,8 @@ void Interpret ()
 				for (int i = 0; i < iterTable; i++)
 				{
 					struct tableObject to = table[i];
+					double temp = to.value > 0 ? 0.5 : -0.5;
+
 					for (int j = 1; j <= to.size1 * to.size2; j++)
 					{
 						switch (to.kind)
@@ -398,11 +400,19 @@ void Interpret ()
 							case intArray:
 								s[intTmp++].dataType = 1;
 								break;
+							case constIntVar:
+								s[intTmp].dataType = 1;
+								s[intTmp++].intData = (int)(to.value + temp);
+								break;
 							case doubleVar:
 								s[intTmp++].dataType = 2;
 								break;
 							case doubleArray:
 								s[intTmp++].dataType = 2;
+								break;
+							case constDoubleVar:
+								s[intTmp].dataType = 2;
+								s[intTmp++].dblData = to.value;
 								break;
 							case charVar:
 								s[intTmp++].dataType = 3;
@@ -410,11 +420,19 @@ void Interpret ()
 							case charArray:
 								s[intTmp++].dataType = 3;
 								break;
+							case constCharVar:
+								s[intTmp].dataType = 3;
+								s[intTmp++].intData = (int)(to.value + temp);
+								break;
 							case boolVar:
 								s[intTmp++].dataType = 4;
 								break;
 							case boolArray:
 								s[intTmp++].dataType = 4;
+								break;
+							case constBoolVar:
+								s[intTmp].dataType = 4;
+								s[intTmp++].intData = (int)(to.value + temp);
 								break;
 							default: /* error type of symbol-table object */
 								error (49);

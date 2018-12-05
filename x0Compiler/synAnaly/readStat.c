@@ -13,13 +13,22 @@ void readStat ()
 		int size2;
 		int offset;
 		enum objectKind kind;
-		int IncOrDec;
+		int IncOrDec;	/* 1: Increase after variable   2: decrease after variable
+					     * 3: Increase before variable  4: decrease before variable
+					     * 5: without Increase or decrease */
 		variable (&kind, &offset, &size1, &size2, &IncOrDec);
 
-		/* 'read' function can't read auto-adding or auto-decreasing variable */
+		/* 'read' function can't read Increasing or decreasing variable */
 		if (IncOrDec != 5)
 		{
 			error (33);
+		}
+
+		/* constant can't be read */
+		if (kind == constIntVar || kind == constCharVar
+			|| kind == constBoolVar || kind == constDoubleVar)
+		{
+			error (53);
 		}
 
 		/* read a variable using scanf function */

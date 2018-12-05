@@ -2,7 +2,7 @@
 
 /*
  * variable syntactical analyzer
- * store information of variable in  ptr_kind, ptr_offset, ptr_size1, ptr_size2 and ptr_IncOrDec
+ * store information of variable in ptr_kind, ptr_offset, ptr_size1, ptr_size2 and ptr_IncOrDec
  */
 void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int* ptr_size2, int* ptr_IncOrDec)
 {
@@ -12,7 +12,7 @@ void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int* 
 
 		if (sym == incsym)
 		{
-			/* auto-adding or auto-decreasing variable must be INT or CHAR */
+			/* Increasing or decreasing variable must be INT or CHAR */
 			if (*ptr_kind != intVar && *ptr_kind != intArray
 				&& *ptr_kind != charVar && *ptr_kind != charArray)
 			{
@@ -24,7 +24,7 @@ void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int* 
 		}
 		else if (sym == decsym)
 		{
-			/* auto-adding or auto-decreasing variable must be INT or CHAR */
+			/* Increasing or decreasing variable must be INT or CHAR */
 			if (*ptr_kind != intVar && *ptr_kind != intArray
 				&& *ptr_kind != charVar && *ptr_kind != charArray)
 			{
@@ -53,7 +53,7 @@ void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int* 
 		getSym ();
 		simpleVariable (ptr_kind, ptr_offset, ptr_size1, ptr_size2);
 
-		/* auto-adding or auto-decreasing variable must be INT or CHAR */
+		/* Increasing or decreasing variable must be INT or CHAR */
 		if (*ptr_kind != intVar && *ptr_kind != intArray
 			&& *ptr_kind != charVar && *ptr_kind != charArray)
 		{

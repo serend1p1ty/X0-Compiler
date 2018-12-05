@@ -39,10 +39,10 @@ void error (int error_code)
 			printf ("the lack of identifier !\n");
 			break;
 		case 7:
-			printf ("the lack of ';' or '[' !\n");
+			printf ("the lack of number can be assigned !\n");
 			break;
 		case 8:
-			printf ("the lack of INT number !\n");
+			printf ("the lack of integer !\n");
 			break;
 		case 9:
 			printf ("the lack of ']' !\n");
@@ -93,7 +93,7 @@ void error (int error_code)
 			printf ("the identifier hasn't been declared !\n");
 			break;
 		case 25:
-			printf ("identifier isn't INT/CHAR/BOOL/DOUBLE variable !\n");
+			printf ("identifier isn't {const} INT/CHAR/BOOL/DOUBLE variable !\n");
 			break;
 		case 26:
 			printf ("identifier isn't INT/CHAR/BOOL/DOUBLE array !\n");
@@ -114,10 +114,10 @@ void error (int error_code)
 			printf ("the lack of 'for' !\n");
 			break;
 		case 32:
-			printf ("auto-adding or auto-decreasing variable can't be left of assignment statement !\n");
+			printf ("constant can't be modified !\n");
 			break;
 		case 33:
-			printf ("'read' function can't read auto-adding or auto-decreasing variable !\n");
+			printf ("'read' function can't read Increasing or decreasing variable !\n");
 			break;
 		case 34:
 			printf ("the lack of 'break' !\n");
@@ -168,10 +168,16 @@ void error (int error_code)
 			printf ("error type of symbol-table object !\n");
 			break;
 		case 50:
-			printf ("auto-adding or auto-decreasing variable must be INT or CHAR !\n");
+			printf ("Increasing or decreasing variable must be INT or CHAR !\n");
 			break;
 		case 51:
 			printf ("array subscript is out of bound !\n");
+			break;
+		case 52:
+			printf ("the lack of 'const' !\n");
+			break;
+		case 53:
+			printf ("constant can't be read !\n");
 			break;
 		default:
 			printf ("illegal error code !\n");

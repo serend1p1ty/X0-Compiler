@@ -1,6 +1,8 @@
-program = "main" "{" declarationList statementList "}".
-declarationList = [declarationStat declarationList].
-declarationStat = type ID (";" | "[" intNumber "]" ["[" intNumber "]"] ";").
+program = "main" "{" constDeclarationList varDeclarationList statementList "}".
+constDeclarationList = [constDeclarationStat constDeclarationList].
+constDeclarationStat = "const" type ID "=" ("intNumber" | "doubleNumber" | "true" | "false") ";".
+varDeclarationList = [varDeclarationStat varDeclarationList].
+varDeclarationStat = type ID ["[" intNumber "]" ["[" intNumber "]"]] ";".
 type = "int" | "char" | "bool" | "double".
 statementList = [statement statementList].
 statement = ifStat | whileStat | readStat | writeStat | compoundStat | expressionStat | forStat | switchStat | breakStat | exitStat | continueStat | dowhileStat | repeatStat.

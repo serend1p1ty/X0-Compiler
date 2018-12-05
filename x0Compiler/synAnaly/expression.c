@@ -17,6 +17,13 @@ void expression ()
 
 		if (sym == eql) /* current statement is assignment statement */
 		{
+			/* constant can't be modified */
+			if (kind == constIntVar || kind == constCharVar
+				|| kind == constBoolVar || kind == constDoubleVar)
+			{
+				error (32);
+			}
+			
 			getSym ();
 			expression ();
 

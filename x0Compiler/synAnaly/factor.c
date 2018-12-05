@@ -33,7 +33,9 @@ void factor ()
 		int size2;
 		int offset;
 		enum objectKind kind;
-		int IncOrDec;
+		int IncOrDec;	/* 1: Increase after variable   2: decrease after variable
+					     * 3: Increase before variable  4: decrease before variable
+					     * 5: without Increase or decrease */
 		variable (&kind, &offset, &size1, &size2, &IncOrDec);
 
 		if (kind == intArray || kind == charArray

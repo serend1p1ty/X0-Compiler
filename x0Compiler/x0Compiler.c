@@ -16,7 +16,8 @@ void compile ()
 		{
 			getSym ();
 			int offset = 3;	/* offset of local variable relative to the base address of current activity record */
-			declarationList (&offset); /* offset is increasing when analysing declarationList */
+			constDeclarationList (&offset); /* offset is increasing when analysing constDeclarationList */
+			varDeclarationList (&offset); /* offset is increasing when analysing varDeclarationList */
 			gen (ini, offset, 0, 0); /* initialize a space in the stack for current activity record */
 			statementList ();
 
@@ -49,7 +50,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/input.txt");
+	strcpy (fileName, "../../testSamples/testConst.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
@@ -57,12 +58,14 @@ int main ()
 		return 1;
 	}
 
+	char temp = fgetc (fin);
 	if (feof(fin))	/* input file is empty */
 	{
 		printf ("input file is empty !\n");
 		fclose (fin);
 		return 1;
 	}
+	rewind (fin);
 
 	compile ();	/* check whether the syntax is correct, and generate intermidiate code */
 

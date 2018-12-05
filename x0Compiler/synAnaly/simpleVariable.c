@@ -97,9 +97,11 @@ void simpleVariable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1,
 		}
 		else
 		{
-			/* identifier isn't INT/CHAR/BOOL/DOUBLE variable */
+			/* identifier isn't {const} INT/CHAR/BOOL/DOUBLE variable */
 			if (table[pos].kind != intVar && table[pos].kind != charVar
-				&& table[pos].kind != boolVar && table[pos].kind != doubleVar)
+				&& table[pos].kind != boolVar && table[pos].kind != doubleVar
+				&& table[pos].kind != constIntVar && table[pos].kind != constCharVar
+				&& table[pos].kind != constBoolVar && table[pos].kind != constDoubleVar)
 			{
 				error (25);
 			}
