@@ -9,14 +9,12 @@ void readStat ()
 	{
 		getSym ();
 		
-		int size;      /* 'size' is the space distributed to 'variable' */
-		int offset;    /* the offset relative to the base address of current activity record */
-		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
-		int IncOrDec;  /* 1: auto-adding after variable   2: auto-decreasing after variable
-					    * 3: auto-adding before variable  4: auto-decreasing before variable
-					    * 5: without auto-adding or auto-decreasing */
-		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
-		variable (&offset, &isArray, &IncOrDec, &identType, &size);
+		int size1;
+		int size2;
+		int offset;
+		enum objectKind kind;
+		int IncOrDec;
+		variable (&kind, &offset, &size1, &size2, &IncOrDec);
 
 		/* 'read' function can't read auto-adding or auto-decreasing variable */
 		if (IncOrDec != 5)
@@ -24,10 +22,38 @@ void readStat ()
 			error (33);
 		}
 
-		gen (opr, 14, identType, 0); /* read a variable using scanf function */
+		/* read a variable using scanf function */
+		switch (kind)
+		{
+			case intVar:
+				gen (opr, 14, 1, 0);
+				break;
+			case intArray:
+				gen (opr, 14, 1, 0);
+				break;
+			case doubleVar:
+				gen (opr, 14, 2, 0);
+				break;
+			case doubleArray:
+				gen (opr, 14, 2, 0);
+				break;
+			case charVar:
+				gen (opr, 14, 3, 0);
+				break;
+			case charArray:
+				gen (opr, 14, 3, 0);
+				break;
+			case boolVar:
+				gen (opr, 14, 4, 0);
+				break;
+			case boolArray:
+				gen (opr, 14, 4, 0);
+				break;
+		}
 		
 		/* store the value of top element in variable */
-		if (isArray)
+		if (kind == intArray || kind == charArray
+			|| kind == boolArray || kind == doubleArray)
 		{
 			gen (sto2, offset, 0, 0);
 		}

@@ -13,6 +13,7 @@ void recover ()
 	chNum = backups[iterBackUp].backupChNum;
 	doubleNum = backups[iterBackUp].backupDoubleNum;
 	intNum = backups[iterBackUp].backupIntNum;
+	iterCode = backups[iterBackUp].backupIterCode;
 	strcpy (id, backups[iterBackUp].backupId);
 
 	for (int i = 0; i < MAX_SIZE_LINE; i++)

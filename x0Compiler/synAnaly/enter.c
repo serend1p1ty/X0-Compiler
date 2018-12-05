@@ -1,16 +1,13 @@
 #include "../global.h"
 
 /*
- * input: 
- * k: type of symbol(charVar/intVar/charArray/intArray)
- * offset: offset of local variable relative to the base address
- * size: the space distributed
  * function: add a new entry to symbol table
  */
-void enter (enum objectKind k, int offset, int size)
+void enter (enum objectKind k, int offset, int size1, int size2)
 {
 	strcpy (table[iterTable].name, id);
 	table[iterTable].kind = k;
 	table[iterTable].offset = offset;
-	table[iterTable++].size = size;
+	table[iterTable].size1 = size1;
+	table[iterTable++].size2 = size2;
 }

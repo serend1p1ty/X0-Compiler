@@ -1,6 +1,6 @@
 program = "main" "{" declarationList statementList "}".
 declarationList = [declarationStat declarationList].
-declarationStat = type ID (";" | "[" intNumber "]" ";").
+declarationStat = type ID (";" | "[" intNumber "]" ["[" intNumber "]"] ";").
 type = "int" | "char" | "bool" | "double".
 statementList = [statement statementList].
 statement = ifStat | whileStat | readStat | writeStat | compoundStat | expressionStat | forStat | switchStat | breakStat | exitStat | continueStat | dowhileStat | repeatStat.
@@ -19,7 +19,7 @@ dowhileStat = "do" "{" statementList "}" "while" "(" expression ")" ";".
 repeatStat = "repeat" "{" statementList "}" "until" "(" expression ")" ";".
 expression = simpleVariable "=" expression | valueExpr.
 variable = simpleVariable ["++" | "--"] | ("++" | "--") simpleVariable.
-simpleVariable = ID ["[" expression "]"].
+simpleVariable = ID ["[" expression "]"] ["[" expression "]"].
 valueExpr = simpleValue {("&&" | "||" | "XOR") simpleValue}.
 simpleValue = odd additiveExpr | additiveExpr [(">" | "<" | ">=" | "<=" | "==" | "!=") additiveExpr].
 additiveExpr = ["-"] term {("+"|"-") term}.

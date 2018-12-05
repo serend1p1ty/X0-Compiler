@@ -9,23 +9,31 @@ void expression ()
 	{
 		backup (); /* backup the status of lexical analysing */
 
-		int size;      /* 'size' is the space distributed to 'variable' */
-		int offset;    /* the offset relative to the base address of current activity record */
-		int isArray;   /* 1: 'variable' is array element   0: 'variable' is just a variable */
-		int identType; /* 1: INT   2: DOUBLE   3: CHAR   4: BOOL */
-		simpleVariable (&offset, &isArray, &identType, &size);
+		int size1;
+		int size2;
+		int offset;
+		enum objectKind kind;
+		simpleVariable (&kind, &offset, &size1, &size2);
 
 		if (sym == eql) /* current statement is assignment statement */
 		{
 			getSym ();
 			expression ();
 
-			/* store the value of top element in variable */
-			if (isArray)
+			if (kind == intArray || kind == charArray 
+				|| kind == boolArray || kind == doubleArray)
 			{
-				gen (sto2, offset, size, 0);
+				/* store the value of top element in a 1-dimension array element */
+				if (size2 == 1)
+				{
+					gen (sto2, offset, 0, 0);
+				}
+				else /* store the value of top element in a 2-dimension array element */
+				{
+					gen (sto3, offset, size2, 0);
+				}
 			}
-			else
+			else /* store the value of top element in a variable */
 			{
 				gen (sto, offset, 0, 0);
 			}

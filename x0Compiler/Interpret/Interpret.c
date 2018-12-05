@@ -314,65 +314,70 @@ void Interpret ()
 						error (28);
 				}
 				break;
-			case lod: /* set a variable which has a offset(i.operand1) relative to the base of current
-					   * activity record on top of stack */
+			case lod: /* set a variable on top of stack */
 				t = t + 1;
 				s[t] = s[1 + i.operand1];
 				break;
-			case lod2: /* set a array element which has a offset(i.operand1 + s[t].intData) relative to 
-					    * the base of current activity record on top of stack */
+			case lod2: /* set a 1-dimension array element on top of stack */
 				/* the subscript of array must be integer */
 				if (s[t].dataType == 2)
 				{
 					error (47);
 				}
-				/* array subscript is beyond bound */
-				if (s[t].intData >= i.operand2)
-				{
-					error (51);
-				}
 				s[t] = s[1 + i.operand1 + s[t].intData];
 				break;
-			case sto: /* store the top element in the variable which has a offset(i.operand1) relative to 
-					   * the base of current activity record */
+			case lod3: /* set a 2-dimension array element on top of stack */
+				/* the subscript of array must be integer */
+				if (s[t].dataType == 2)
+				{
+					error (47);
+				}
+				s[t - 1] = s[1 + i.operand1 + s[t - 1].intData * i.operand2 + s[t].intData];
+				t = t - 1;
+				break;
+			case sto: /* store the top element in a variable */
 				store (s, 1 + i.operand1, t);
 				t = t - 1;
 				break;
-			case sto2: /* store the top element in the array element which has a offset(i.operand1 + s[t - 1].intData) 
-					    * relative to the base of current activity record */ 
+			case sto2: /* store the top element in a 1-dimension array element */ 
 				/* the subscript of array must be integer */
 				if (s[t - 1].dataType == 2)
 				{
 					error (47);
 				}
-				/* array subscript is beyond bound */
-				if (s[t - 1].intData >= i.operand2)
-				{
-					error (51);
-				}
 				store (s, 1 + i.operand1 + s[t - 1].intData, t);
 				t = t - 2;
 				break;
-			case add: /* add one to the value of the variable which has a offset(i.operand1) 
-					   * relative to the base of current activity record */
+			case sto3: /* store the top element in a 2-dimension array element */
+				/* the subscript of array must be integer */
+				if (s[t - 1].dataType == 2)
+				{
+					error (47);
+				}
+				store (s, 1 + i.operand1 + s[t - 2].intData * i.operand2 + s[t - 1].intData, t);
+				t = t - 3;
+				break;
+			case add: /* add one to the value of a variable */
 				s[1 + i.operand1].intData += i.operand2;
 				break;
-			case add2: /* add one to the value of the array element which has a offset(i.operand1 + s[t].intData) 
-					    * relative to the base of current activity record */
+			case add2: /* add one to the value of a 1-dimension array element */
 				/* the subscript of array must be integer */
 				if (s[t].dataType == 2)
 				{
 					error (47);
 				}
-				/* array subscript is beyond bound */
-				if (s[t].intData >= i.operand2)
+				s[1 + i.operand1 + s[t].intData].intData += i.operand2;
+				break;
+			case add3: /* add one to the value of a 2-dimension array element */
+				/* the subscript of array must be integer */
+				if (s[t].dataType == 2)
 				{
-					error (51);
+					error (47);
 				}
 				double temp = i.operand3 > 0 ? 0.5 : -0.5;
-				s[1 + i.operand1 + s[t].intData].intData += (int)(i.operand3 + temp);
+				s[1 + i.operand1 + s[t - 1].intData * i.operand2 + s[t].intData].intData += (int)(i.operand3 + temp);
 				break;
-			case tad: /* add intOffset to the value of top element */
+			case tad: /* add i.operand1 to the value of top element */
 				s[t].intData += i.operand1;
 				break;
 			case cal: /* call function */
@@ -383,7 +388,7 @@ void Interpret ()
 				for (int i = 0; i < iterTable; i++)
 				{
 					struct tableObject to = table[i];
-					for (int j = 1; j <= to.size; j++)
+					for (int j = 1; j <= to.size1 * to.size2; j++)
 					{
 						switch (to.kind)
 						{

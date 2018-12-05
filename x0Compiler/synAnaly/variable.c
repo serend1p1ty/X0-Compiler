@@ -2,17 +2,19 @@
 
 /*
  * variable syntactical analyzer
+ * store information of variable in  ptr_kind, ptr_offset, ptr_size1, ptr_size2 and ptr_IncOrDec
  */
-void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_identType, int* ptr_size)
+void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int* ptr_size2, int* ptr_IncOrDec)
 {
 	if (sym == ident)
 	{
-		simpleVariable (ptr_offset, ptr_isArray, ptr_identType, ptr_size);
+		simpleVariable (ptr_kind, ptr_offset, ptr_size1, ptr_size2);
 
 		if (sym == incsym)
 		{
-			/* auto-adding or auto-decreasing variable must be INT */
-			if (*ptr_identType != 1)
+			/* auto-adding or auto-decreasing variable must be INT or CHAR */
+			if (*ptr_kind != intVar && *ptr_kind != intArray
+				&& *ptr_kind != charVar && *ptr_kind != charArray)
 			{
 				error (50);
 			}
@@ -22,8 +24,9 @@ void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_id
 		}
 		else if (sym == decsym)
 		{
-			/* auto-adding or auto-decreasing variable must be INT */
-			if (*ptr_identType != 1)
+			/* auto-adding or auto-decreasing variable must be INT or CHAR */
+			if (*ptr_kind != intVar && *ptr_kind != intArray
+				&& *ptr_kind != charVar && *ptr_kind != charArray)
 			{
 				error (50);
 			}
@@ -48,10 +51,11 @@ void variable (int* ptr_offset, int* ptr_isArray, int* ptr_IncOrDec, int* ptr_id
 		}
 
 		getSym ();
-		simpleVariable (ptr_offset, ptr_isArray, ptr_identType, ptr_size);
+		simpleVariable (ptr_kind, ptr_offset, ptr_size1, ptr_size2);
 
-		/* auto-adding or auto-decreasing variable must be INT */
-		if (*ptr_identType != 1)
+		/* auto-adding or auto-decreasing variable must be INT or CHAR */
+		if (*ptr_kind != intVar && *ptr_kind != intArray
+			&& *ptr_kind != charVar && *ptr_kind != charArray)
 		{
 			error (50);
 		}

@@ -2,8 +2,9 @@
 
 /*
  * simpleVariable syntactical analyzer
+ * store information of simpleVariable in  ptr_kind, ptr_offset, ptr_size1 and ptr_size2
  */
-void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType, int* ptr_size)
+void simpleVariable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_size1, int*ptr_size2)
 {
 	if (sym == ident)
 	{
@@ -14,11 +15,34 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType, int*
 			error (24);
 		}
 
+		*ptr_kind = table[pos].kind;
+		*ptr_offset = table[pos].offset;
+		*ptr_size1 = table[pos].size1;
+		*ptr_size2 = table[pos].size2;
 		getSym ();
 
 		if (sym == lbracket)
 		{
 			getSym ();
+			
+			/* check whether array subscript is out of bound if 'expression' is a number */
+			backup ();
+			if (sym == intnum)
+			{
+				int tempNum = intNum;
+				getSym ();
+
+				if (sym == rbracket)
+				{
+					/* array subscript is out of bound */
+					if (tempNum >= table[pos].size1)
+					{
+						error (51);
+					}
+				}
+			}
+			recover ();
+			
 			expression ();
 
 			if (sym == rbracket)
@@ -30,27 +54,41 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType, int*
 					error (26);
 				}
 
-				*ptr_offset = table[pos].offset;
-				*ptr_isArray = 1;
-				*ptr_size = table[pos].size;
-
-				switch (table[pos].kind)
-				{
-					case intArray:
-						*ptr_identType = 1;
-						break;
-					case doubleArray:
-						*ptr_identType = 2;
-						break;
-					case charArray:
-						*ptr_identType = 3;
-						break;
-					case boolArray:
-						*ptr_identType = 4;
-						break;
-				}
-
 				getSym ();
+
+				if (sym == lbracket)
+				{
+					getSym ();
+
+					/* check whether array subscript is out of bound if 'expression' is a number */
+					backup ();
+					if (sym == intnum)
+					{
+						int tempNum = intNum;
+						getSym ();
+
+						if (sym == rbracket)
+						{
+							/* array subscript is out of bound */
+							if (tempNum >= table[pos].size2)
+							{
+								error (51);
+							}
+						}
+					}
+					recover ();
+
+					expression ();
+
+					if (sym == rbracket)
+					{
+						getSym ();
+					}
+					else /* the lack of ']' */
+					{
+						error (9);
+					}
+				}
 			}
 			else /* the lack of ']' */
 			{
@@ -64,26 +102,6 @@ void simpleVariable (int* ptr_offset, int* ptr_isArray, int* ptr_identType, int*
 				&& table[pos].kind != boolVar && table[pos].kind != doubleVar)
 			{
 				error (25);
-			}
-
-			*ptr_offset = table[pos].offset;
-			*ptr_isArray = 0;
-			*ptr_size = table[pos].size;
-
-			switch (table[pos].kind)
-			{
-				case intVar:
-					*ptr_identType = 1;
-					break;
-				case doubleVar:
-					*ptr_identType = 2;
-					break;
-				case charVar:
-					*ptr_identType = 3;
-					break;
-				case boolVar:
-					*ptr_identType = 4;
-					break;
 			}
 		}
 	}

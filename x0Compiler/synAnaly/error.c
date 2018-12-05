@@ -168,10 +168,10 @@ void error (int error_code)
 			printf ("error type of symbol-table object !\n");
 			break;
 		case 50:
-			printf ("auto-adding or auto-decreasing variable must be INT !\n");
+			printf ("auto-adding or auto-decreasing variable must be INT or CHAR !\n");
 			break;
 		case 51:
-			printf ("array subscript is beyond bound !\n");
+			printf ("array subscript is out of bound !\n");
 			break;
 		default:
 			printf ("illegal error code !\n");
