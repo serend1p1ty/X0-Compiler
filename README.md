@@ -1,4 +1,4 @@
-# x0Compiler
+# X0-Compiler
 Project name: x0 compiler
 
 Programming language: c
