@@ -131,7 +131,7 @@
     <ClCompile Include="synAnaly\write_stat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="X0-Compiler.c">
+    <ClCompile Include="x0Compiler.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

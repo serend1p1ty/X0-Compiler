@@ -1,29 +1,29 @@
-program = "main" "{" constDeclarationList varDeclarationList statementList "}".
-constDeclarationList = [constDeclarationStat constDeclarationList].
-constDeclarationStat = "const" type ID "=" ("intNumber" | "doubleNumber" | "true" | "false") ";".
-varDeclarationList = [varDeclarationStat varDeclarationList].
-varDeclarationStat = type ID {["[" intNumber "]"} ";".
+program = "main" "{" const_declaration_list var_declaration_list statement_list "}".
+const_declaration_list = [const_declaration_stat const_declaration_list].
+const_declaration_stat = "const" type ID "=" ("intNumber" | "doubleNumber" | "true" | "false") ";".
+var_declaration_list = [var_declaration_stat var_declaration_list].
+var_declaration_stat = type ID {["[" intNumber "]"} ";".
 type = "int" | "char" | "bool" | "double".
-statementList = [statement statementList].
-statement = ifStat | whileStat | readStat | writeStat | compoundStat | expressionStat | forStat | switchStat | breakStat | exitStat | continueStat | dowhileStat | repeatStat.
-ifStat = "if" "(" expression ")" statement [ "else" statement].
-whileStat = "while" "(" expression ")" statement.
-readStat = "read" variable ";".
-writeStat = "write" expression ";" .
-compoundStat = "{" statementList "}".
-expressionStat = expression ";" | ";".
-forStat = "for" "(" expression ";" expression ";" expression ")" statement.
-switchStat = "switch" "(" expression ")" "{" {"case" intNumber ":" statementList} ["default" ":" statementList] "}".
-breakStat = "break" ";".
-exitStat = "exit" "(" intNumber ")" ";".
-continueStat = "continue" ";".
-dowhileStat = "do" "{" statementList "}" "while" "(" expression ")" ";".
-repeatStat = "repeat" "{" statementList "}" "until" "(" expression ")" ";".
-expression = simpleVariable "=" expression | valueExpr.
-variable = simpleVariable ["++" | "--"] | ("++" | "--") simpleVariable.
-simpleVariable = ID {"[" expression "]"}.
-valueExpr = simpleValue {("&&" | "||" | "XOR") simpleValue}.
-simpleValue = odd additiveExpr | additiveExpr [(">" | "<" | ">=" | "<=" | "==" | "!=") additiveExpr].
-additiveExpr = ["-"] term {("+"|"-") term}.
+statement_list = [statement statement_list].
+statement = if_stat | while_stat | read_stat | write_stat | compound_stat | expression_stat | for_stat | switch_stat | break_stat | exit_stat | continue_stat | dowhile_stat | repeat_stat.
+if_stat = "if" "(" expression ")" statement [ "else" statement].
+while_stat = "while" "(" expression ")" statement.
+read_stat = "read" variable ";".
+write_stat = "write" expression ";" .
+compound_stat = "{" statement_list "}".
+expression_stat = expression ";" | ";".
+for_stat = "for" "(" expression ";" expression ";" expression ")" statement.
+switch_stat = "switch" "(" expression ")" "{" {"case" intNumber ":" statement_list} ["default" ":" statement_list] "}".
+break_stat = "break" ";".
+exit_stat = "exit" "(" intNumber ")" ";".
+continue_stat = "continue" ";".
+dowhile_stat = "do" "{" statement_list "}" "while" "(" expression ")" ";".
+repeat_stat = "repeat" "{" statement_list "}" "until" "(" expression ")" ";".
+expression = simple_variable "=" expression | value_expr.
+variable = simple_variable ["++" | "--"] | ("++" | "--") simple_variable.
+simple_variable = ID {"[" expression "]"}.
+value_expr = simple_value {("&&" | "||" | "XOR") simple_value}.
+simple_value = odd additive_expr | additive_expr [(">" | "<" | ">=" | "<=" | "==" | "!=") additive_expr].
+additive_expr = ["-"] term {("+"|"-") term}.
 term = factor {("*"|"/"|"%") factor}.
 factor = ["!"] ("(" expression ")"| variable | intNumber | doubleNumber | "true" | "false").

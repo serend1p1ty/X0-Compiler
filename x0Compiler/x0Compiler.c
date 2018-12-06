@@ -50,7 +50,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/testAssign.txt");
+	strcpy (fileName, "../../testSamples/test_5.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
