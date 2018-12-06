@@ -7,58 +7,58 @@ void statement ()
 {
 	if (sym == ifsym) /* if statement */
 	{
-		ifStat ();
+		if_stat ();
 	}
 	else if (sym == whilesym) /* while statement */
 	{
-		whileStat ();
+		while_stat ();
 	}
 	else if (sym == readsym) /* read statement */
 	{
-		readStat ();
+		read_stat ();
 	}
 	else if (sym == writesym) /* write statement */
 	{
-		writeStat ();
+		write_stat ();
 	}
 	else if (sym == lbrace)	/* compound statement */
 	{
-		compoundStat ();
+		compound_stat ();
 	}
 	else if (sym == semic || sym == ident || sym == doublenum
 		|| sym == lparen || sym == intnum || sym == minus
 		|| sym == incsym || sym == decsym || sym == oddsym
 		|| sym == notsym || sym == truesym || sym == falsesym)	/* expression statement */
 	{
-		expressionStat ();
+		expression_stat ();
 	}
 	else if (sym == forsym) /* for statement */
 	{
-		forStat ();
+		for_stat ();
 	}
 	else if (sym == brksym) /* break statement */
 	{
-		breakStat ();
+		break_stat ();
 	}
 	else if (sym == exitsym) /* exit statement */
 	{
-		exitStat ();
+		exit_stat ();
 	}
 	else if (sym == ctnsym) /* continue statement */
 	{
-		continueStat ();
+		continue_stat ();
 	}
 	else if (sym == swtcsym) /* switch statement */
 	{
-		switchStat ();
+		switch_stat ();
 	}
 	else if (sym == dosym) /* do-while statement */
 	{
-		dowhileStat ();
+		dowhile_stat ();
 	}
 	else if (sym == reptsym) /* repeat-until statement */
 	{
-		repeatStat ();
+		repeat_stat ();
 	}
 	else /* sym isn't belong to first(statement) */
 	{

@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * whileStat syntactical analyzer
+ * while_stat syntactical analyzer
  */
-void whileStat ()
+void while_stat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing whileStat */
-	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing whileStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing while_stat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing while_stat */
 
 	if (sym == whilesym)
 	{
@@ -33,7 +33,7 @@ void whileStat ()
 					code[pos].operand1 = iterCode;
 				}
 				iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
-												 * that is before analysing whileStat */
+												 * that is before analysing while_stat */
 
 				gen (jmp, pos1, 0, 0);
 				code[pos2].operand1 = iterCode; /* backfill */
@@ -60,5 +60,5 @@ void whileStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-									* that is before analysing whileStat */
+									* that is before analysing while_stat */
 }

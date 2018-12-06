@@ -16,10 +16,10 @@ void compile ()
 		{
 			readSymbol ();
 			int offset = 3;	/* offset of local variable relative to the base address of current activity record */
-			constDeclarationList (&offset); /* offset is increasing when analysing constDeclarationList */
-			varDeclarationList (&offset); /* offset is increasing when analysing varDeclarationList */
+			const_declaration_list (&offset); /* offset is increasing when analysing const_declaration_list */
+			var_declaration_list (&offset); /* offset is increasing when analysing var_declaration_list */
 			gen (ini, offset, 0, 0); /* initialize a space in the stack for current activity record */
-			statementList ();
+			statement_list ();
 
 			if (sym == rbrace)
 			{
@@ -50,7 +50,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/testNArray.txt");
+	strcpy (fileName, "../../testSamples/testAssign.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{

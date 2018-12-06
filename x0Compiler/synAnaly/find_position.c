@@ -4,7 +4,7 @@
  * input: identName  the name of identifier which we want to search
  * output: the position of this identifier in symbol table
  */
-int findPosition_V1 (char* identName)
+int find_position_v1 (char* identName)
 {
 	for (int i = 0; i < iterTable; i++)
 	{
@@ -20,7 +20,7 @@ int findPosition_V1 (char* identName)
 * input: offset  the offset of identifier which we want to search
 * output: the position of this identifier in symbol table
 */
-int findPosition_V2 (int offset)
+int find_position_v2 (int offset)
 {
 	for (int i = 0; i < iterTable; i++)
 	{

@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * breakStat syntactical analyzer
+ * break_stat syntactical analyzer
  */
-void breakStat ()
+void break_stat ()
 {
 	if (sym == brksym)
 	{

@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * additiveExpr syntactical analyzer
+ * additive_expr syntactical analyzer
  */
-void additiveExpr ()
+void additive_expr ()
 {
 	if (sym == minus) /* here see '-' as negtive sign */
 	{

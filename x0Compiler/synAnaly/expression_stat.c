@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * expressionStat syntactical analyzer
+ * expression_stat syntactical analyzer
  */
-void expressionStat ()
+void expression_stat ()
 {
 	/* execute expression syntactical analyzer if sym belong to first(expression) */
 	if (sym == ident|| sym == lparen || sym == intnum 
@@ -26,7 +26,7 @@ void expressionStat ()
 	{
 		readSymbol ();
 	}
-	else /* sym isn't belong to first(expressionStat) */
+	else /* sym isn't belong to first(expression_stat) */
 	{
 		error (13);
 	}

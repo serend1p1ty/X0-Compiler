@@ -1,13 +1,13 @@
 #include "../global.h"
 
 /*
- * constDeclarationList syntactical analyzer
+ * const_declaration_list syntactical analyzer
  */
-void constDeclarationList (int* ptr_offset)
+void const_declaration_list (int* ptr_offset)
 {
-	/* execute constDeclarationStat syntactical analyzer if sym belong to first(constDeclarationStat) */
+	/* execute const_declaration_stat syntactical analyzer if sym belong to first(const_declaration_stat) */
 	while (sym == cstsym)
 	{
-		constDeclarationStat (ptr_offset);
+		const_declaration_stat (ptr_offset);
 	}
 }

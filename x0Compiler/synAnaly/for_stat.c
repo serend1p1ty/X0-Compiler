@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * forStat syntactical analyzer
+ * for_stat syntactical analyzer
  */
-void forStat ()
+void for_stat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing forStat */
-	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing forStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing for_stat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing for_stat */
 
 	if (sym == forsym)
 	{
@@ -69,7 +69,7 @@ void forStat ()
 							code[pos].operand1 = iterCode;
 						}
 						iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
-														 * that is before analysing forStat */
+														 * that is before analysing for_stat */
 						
 						gen (jmp, L1, 0, 0);
 						
@@ -116,5 +116,5 @@ void forStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-									* that is before analysing forStat */
+									* that is before analysing for_stat */
 }

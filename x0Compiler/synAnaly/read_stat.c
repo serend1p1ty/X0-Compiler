@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * readStat syntactical analyzer
+ * read_stat syntactical analyzer
  */
-void readStat ()
+void read_stat ()
 {
 	if (sym == readsym)
 	{

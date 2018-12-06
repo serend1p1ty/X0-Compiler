@@ -57,7 +57,7 @@ void error (int error_code)
 			printf ("sym isn't belong to first(expression) !\n");
 			break;
 		case 13:
-			printf ("sym isn't belong to first(expressionStat) !\n");
+			printf ("sym isn't belong to first(expression_stat) !\n");
 			break;
 		case 14:
 			printf ("the lack of ')' !\n");

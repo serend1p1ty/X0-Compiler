@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * dowhileStat syntactical analyzer
+ * dowhile_stat syntactical analyzer
  */
-void dowhileStat ()
+void dowhile_stat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing dowhileStat */
-	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing dowhileStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing dowhile_stat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing dowhile_stat */
 
 	if (sym == dosym)
 	{
@@ -15,8 +15,8 @@ void dowhileStat ()
 		if (sym == lbrace)
 		{
 			readSymbol ();
-			int pos = iterCode; /* save the position of fist code of statementList */ 
-			statementList ();
+			int pos = iterCode; /* save the position of fist code of statement_list */ 
+			statement_list ();
 
 			/* backfill continue statement */
 			for (int i = startContinueNum; i < iterCtnList; i++)
@@ -25,7 +25,7 @@ void dowhileStat ()
 				code[pos].operand1 = iterCode;
 			}
 			iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
-											 * that is before analysing dowhileStat */
+											 * that is before analysing dowhile_stat */
 
 			if (sym == rbrace)
 			{
@@ -92,5 +92,5 @@ void dowhileStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-								    * that is before analysing dowhileStat */
+								    * that is before analysing dowhile_stat */
 }

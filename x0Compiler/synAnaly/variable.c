@@ -8,7 +8,7 @@ void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_IncOrDec)
 {
 	if (sym == ident)
 	{
-		simpleVariable (ptr_kind, ptr_offset);
+		simple_variable (ptr_kind, ptr_offset);
 		if (sym == incsym)
 		{
 			/* Increasing or decreasing variable must be INT or CHAR */
@@ -50,7 +50,7 @@ void variable (enum objectKind* ptr_kind, int* ptr_offset, int* ptr_IncOrDec)
 		}
 		readSymbol ();
 		enum objectKind kind;
-		simpleVariable (&kind, ptr_offset);
+		simple_variable (&kind, ptr_offset);
 
 		/* Increasing or decreasing variable must be INT or CHAR */
 		if (*ptr_kind != intVar && *ptr_kind != intArray

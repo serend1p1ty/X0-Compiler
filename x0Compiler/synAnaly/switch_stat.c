@@ -1,11 +1,11 @@
 #include "../global.h"
 
 /*
- * switchStat syntactical analyzer
+ * switch_stat syntactical analyzer
  */
-void switchStat ()
+void switch_stat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing switchStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing switch_stat */
 	
 	if (sym == swtcsym)
 	{
@@ -52,7 +52,7 @@ void switchStat ()
 									code[pos2].operand1 = iterCode; /* backfill */
 								}
 
-								statementList ();
+								statement_list ();
 								gen (jmp, 0, 0, 0);
 								pos2 = iterCode - 1;
 							}
@@ -84,7 +84,7 @@ void switchStat ()
 						if (sym == colonsym)
 						{
 							readSymbol ();
-							statementList ();
+							statement_list ();
 						}
 						else /* the lack of ':' */
 						{
@@ -128,5 +128,5 @@ void switchStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-									* that is before analysing switchStat */
+									* that is before analysing switch_stat */
 }

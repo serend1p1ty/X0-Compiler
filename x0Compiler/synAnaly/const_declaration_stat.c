@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * constDeclarationStat syntactical analyzer
+ * const_declaration_stat syntactical analyzer
  */
-void constDeclarationStat (int* ptr_offset)
+void const_declaration_stat (int* ptr_offset)
 {
 	if (sym == cstsym)
 	{

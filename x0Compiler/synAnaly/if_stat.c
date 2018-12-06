@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * ifStat syntactical analyzer
+ * if_stat syntactical analyzer
  */
-void ifStat ()
+void if_stat ()
 {
 	if (sym == ifsym)
 	{

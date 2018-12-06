@@ -1,13 +1,13 @@
 #include "../global.h"
 
 /*
- * varDeclarationList syntactical analyzer
+ * var_declaration_list syntactical analyzer
  */
-void varDeclarationList (int* ptr_offset)
+void var_declaration_list (int* ptr_offset)
 {	
-	/* execute varDeclarationStat syntactical analyzer if sym belong to first(varDeclarationStat) */
+	/* execute var_declaration_stat syntactical analyzer if sym belong to first(var_declaration_stat) */
 	while (sym == charsym || sym == intsym || sym == bolsym || sym == dblsym)
 	{
-		varDeclarationStat (ptr_offset);
+		var_declaration_stat (ptr_offset);
 	}
 }

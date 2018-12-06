@@ -1,26 +1,26 @@
 #include "../global.h"
 
 /*
- * simpleValue syntactical analyzer
+ * simple_value syntactical analyzer
  */
-void simpleValue ()
+void simple_value ()
 {
 	if (sym == oddsym)
 	{
 		readSymbol ();
-		additiveExpr ();
+		additive_expr ();
 		gen (opr, 20, 0, 0); /* ODD operation */
 	}
 	else
 	{
-		additiveExpr ();
+		additive_expr ();
 
 		if (sym == great || sym == less || sym == greateql
 			|| sym == lesseql || sym == eqleql || sym == neql)
 		{
 			enum symbol tempSym = sym; /* save current value of sym */
 			readSymbol ();
-			additiveExpr ();
+			additive_expr ();
 
 			/* >, <, >=, <=, ==, != */
 			switch (tempSym)

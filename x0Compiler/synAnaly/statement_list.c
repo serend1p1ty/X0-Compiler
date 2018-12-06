@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * statementList syntactical analyzer
+ * statement_list syntactical analyzer
  */
-void statementList ()
+void statement_list ()
 {
 	/* execute statement syntactical analyzer if sym belong to first(statement) */
 	while (sym == ifsym || sym == whilesym || sym == readsym

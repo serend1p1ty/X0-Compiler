@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * varDeclarationStat syntactical analyzer
+ * var_declaration_stat syntactical analyzer
  */
-void varDeclarationStat (int* ptr_offset)
+void var_declaration_stat (int* ptr_offset)
 {	
 	/* 
 	 * current type of symbol, 1: INT, 2: DOUBLE, 3: CHAR, 4: BOOL

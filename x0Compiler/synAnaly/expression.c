@@ -10,7 +10,7 @@ void expression ()
 		backup (); /* backup the status of lexical analysing */
 		int offset;
 		enum objectKind kind;
-		simpleVariable (&kind, &offset);
+		simple_variable (&kind, &offset);
 		if (sym == eql) /* current statement is assignment statement */
 		{
 			/* constant can't be modified */
@@ -24,17 +24,17 @@ void expression ()
 			expression ();
 			gen (sto, offset, 0, 0); /* store the top element in the specfic variable */
 		}
-		else /* current statement is valueExpr */
+		else /* current statement is value_expr */
 		{
 			recover (); /* recover the status of lexical analysing from backups */
-			valueExpr ();
+			value_expr ();
 		}
 	}
 	else if (sym == lparen || sym == intnum || sym == ident || sym == minus
 			|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym
-			|| sym == truesym || sym == falsesym || sym == doublenum) /* sym belong to first(valueExpr) */
+			|| sym == truesym || sym == falsesym || sym == doublenum) /* sym belong to first(value_expr) */
 	{
-		valueExpr ();
+		value_expr ();
 	}
 	else /* sym isn't belong to first(expression) */
 	{

@@ -1,17 +1,17 @@
 #include "../global.h"
 
 /*
- * valueExpr syntactical analyzer
+ * value_expr syntactical analyzer
  */
-void valueExpr ()
+void value_expr ()
 {
-	simpleValue ();
+	simple_value ();
 
 	while (sym == andsym || sym == orsym || sym == xorsym)
 	{
 		enum symbol tempSym = sym; /* save current value of sym */
 		readSymbol ();
-		simpleValue ();
+		simple_value ();
 
 		switch (tempSym)
 		{

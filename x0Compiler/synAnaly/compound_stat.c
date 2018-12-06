@@ -1,14 +1,14 @@
 #include "../global.h"
 
 /*
- * compoundStat syntactical analyzer
+ * compound_stat syntactical analyzer
  */
-void compoundStat ()
+void compound_stat ()
 {
 	if (sym == lbrace)
 	{
 		readSymbol ();
-		statementList ();
+		statement_list ();
 
 		if (sym == rbrace)
 		{

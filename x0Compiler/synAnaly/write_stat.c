@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * writeStat syntactical analyzer
+ * write_stat syntactical analyzer
  */
-void writeStat ()
+void write_stat ()
 {
 	if (sym == writesym)
 	{

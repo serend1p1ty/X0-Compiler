@@ -1,12 +1,12 @@
 #include "../global.h"
 
 /*
- * repeatStat syntactical analyzer
+ * repeat_stat syntactical analyzer
  */
-void repeatStat ()
+void repeat_stat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing repeatStat */
-	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing repeatStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing repeat_stat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing repeat_stat */
 
 	if (sym == reptsym)
 	{
@@ -15,8 +15,8 @@ void repeatStat ()
 		if (sym == lbrace)
 		{
 			readSymbol ();
-			int pos = iterCode; /* save the position of statementList's first code */
-			statementList ();
+			int pos = iterCode; /* save the position of statement_list's first code */
+			statement_list ();
 
 			/* backfill continue statement */
 			for (int i = startContinueNum; i < iterCtnList; i++)
@@ -25,7 +25,7 @@ void repeatStat ()
 				code[pos].operand1 = iterCode;
 			}
 			iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
-											 * that is before analysing repeatStat */
+											 * that is before analysing repeat_stat */
 
 			if (sym == rbrace)
 			{
@@ -91,5 +91,5 @@ void repeatStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-								    * that is before analysing repeatStat */
+								    * that is before analysing repeat_stat */
 }

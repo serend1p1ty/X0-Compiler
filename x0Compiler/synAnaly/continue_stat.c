@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * continueStat syntactical analyzer
+ * continue_stat syntactical analyzer
  */
-void continueStat ()
+void continue_stat ()
 {
 	if (sym == ctnsym)
 	{

@@ -327,7 +327,7 @@ void Interpret ()
 				}
 				break;
 			case lod: /* load a variable to the top of stack */
-				pos = findPosition_V2 (i.operand1);
+				pos = find_position_v2 (i.operand1);
 				dimension = table[pos].dimension;
 				offset = 0;
 				for (int i = 0; i < dimension; i++)
@@ -343,7 +343,7 @@ void Interpret ()
 				t = t + 1 - dimension;
 				break;
 			case sto: /* store the top element in the specific variable */
-				pos = findPosition_V2 (i.operand1);
+				pos = find_position_v2 (i.operand1);
 				dimension = table[pos].dimension;
 				offset = 0;
 				for (int i = 0; i < dimension; i++)
@@ -356,10 +356,11 @@ void Interpret ()
 					offset = offset * table[pos].size[i] + s[t - dimension + i].intData;
 				}
 				store (s, 1 + i.operand1 + offset, t);
-				t = t - 1 - dimension;
+				s[t - dimension] = s[t];
+				t = t - dimension;
 				break;
 			case add: /* add i.operand2 to the value of a variable */
-				pos = findPosition_V2 (i.operand1);
+				pos = find_position_v2 (i.operand1);
 				dimension = table[pos].dimension;
 				offset = 0;
 				for (int i = 0; i < dimension; i++)

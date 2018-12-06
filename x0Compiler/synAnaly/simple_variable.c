@@ -1,14 +1,14 @@
 #include "../global.h"
 
 /*
- * simpleVariable syntactical analyzer
- * store information of simpleVariable in ptr_kind, ptr_offset, ptr_size1 and ptr_size2
+ * simple_variable syntactical analyzer
+ * store information of simple_variable in ptr_kind, ptr_offset, ptr_size1 and ptr_size2
  */
-void simpleVariable (enum objectKind* ptr_kind, int* ptr_offset)
+void simple_variable (enum objectKind* ptr_kind, int* ptr_offset)
 {
 	if (sym == ident)
 	{
-		int pos = findPosition_V1 (id);
+		int pos = find_position_v1 (id);
 		if (pos == -1)	/* the identifier hasn't been declared */
 		{
 			error (24);

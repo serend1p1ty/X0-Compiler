@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * exitStat syntactical analyzer
+ * exit_stat syntactical analyzer
  */
-void exitStat ()
+void exit_stat ()
 {
 	if (sym == exitsym)
 	{
