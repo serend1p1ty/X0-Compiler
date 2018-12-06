@@ -7,7 +7,7 @@ void constDeclarationStat (int* ptr_offset)
 {
 	if (sym == cstsym)
 	{
-		getSym ();
+		readSymbol ();
 	}
 	else /* the lack of 'const' */
 	{
@@ -39,54 +39,58 @@ void constDeclarationStat (int* ptr_offset)
 
 	if (sym == ident)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == eql)
 		{
-			getSym ();
+			readSymbol ();
+			int size[MAX_DIMENSION] = { 0 };
+			int dimension = 0;
 
 			if (sym == intnum || sym == doublenum)
 			{
-				getSym ();
+				readSymbol ();
 				
 				switch (typeSym)
 				{
 					case 1:
-						enter (constIntVar, *ptr_offset, 1, 1, sym == intnum ? intNum : doubleNum);
+						enter (constIntVar, *ptr_offset, size, dimension, sym == intnum ? intNum : doubleNum);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 2:
-						enter (constDoubleVar, *ptr_offset, 1, 1, sym == intnum ? intNum : doubleNum);
+						enter (constDoubleVar, *ptr_offset, size, dimension, sym == intnum ? intNum : doubleNum);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 3:
-						enter (constCharVar, *ptr_offset, 1, 1, sym == intnum ? intNum : doubleNum);
+						enter (constCharVar, *ptr_offset, size, dimension, sym == intnum ? intNum : doubleNum);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 4:
-						enter (constBoolVar, *ptr_offset, 1, 1, sym == intnum ? intNum : doubleNum);
+						enter (constBoolVar, *ptr_offset, size, dimension, sym == intnum ? intNum : doubleNum);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 				}
 			}
 			else if (sym == truesym || sym == falsesym)
 			{
+				readSymbol ();
+
 				switch (typeSym)
 				{
 					case 1:
-						enter (constIntVar, *ptr_offset, 1, 1, doubleNum);
+						enter (constIntVar, *ptr_offset, size, dimension, sym == truesym ? 1 : 0);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 2:
-						enter (constDoubleVar, *ptr_offset, 1, 1, doubleNum);
+						enter (constDoubleVar, *ptr_offset, size, dimension, sym == truesym ? 1 : 0);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 3:
-						enter (constCharVar, *ptr_offset, 1, 1, doubleNum);
+						enter (constCharVar, *ptr_offset, size, dimension, sym == truesym ? 1 : 0);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 					case 4:
-						enter (constBoolVar, *ptr_offset, 1, 1, doubleNum);
+						enter (constBoolVar, *ptr_offset, size, dimension, sym == truesym ? 1 : 0);
 						*ptr_offset = *ptr_offset + 1;
 						break;
 				}
@@ -98,7 +102,7 @@ void constDeclarationStat (int* ptr_offset)
 
 			if (sym == semic)
 			{
-				getSym ();
+				readSymbol ();
 			}
 			else /* the lack of ';' */
 			{

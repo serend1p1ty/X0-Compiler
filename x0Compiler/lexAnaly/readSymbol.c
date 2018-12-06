@@ -41,7 +41,7 @@ void getCh ()
 /*
  * lexical analyzer£ºread a terminal symbol
  */
-void getSym ()
+void readSymbol ()
 {
 	int i, j, k;
 

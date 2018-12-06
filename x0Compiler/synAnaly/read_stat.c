@@ -7,16 +7,14 @@ void readStat ()
 {
 	if (sym == readsym)
 	{
-		getSym ();
+		readSymbol ();
 		
-		int size1;
-		int size2;
+		enum objecKind kind;
 		int offset;
-		enum objectKind kind;
 		int IncOrDec;	/* 1: Increase after variable   2: decrease after variable
 					     * 3: Increase before variable  4: decrease before variable
 					     * 5: without Increase or decrease */
-		variable (&kind, &offset, &size1, &size2, &IncOrDec);
+		variable (&kind, &offset, &IncOrDec);
 
 		/* 'read' function can't read Increasing or decreasing variable */
 		if (IncOrDec != 5)
@@ -59,21 +57,12 @@ void readStat ()
 				gen (opr, 14, 4, 0);
 				break;
 		}
-		
-		/* store the value of top element in variable */
-		if (kind == intArray || kind == charArray
-			|| kind == boolArray || kind == doubleArray)
-		{
-			gen (sto2, offset, 0, 0);
-		}
-		else
-		{
-			gen (sto, offset, 0, 0);
-		}
 
+		gen (sto, offset, 0, 0); /* store the value of top element in variable */
+		
 		if (sym == semic)
 		{
-			getSym ();
+			readSymbol ();
 		}
 		else /* the lack of ';' */
 		{

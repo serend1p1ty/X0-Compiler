@@ -93,10 +93,10 @@ void error (int error_code)
 			printf ("the identifier hasn't been declared !\n");
 			break;
 		case 25:
-			printf ("identifier isn't {const} INT/CHAR/BOOL/DOUBLE variable !\n");
+			printf ("identifier isn't {const} variable !\n");
 			break;
 		case 26:
-			printf ("identifier isn't INT/CHAR/BOOL/DOUBLE array !\n");
+			printf ("identifier isn't array !\n");
 			break;
 		case 27:
 			printf ("the program is too long !\n");
@@ -178,6 +178,9 @@ void error (int error_code)
 			break;
 		case 53:
 			printf ("constant can't be read !\n");
+			break;
+		case 54:
+			printf ("top element isn't integer, 'tad' instruction can't work !\n");
 			break;
 		default:
 			printf ("illegal error code !\n");

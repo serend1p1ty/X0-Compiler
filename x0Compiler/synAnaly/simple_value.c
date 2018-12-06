@@ -7,7 +7,7 @@ void simpleValue ()
 {
 	if (sym == oddsym)
 	{
-		getSym ();
+		readSymbol ();
 		additiveExpr ();
 		gen (opr, 20, 0, 0); /* ODD operation */
 	}
@@ -19,7 +19,7 @@ void simpleValue ()
 			|| sym == lesseql || sym == eqleql || sym == neql)
 		{
 			enum symbol tempSym = sym; /* save current value of sym */
-			getSym ();
+			readSymbol ();
 			additiveExpr ();
 
 			/* >, <, >=, <=, ==, != */

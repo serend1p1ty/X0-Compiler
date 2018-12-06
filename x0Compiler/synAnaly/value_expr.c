@@ -10,7 +10,7 @@ void valueExpr ()
 	while (sym == andsym || sym == orsym || sym == xorsym)
 	{
 		enum symbol tempSym = sym; /* save current value of sym */
-		getSym ();
+		readSymbol ();
 		simpleValue ();
 
 		switch (tempSym)

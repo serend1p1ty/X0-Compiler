@@ -6,15 +6,15 @@
 void compile ()
 {
 	gen (jmp, 1, 0, 0);
-	getSym ();
+	readSymbol ();
 
 	if (sym == mainsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lbrace)
 		{
-			getSym ();
+			readSymbol ();
 			int offset = 3;	/* offset of local variable relative to the base address of current activity record */
 			constDeclarationList (&offset); /* offset is increasing when analysing constDeclarationList */
 			varDeclarationList (&offset); /* offset is increasing when analysing varDeclarationList */
@@ -50,7 +50,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/testConst.txt");
+	strcpy (fileName, "../../testSamples/testNArray.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{

@@ -10,11 +10,11 @@ void forStat ()
 
 	if (sym == forsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lparen)
 		{
-			getSym ();
+			readSymbol ();
 			
 			if (sym != semic)
 			{
@@ -23,7 +23,7 @@ void forStat ()
 
 			if (sym == semic)
 			{
-				getSym ();
+				readSymbol ();
 				int L0 = iterCode; /* jumping label */
 
 				int pos1;
@@ -46,7 +46,7 @@ void forStat ()
 
 				if (sym == semic)
 				{
-					getSym ();
+					readSymbol ();
 					int L1 = iterCode; /* jumping label */
 
 					if (sym != rparen)
@@ -58,7 +58,7 @@ void forStat ()
 
 					if (sym == rparen)
 					{
-						getSym ();
+						readSymbol ();
 						int L2 = iterCode; /* jumping label */
 						statement ();
 

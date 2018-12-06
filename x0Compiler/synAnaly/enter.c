@@ -3,12 +3,15 @@
 /*
  * function: add a new entry to symbol table
  */
-void enter (enum objectKind k, int offset, int size1, int size2, double value)
+void enter (enum objectKind k, int offset, int* size, int dimension, double value)
 {
 	strcpy (table[iterTable].name, id);
 	table[iterTable].kind = k;
 	table[iterTable].offset = offset;
-	table[iterTable].size1 = size1;
-	table[iterTable].size2 = size2;
+	for (int i = 0; i < dimension; i++)
+	{
+		table[iterTable].size[i] = size[i];
+	}
+	table[iterTable].dimension = dimension;
 	table[iterTable++].value = value;
 }

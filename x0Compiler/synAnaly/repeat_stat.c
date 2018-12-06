@@ -1,21 +1,21 @@
 #include "../global.h"
 
 /*
- * dowhileStat syntactical analyzer
+ * repeatStat syntactical analyzer
  */
-void dowhileStat ()
+void repeatStat ()
 {
-	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing dowhileStat */
-	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing dowhileStat */
+	int startBreakNum = iterBreakList; /* save the number of break statement to be backfilled before analysing repeatStat */
+	int startContinueNum = iterCtnList; /* save the number of continue statement to be backfilled before analysing repeatStat */
 
-	if (sym == dosym)
+	if (sym == reptsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lbrace)
 		{
-			getSym ();
-			int pos = iterCode; /* save the position of fist code of statementList */ 
+			readSymbol ();
+			int pos = iterCode; /* save the position of statementList's first code */
 			statementList ();
 
 			/* backfill continue statement */
@@ -25,37 +25,36 @@ void dowhileStat ()
 				code[pos].operand1 = iterCode;
 			}
 			iterCtnList = startContinueNum; /* set the value of iterCtnList to the value
-											 * that is before analysing dowhileStat */
+											 * that is before analysing repeatStat */
 
 			if (sym == rbrace)
 			{
-				getSym ();
+				readSymbol ();
 
-				if (sym == whilesym)
+				if (sym == untlsym)
 				{
-					getSym ();
+					readSymbol ();
 
 					if (sym == lparen)
 					{
-						getSym ();
+						readSymbol ();
 						expression ();
-						gen (jpc, iterCode + 2, 0, 0);
-						gen (jmp, pos, 0, 0);
+						gen (jpc, pos, 0, 0);
 
 						if (sym == rparen)
 						{
-							getSym ();
+							readSymbol ();
 
 							if (sym == semic)
 							{
-								getSym ();
+								readSymbol ();
 							}
 							else /* the lack of ';' */
 							{
 								error (10);
 							}
 						}
-						else /* the lack of '}' */
+						else /* the lack of ')' */
 						{
 							error (14);
 						}
@@ -92,5 +91,5 @@ void dowhileStat ()
 		code[pos].operand1 = iterCode;
 	}
 	iterBreakList = startBreakNum; /* set the value of iterBreakList to the value
-								    * that is before analysing dowhileStat */
+								    * that is before analysing repeatStat */
 }

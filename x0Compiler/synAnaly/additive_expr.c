@@ -7,7 +7,7 @@ void additiveExpr ()
 {
 	if (sym == minus) /* here see '-' as negtive sign */
 	{
-		getSym ();
+		readSymbol ();
 		term ();
 		gen (opr, 1, 0, 0);
 	}
@@ -19,7 +19,7 @@ void additiveExpr ()
 	while (sym == plus || sym == minus)
 	{
 		enum symbol tempSym = sym; /* save current symbol */
-		getSym ();
+		readSymbol ();
 		term ();
 
 		switch (tempSym)

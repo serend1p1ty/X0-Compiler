@@ -10,20 +10,20 @@ void whileStat ()
 
 	if (sym == whilesym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lparen)
 		{
 			int pos1 = iterCode; /* save current value of iterCode */
 
-			getSym ();
+			readSymbol ();
 			expression ();
 
 			if (sym == rparen)
 			{
 				int pos2 = iterCode; /* save current value of iterCode for backfilling */
 				gen (jpc, 0, 0, 0); /* the position where program jump to hasn't been determined. we'll backfill it later. */
-				getSym ();
+				readSymbol ();
 				statement ();
 
 				/* backfill continue statement */

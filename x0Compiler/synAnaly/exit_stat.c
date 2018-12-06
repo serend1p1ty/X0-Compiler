@@ -7,24 +7,24 @@ void exitStat ()
 {
 	if (sym == exitsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lparen)
 		{
-			getSym ();
+			readSymbol ();
 
 			if (sym == intnum)
 			{
-				getSym ();
+				readSymbol ();
 				gen (lit, 1, intNum, 0);
 
 				if (sym == rparen)
 				{
-					getSym ();
+					readSymbol ();
 
 					if (sym == semic)
 					{
-						getSym ();
+						readSymbol ();
 						gen (opr, 7, 0, 0); /* execute 'exit' function */
 					}
 					else /* the lack of ';' */

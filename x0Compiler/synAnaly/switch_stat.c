@@ -9,20 +9,20 @@ void switchStat ()
 	
 	if (sym == swtcsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lparen)
 		{
-			getSym ();
+			readSymbol ();
 			expression ();
 
 			if (sym == rparen)
 			{
-				getSym ();
+				readSymbol ();
 
 				if (sym == lbrace)
 				{
-					getSym ();
+					readSymbol ();
 					int pos1 = -1; /* the position of 'jpc' in previous 'case' statement */
 					int pos2 = -1; /* the position of 'jmp' in previous 'case' statement */
 
@@ -33,7 +33,7 @@ void switchStat ()
 							code[pos1].operand1 = iterCode; /* backfill */
 						}
 						
-						getSym ();
+						readSymbol ();
 
 						if (sym == intnum)
 						{
@@ -41,11 +41,11 @@ void switchStat ()
 							gen (opr, 21, 0, 0); /* '==' operation */
 							gen (jpc, 0, 0, 0);
 							pos1 = iterCode - 1;
-							getSym ();
+							readSymbol ();
 
 							if (sym == colonsym)
 							{
-								getSym ();
+								readSymbol ();
 
 								if (pos2 != -1)
 								{
@@ -79,11 +79,11 @@ void switchStat ()
 
 					if (sym == defausym)
 					{
-						getSym ();
+						readSymbol ();
 
 						if (sym == colonsym)
 						{
-							getSym ();
+							readSymbol ();
 							statementList ();
 						}
 						else /* the lack of ':' */
@@ -94,7 +94,7 @@ void switchStat ()
 
 					if (sym == rbrace)
 					{
-						getSym ();
+						readSymbol ();
 					}
 					else /* the lack of '}' */
 					{

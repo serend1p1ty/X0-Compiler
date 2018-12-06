@@ -7,18 +7,18 @@ void ifStat ()
 {
 	if (sym == ifsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == lparen)
 		{
-			getSym ();
+			readSymbol ();
 			expression ();
 			int pos1 = iterCode; /* save current value of iterCode for backfilling */
 			gen (jpc, 0, 0, 0);  /* the position where program jump to hasn't been determined. we'll backfill it later. */
 
 			if (sym == rparen)
 			{
-				getSym ();
+				readSymbol ();
 				statement ();
 
 				if (sym == elsesym)
@@ -26,7 +26,7 @@ void ifStat ()
 					int pos2 = iterCode; /* save current value of iterCode for backfilling */
 					gen (jmp, 0, 0, 0);  /* the position where program jump to hasn't been determined. we'll backfill it later. */
 					code[pos1].operand1 = iterCode; /* backfill */
-					getSym ();
+					readSymbol ();
 					statement ();
 					code[pos2].operand1 = iterCode; /* backfill */
 				}

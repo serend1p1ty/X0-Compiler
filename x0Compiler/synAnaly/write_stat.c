@@ -7,12 +7,12 @@ void writeStat ()
 {
 	if (sym == writesym)
 	{
-		getSym ();
+		readSymbol ();
 		expression ();
 
 		if (sym == semic)
 		{
-			getSym ();
+			readSymbol ();
 		}
 		else /* the lack of ';' */
 		{

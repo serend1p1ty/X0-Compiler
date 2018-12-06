@@ -20,9 +20,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="x0Compiler.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="global.c">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -41,9 +38,6 @@
     <ClCompile Include="synAnaly\factor.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\findPosition.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
     <ClCompile Include="synAnaly\gen.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
@@ -56,64 +50,7 @@
     <ClCompile Include="synAnaly\type.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="lexAnaly\getSym.c">
-      <Filter>源文件\lexAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\additiveExpr.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\compoundStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\expressionStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\forStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\ifStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\readStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\statementList.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\whileStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\writeStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
     <ClCompile Include="synAnaly\variable.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\simpleVariable.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\simpleValue.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\valueExpr.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\breakStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\exitStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\continueStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\switchStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\dowhileStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
-    <ClCompile Include="synAnaly\repeatStat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
     <ClCompile Include="lexAnaly\backup.c">
@@ -122,17 +59,80 @@
     <ClCompile Include="lexAnaly\recover.c">
       <Filter>源文件\lexAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\varDeclarationStat.c">
+    <ClCompile Include="lexAnaly\readSymbol.c">
+      <Filter>源文件\lexAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\additive_expr.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\varDeclarationList.c">
+    <ClCompile Include="synAnaly\break_stat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\constDeclarationList.c">
+    <ClCompile Include="synAnaly\compound_stat.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\constDeclarationStat.c">
+    <ClCompile Include="synAnaly\const_declaration_list.c">
       <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\const_declaration_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\continue_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\dowhile_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\exit_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\expression_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\find_position.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\for_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\if_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\read_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\repeat_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\simple_value.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\simple_variable.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\statement_list.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\switch_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\value_expr.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\var_declaration_list.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\var_declaration_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\while_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\write_stat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="X0-Compiler.c">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

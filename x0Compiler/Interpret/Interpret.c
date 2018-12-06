@@ -5,7 +5,7 @@
  * output: data type of result
  * tip: dataType = 1 denotes INT, 2 denotes DOUBLE, 3 denotes CHAR, 4 denotes BOOL
  */
-int calculateType (int dataType1, int dataType2)
+int resultType (int dataType1, int dataType2)
 {	
 	/* result is DOUBLE if either operand1 or operand2 is DOUBLE */
 	if (dataType1 == 2 || dataType2 == 2)
@@ -16,15 +16,15 @@ int calculateType (int dataType1, int dataType2)
 	{
 		return 3;
 	}
-	else /* in addition to above, result is INT (tip: result of plus/subtract/multiply/divide operation can't be BOOL) */
+	else /* in addition to above, result is INT.
+		  * tip: result of plus/subtract/multiply/divide operation can't be BOOL */
 	{
 		return 1;
 	}
 }
 
 /*
- * input: s  data stack, i/j  two positions
- * function: store the j-th element in the i-th position 
+ * function: store the j-th element in the i-th position
  */
 void store (struct stackObject* s, int i, int j)
 {
@@ -53,16 +53,28 @@ void store (struct stackObject* s, int i, int j)
 	}
 }
 
+/* 
+ * convert to integer from floating number 
+ */
+int convertToInt (double num)
+{
+	double temp = num > 0 ? 0.5 : -0.5;
+	return (int)(num + temp);
+}
+
 /* interpret and execute intermidiate code */
 void Interpret ()
 {
-	int p = 0; /* pointer of next instruction */
-	int b = 1; /* the base address of current activity record */
-	int t = 0; /* pointer of stack top */
-	struct instruction i; /* current instruction */
-	struct stackObject s[MAX_SIZE_STACK]; /* data stack */
-	int intTmp;   /* temporary int variable used in the next part */
-	char charTmp; /* temporary char variable used in the next part */
+	int p = 0;		/* pointer of next instruction */
+	int b = 1;		/* the base address of current activity record */
+	int t = 0;		/* pointer of stack top */
+	struct instruction i;	/* current instruction */
+	struct stackObject s[MAX_SIZE_STACK];	/* data stack */
+	int intTmp;		/* temporary int variable */
+	char charTmp;	/* temporary char variable */
+	int dimension;	/* the dimension of array */
+	int offset;		/* offset relative to the head of array */
+	int pos;        /* position of the variable in symbol table */
 
 	printf ("output of x0 program£º\n");
 
@@ -128,7 +140,7 @@ void Interpret ()
 							s[t].dblData = (s[t].dataType != 2 ? s[t].intData : s[t].dblData)
 								+ (s[t + 1].dataType != 2 ? s[t + 1].intData : s[t + 1].dblData);
 						}
-						s[t].dataType = calculateType (s[t].dataType, s[t + 1].dataType);
+						s[t].dataType = resultType (s[t].dataType, s[t + 1].dataType);
 						break;
 					case 3: /* subtract operation */
 						t = t - 1;
@@ -141,7 +153,7 @@ void Interpret ()
 							s[t].dblData = (s[t].dataType != 2 ? s[t].intData : s[t].dblData)
 								- (s[t + 1].dataType != 2 ? s[t + 1].intData : s[t + 1].dblData);
 						}
-						s[t].dataType = calculateType (s[t].dataType, s[t + 1].dataType);
+						s[t].dataType = resultType (s[t].dataType, s[t + 1].dataType);
 						break;
 					case 4: /* multiply operation */
 						t = t - 1;
@@ -154,7 +166,7 @@ void Interpret ()
 							s[t].dblData = (s[t].dataType != 2 ? s[t].intData : s[t].dblData)
 								* (s[t + 1].dataType != 2 ? s[t + 1].intData : s[t + 1].dblData);
 						}
-						s[t].dataType = calculateType (s[t].dataType, s[t + 1].dataType);
+						s[t].dataType = resultType (s[t].dataType, s[t + 1].dataType);
 						break;
 					case 5: /* divide operation */
 						t = t - 1;
@@ -167,7 +179,7 @@ void Interpret ()
 							s[t].dblData = (s[t].dataType != 2 ? s[t].intData : s[t].dblData)
 								/ (s[t + 1].dataType != 2 ? s[t + 1].intData : s[t + 1].dblData);
 						}
-						s[t].dataType = calculateType (s[t].dataType, s[t + 1].dataType);
+						s[t].dataType = resultType (s[t].dataType, s[t + 1].dataType);
 						break;
 					case 6: /* mod operation */
 						t = t - 1;
@@ -314,70 +326,59 @@ void Interpret ()
 						error (28);
 				}
 				break;
-			case lod: /* set a variable on top of stack */
-				t = t + 1;
-				s[t] = s[1 + i.operand1];
-				break;
-			case lod2: /* set a 1-dimension array element on top of stack */
-				/* the subscript of array must be integer */
-				if (s[t].dataType == 2)
+			case lod: /* load a variable to the top of stack */
+				pos = findPosition_V2 (i.operand1);
+				dimension = table[pos].dimension;
+				offset = 0;
+				for (int i = 0; i < dimension; i++)
 				{
-					error (47);
+					/* the subscript of array must be integer */
+					if (s[t + 1 - dimension + i].dataType == 2)
+					{
+						error (47);
+					}
+					offset = offset * table[pos].size[i] + s[t + 1 - dimension + i].intData;
 				}
-				s[t] = s[1 + i.operand1 + s[t].intData];
+				s[t + 1 - dimension] = s[1 + i.operand1 + offset];
+				t = t + 1 - dimension;
 				break;
-			case lod3: /* set a 2-dimension array element on top of stack */
-				/* the subscript of array must be integer */
-				if (s[t].dataType == 2)
+			case sto: /* store the top element in the specific variable */
+				pos = findPosition_V2 (i.operand1);
+				dimension = table[pos].dimension;
+				offset = 0;
+				for (int i = 0; i < dimension; i++)
 				{
-					error (47);
+					/* the subscript of array must be integer */
+					if (s[t - dimension + i].dataType == 2)
+					{
+						error (47);
+					}
+					offset = offset * table[pos].size[i] + s[t - dimension + i].intData;
 				}
-				s[t - 1] = s[1 + i.operand1 + s[t - 1].intData * i.operand2 + s[t].intData];
-				t = t - 1;
+				store (s, 1 + i.operand1 + offset, t);
+				t = t - 1 - dimension;
 				break;
-			case sto: /* store the top element in a variable */
-				store (s, 1 + i.operand1, t);
-				t = t - 1;
-				break;
-			case sto2: /* store the top element in a 1-dimension array element */ 
-				/* the subscript of array must be integer */
-				if (s[t - 1].dataType == 2)
+			case add: /* add i.operand2 to the value of a variable */
+				pos = findPosition_V2 (i.operand1);
+				dimension = table[pos].dimension;
+				offset = 0;
+				for (int i = 0; i < dimension; i++)
 				{
-					error (47);
+					/* the subscript of array must be integer */
+					if (s[t + 1 - dimension + i].dataType == 2)
+					{
+						error (47);
+					}
+					offset = offset * table[pos].size[i] + s[t + 1 - dimension + i].intData;
 				}
-				store (s, 1 + i.operand1 + s[t - 1].intData, t);
-				t = t - 2;
-				break;
-			case sto3: /* store the top element in a 2-dimension array element */
-				/* the subscript of array must be integer */
-				if (s[t - 1].dataType == 2)
-				{
-					error (47);
-				}
-				store (s, 1 + i.operand1 + s[t - 2].intData * i.operand2 + s[t - 1].intData, t);
-				t = t - 3;
-				break;
-			case add: /* add one to the value of a variable */
-				s[1 + i.operand1].intData += i.operand2;
-				break;
-			case add2: /* add one to the value of a 1-dimension array element */
-				/* the subscript of array must be integer */
-				if (s[t].dataType == 2)
-				{
-					error (47);
-				}
-				s[1 + i.operand1 + s[t].intData].intData += i.operand2;
-				break;
-			case add3: /* add one to the value of a 2-dimension array element */
-				/* the subscript of array must be integer */
-				if (s[t].dataType == 2)
-				{
-					error (47);
-				}
-				double temp = i.operand3 > 0 ? 0.5 : -0.5;
-				s[1 + i.operand1 + s[t - 1].intData * i.operand2 + s[t].intData].intData += (int)(i.operand3 + temp);
+				s[1 + i.operand1 + offset].intData += i.operand2;
 				break;
 			case tad: /* add i.operand1 to the value of top element */
+				/* top element isn't integer, 'tad' instruction can't work */
+				if (s[t].dataType == 2)
+				{
+					error (54);
+				}
 				s[t].intData += i.operand1;
 				break;
 			case cal: /* call function */
@@ -388,9 +389,13 @@ void Interpret ()
 				for (int i = 0; i < iterTable; i++)
 				{
 					struct tableObject to = table[i];
-					double temp = to.value > 0 ? 0.5 : -0.5;
+					int totalSize = 1;
+					for (int i = 0; i < to.dimension; i++)
+					{
+						totalSize *= to.size[i];
+					}
 
-					for (int j = 1; j <= to.size1 * to.size2; j++)
+					for (int j = 1; j <= totalSize; j++)
 					{
 						switch (to.kind)
 						{
@@ -402,7 +407,7 @@ void Interpret ()
 								break;
 							case constIntVar:
 								s[intTmp].dataType = 1;
-								s[intTmp++].intData = (int)(to.value + temp);
+								s[intTmp++].intData = convertToInt(to.value);
 								break;
 							case doubleVar:
 								s[intTmp++].dataType = 2;
@@ -422,7 +427,7 @@ void Interpret ()
 								break;
 							case constCharVar:
 								s[intTmp].dataType = 3;
-								s[intTmp++].intData = (int)(to.value + temp);
+								s[intTmp++].intData = convertToInt (to.value);
 								break;
 							case boolVar:
 								s[intTmp++].dataType = 4;
@@ -432,7 +437,7 @@ void Interpret ()
 								break;
 							case constBoolVar:
 								s[intTmp].dataType = 4;
-								s[intTmp++].intData = (int)(to.value + temp);
+								s[intTmp++].intData = convertToInt (to.value);
 								break;
 							default: /* error type of symbol-table object */
 								error (49);

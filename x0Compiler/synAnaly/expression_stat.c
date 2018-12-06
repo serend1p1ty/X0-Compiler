@@ -15,7 +15,7 @@ void expressionStat ()
 
 		if (sym == semic)
 		{
-			getSym ();
+			readSymbol ();
 		}
 		else /* the lack of ';' */
 		{
@@ -24,7 +24,7 @@ void expressionStat ()
 	}
 	else if (sym == semic)
 	{
-		getSym ();
+		readSymbol ();
 	}
 	else /* sym isn't belong to first(expressionStat) */
 	{

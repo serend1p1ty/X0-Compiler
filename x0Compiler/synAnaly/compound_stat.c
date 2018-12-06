@@ -7,12 +7,12 @@ void compoundStat ()
 {
 	if (sym == lbrace)
 	{
-		getSym ();
+		readSymbol ();
 		statementList ();
 
 		if (sym == rbrace)
 		{
-			getSym ();
+			readSymbol ();
 		}
 		else /* the lack of '}' */
 		{

@@ -11,5 +11,5 @@ void type ()
 		error (20);
 	}
 
-	getSym ();
+	readSymbol ();
 }

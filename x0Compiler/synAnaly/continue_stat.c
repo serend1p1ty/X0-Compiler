@@ -7,11 +7,11 @@ void continueStat ()
 {
 	if (sym == ctnsym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == semic)
 		{
-			getSym ();
+			readSymbol ();
 			gen (jmp, 0, 0, 0);
 			continueList[iterCtnList++] = iterCode - 1;
 		}

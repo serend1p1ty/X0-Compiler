@@ -8,13 +8,9 @@ void expression ()
 	if (sym == ident) /* need to read more symbols to determine whether current statement is assignment statement */
 	{
 		backup (); /* backup the status of lexical analysing */
-
-		int size1;
-		int size2;
 		int offset;
 		enum objectKind kind;
-		simpleVariable (&kind, &offset, &size1, &size2);
-
+		simpleVariable (&kind, &offset);
 		if (sym == eql) /* current statement is assignment statement */
 		{
 			/* constant can't be modified */
@@ -24,26 +20,9 @@ void expression ()
 				error (32);
 			}
 			
-			getSym ();
+			readSymbol ();
 			expression ();
-
-			if (kind == intArray || kind == charArray 
-				|| kind == boolArray || kind == doubleArray)
-			{
-				/* store the value of top element in a 1-dimension array element */
-				if (size2 == 1)
-				{
-					gen (sto2, offset, 0, 0);
-				}
-				else /* store the value of top element in a 2-dimension array element */
-				{
-					gen (sto3, offset, size2, 0);
-				}
-			}
-			else /* store the value of top element in a variable */
-			{
-				gen (sto, offset, 0, 0);
-			}
+			gen (sto, offset, 0, 0); /* store the top element in the specfic variable */
 		}
 		else /* current statement is valueExpr */
 		{
@@ -53,7 +32,7 @@ void expression ()
 	}
 	else if (sym == lparen || sym == intnum || sym == ident || sym == minus
 			|| sym == incsym || sym == decsym || sym == oddsym || sym == notsym
-			|| sym == truesym || sym == falsesym || sym == doublenum)	/* sym belong to first(valueExpr) */
+			|| sym == truesym || sym == falsesym || sym == doublenum) /* sym belong to first(valueExpr) */
 	{
 		valueExpr ();
 	}

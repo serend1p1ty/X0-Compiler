@@ -9,7 +9,7 @@ void term ()
 	while (sym == times || sym == slash || sym == modsym)
 	{
 		enum symbol tempSym = sym; /* save current value of sym */
-		getSym ();
+		readSymbol ();
 		factor ();
 
 		switch (tempSym)

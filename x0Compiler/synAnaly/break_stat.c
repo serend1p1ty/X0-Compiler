@@ -7,11 +7,11 @@ void breakStat ()
 {
 	if (sym == brksym)
 	{
-		getSym ();
+		readSymbol ();
 
 		if (sym == semic)
 		{
-			getSym ();
+			readSymbol ();
 			gen (jmp, 0, 0, 0);
 			breakList[iterBreakList++] = iterCode - 1;
 		}
