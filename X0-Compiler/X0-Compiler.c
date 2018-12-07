@@ -83,7 +83,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/testNArray.txt");
+	strcpy (fileName, "../../testSamples/testFunction.txt");
 
 	if ((inputFile = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
@@ -92,7 +92,7 @@ int main ()
 	}
 
 	char temp = fgetc (inputFile);
-	if (feof(inputFile))	/* input file is empty */
+	if (feof(inputFile)) /* input file is empty */
 	{
 		printf ("input file is empty !\n");
 		fclose (inputFile);

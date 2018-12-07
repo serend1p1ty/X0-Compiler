@@ -18,7 +18,16 @@ void FunctionStat ()
 		if (sym == lparen)
 		{
 			ReadSymbol ();
-			expression ();
+
+			/* the function has a parameter at least if sym belong to first(expression) */
+			if (sym == ident || sym == lparen || sym == intnum
+				|| sym == minus || sym == incsym || sym == decsym
+				|| sym == oddsym || sym == notsym || sym == truesym
+				|| sym == falsesym || sym == doublenum)
+			{
+				expression ();
+			}
+			
 			while (sym == comma)
 			{
 				ReadSymbol ();

@@ -3,7 +3,7 @@
 /*
  * input: data type of plus/subtract/multiply/divide operation's operand
  * output: data type of result
- * tip: dataType = 1 denotes INT, 2 denotes DOUBLE, 3 denotes CHAR, 4 denotes BOOL
+ * Tip: dataType = 1 denotes INT, 2 denotes DOUBLE, 3 denotes CHAR, 4 denotes BOOL
  */
 int resultType (int dataType1, int dataType2)
 {	
@@ -460,7 +460,6 @@ void Interpret ()
 						}
 					}
 				}
-
 				for (int j = 0; j < ParameterNum; j++)
 				{
 					store (s, b + 3 + j, b - ParameterNum + j);
