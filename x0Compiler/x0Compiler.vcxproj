@@ -30,6 +30,8 @@
     <ClCompile Include="synAnaly\const_declaration_list.c" />
     <ClCompile Include="synAnaly\const_declaration_stat.c" />
     <ClCompile Include="synAnaly\continue_stat.c" />
+    <ClCompile Include="synAnaly\FunctionList.c" />
+    <ClCompile Include="synAnaly\FunctionStat.c" />
     <ClCompile Include="synAnaly\var_declaration_list.c" />
     <ClCompile Include="synAnaly\var_declaration_stat.c" />
     <ClCompile Include="synAnaly\dowhile_stat.c" />

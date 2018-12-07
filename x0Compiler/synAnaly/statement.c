@@ -25,12 +25,24 @@ void statement ()
 	{
 		compound_stat ();
 	}
-	else if (sym == semic || sym == ident || sym == doublenum
+	else if (sym == semic || sym == doublenum
 		|| sym == lparen || sym == intnum || sym == minus
 		|| sym == incsym || sym == decsym || sym == oddsym
 		|| sym == notsym || sym == truesym || sym == falsesym)	/* expression statement */
 	{
 		expression_stat ();
+	}
+	else if (sym == ident)
+	{
+		int pos = find_position_v1 (id, tableNum);
+		if (pos == -1)
+		{
+			FunctionStat ();
+		}
+		else
+		{
+			expression_stat ();
+		}
 	}
 	else if (sym == forsym) /* for statement */
 	{

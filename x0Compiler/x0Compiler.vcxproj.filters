@@ -134,6 +134,12 @@
     <ClCompile Include="x0Compiler.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="synAnaly\FunctionList.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\FunctionStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h">

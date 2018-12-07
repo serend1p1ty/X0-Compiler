@@ -39,25 +39,25 @@ void factor ()
 		switch (IncOrDec)
 		{
 			case 1:
-				gen (add, offset, 1, 0);
-				gen (lod, offset, 0, 0);
+				gen (add, offset, 1, tableNum);
+				gen (lod, offset, tableNum, 0);
 				gen (tad, -1, 0, 0);
 				break;
 			case 2:
-				gen (add, offset, -1, 0);
-				gen (lod, offset, 0, 0);
+				gen (add, offset, -1, tableNum);
+				gen (lod, offset, tableNum, 0);
 				gen (tad, 1, 0, 0);
 				break;
 			case 3:
-				gen (add, offset, 1, 0);
-				gen (lod, offset, 0, 0);
+				gen (add, offset, 1, tableNum);
+				gen (lod, offset, tableNum, 0);
 				break;
 			case 4:
-				gen (add, offset, -1, 0);
-				gen (lod, offset, 0, 0);
+				gen (add, offset, -1, tableNum);
+				gen (lod, offset, tableNum, 0);
 				break;
 			case 5:
-				gen (lod, offset, 0, 0);
+				gen (lod, offset, tableNum, 0);
 				break;
 		}
 	}

@@ -182,6 +182,12 @@ void error (int error_code)
 		case 54:
 			printf ("top element isn't integer, 'tad' instruction can't work !\n");
 			break;
+		case 55:
+			printf ("the lack of 'void' !\n");
+			break;
+		case 56:
+			printf ("the function hasn't been declared !\n");
+			break;
 		default:
 			printf ("illegal error code !\n");
 	}

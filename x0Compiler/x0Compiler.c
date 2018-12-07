@@ -7,36 +7,59 @@ void compile ()
 {
 	gen (jmp, 1, 0, 0);
 	readSymbol ();
-
+	int functionNum = FunctionList ();
+	code[0].operand1 = iterCode;
 	if (sym == mainsym)
 	{
-		readSymbol ();
+		tableNum++;
+		iterFctInfo++;
+		strcpy (fctInfo[iterFctInfo].name, id);
+		fctInfo[iterFctInfo].startINTCode = iterCode;
+		fctInfo[iterFctInfo].posSymTables = tableNum;
+		fctInfo[iterFctInfo].parameterNum = 0;
 
-		if (sym == lbrace)
+		readSymbol ();
+		if (sym == lparen)
 		{
 			readSymbol ();
-			int offset = 3;	/* offset of local variable relative to the base address of current activity record */
-			const_declaration_list (&offset); /* offset is increasing when analysing const_declaration_list */
-			var_declaration_list (&offset); /* offset is increasing when analysing var_declaration_list */
-			gen (ini, offset, 0, 0); /* initialize a space in the stack for current activity record */
-			statement_list ();
-
-			if (sym == rbrace)
+			if (sym == rparen)
 			{
-				gen (opr, 0, 0, 0); /* return to the location where current function is called */
+				readSymbol ();
+				if (sym == lbrace)
+				{
+					readSymbol ();
+					int offset = 3;	/* offset of local variable relative to the base address of current activity record */
+					const_declaration_list (&offset); /* offset is increasing when analysing const_declaration_list */
+					var_declaration_list (&offset); /* offset is increasing when analysing var_declaration_list */
+					gen (ini, offset, functionNum, 0); /* initialize a space in the stack for current activity record */
+					statement_list ();
 
-				printf ("\n***************\n");
-				printf ("Compile successfully!\n");
-				printf ("***************\n");
+					if (sym == rbrace)
+					{
+						gen (opr, 0, 0, 0); /* return to the location where current function is called */
+
+						printf ("\n***************\n");
+						printf ("Compile successfully!\n");
+						printf ("***************\n");
+					}
+					else /* the lack of '}' */
+					{
+						error (4);
+					}
+				}
+				else /* the lack of '{' */
+				{
+					error (5);
+				}
 			}
-			else /* the lack of '}' */
+			else /* the lack of ')' */
 			{
-				error (4);
+				error (14);
 			}
 		}
-		else /* the lack of '{' */
+		else /* the lack of '(' */
 		{
-			error (5);
+			error (16);
 		}
 	}
 	else /* the lack of 'main' */
@@ -50,7 +73,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/test_5.txt");
+	strcpy (fileName, "../../testSamples/testFunction.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{

@@ -58,7 +58,7 @@ void read_stat ()
 				break;
 		}
 
-		gen (sto, offset, 0, 0); /* store the value of top element in variable */
+		gen (sto, offset, tableNum, 0); /* store the value of top element in variable */
 		
 		if (sym == semic)
 		{

@@ -24,11 +24,11 @@ int resultType (int dataType1, int dataType2)
 }
 
 /*
- * function: store the j-th element in the i-th position
+ * function: store the j-th element in the j-th position
  */
 void store (struct stackObject* s, int i, int j)
 {
-	/* the types of s[i] and s[j] need to be discussed separately */
+	/* the types of s[j] and s[j] need to be discussed separately */
 	if (s[i].dataType == 2)
 	{
 		if (s[j].dataType == 2)
@@ -75,6 +75,8 @@ void Interpret ()
 	int dimension;	/* the dimension of array */
 	int offset;		/* offset relative to the head of array */
 	int pos;        /* position of the variable in symbol table */
+	int tablePos;
+	int ParameterNum;
 
 	printf ("output of x0 program£º\n");
 
@@ -327,54 +329,55 @@ void Interpret ()
 				}
 				break;
 			case lod: /* load a variable to the top of stack */
-				pos = find_position_v2 (i.operand1);
-				dimension = table[pos].dimension;
+				pos = find_position_v2 (i.operand1, i.operand2);
+				dimension = functionTable[i.operand2][pos].dimension;
 				offset = 0;
-				for (int i = 0; i < dimension; i++)
+				for (int j = 0; j < dimension; j++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t + 1 - dimension + i].dataType == 2)
+					if (s[t + 1 - dimension + j].dataType == 2)
 					{
 						error (47);
 					}
-					offset = offset * table[pos].size[i] + s[t + 1 - dimension + i].intData;
+					offset = offset * functionTable[i.operand2][pos].size[j] + s[t + 1 - dimension + j].intData;
 				}
-				s[t + 1 - dimension] = s[1 + i.operand1 + offset];
+				s[t + 1 - dimension] = s[b + i.operand1 + offset];
 				t = t + 1 - dimension;
 				break;
 			case sto: /* store the top element in the specific variable */
-				pos = find_position_v2 (i.operand1);
-				dimension = table[pos].dimension;
+				pos = find_position_v2 (i.operand1, i.operand2);
+				dimension = functionTable[i.operand2][pos].dimension;
 				offset = 0;
-				for (int i = 0; i < dimension; i++)
+				for (int j = 0; j < dimension; j++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t - dimension + i].dataType == 2)
+					if (s[t - dimension + j].dataType == 2)
 					{
 						error (47);
 					}
-					offset = offset * table[pos].size[i] + s[t - dimension + i].intData;
+					offset = offset * functionTable[i.operand2][pos].size[j] + s[t - dimension + j].intData;
 				}
-				store (s, 1 + i.operand1 + offset, t);
+				store (s, b + i.operand1 + offset, t);
 				s[t - dimension] = s[t];
 				t = t - dimension;
 				break;
-			case add: /* add i.operand2 to the value of a variable */
-				pos = find_position_v2 (i.operand1);
-				dimension = table[pos].dimension;
+			case add: /* add j.operand2 to the value of a variable */
+				tablePos = convertToInt (i.operand3);
+				pos = find_position_v2 (i.operand1, tablePos);
+				dimension = functionTable[tablePos][pos].dimension;
 				offset = 0;
-				for (int i = 0; i < dimension; i++)
+				for (int j = 0; j < dimension; j++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t + 1 - dimension + i].dataType == 2)
+					if (s[t + 1 - dimension + j].dataType == 2)
 					{
 						error (47);
 					}
-					offset = offset * table[pos].size[i] + s[t + 1 - dimension + i].intData;
+					offset = offset * functionTable[tablePos][pos].size[j] + s[t + 1 - dimension + j].intData;
 				}
-				s[1 + i.operand1 + offset].intData += i.operand2;
+				s[b + i.operand1 + offset].intData += i.operand2;
 				break;
-			case tad: /* add i.operand1 to the value of top element */
+			case tad: /* add j.operand1 to the value of top element */
 				/* top element isn't integer, 'tad' instruction can't work */
 				if (s[t].dataType == 2)
 				{
@@ -383,13 +386,23 @@ void Interpret ()
 				s[t].intData += i.operand1;
 				break;
 			case cal: /* call function */
+				s[t + 1].dataType = 1;
+				s[t + 1].intData = 0;
+				s[t + 2].dataType = 1;
+				s[t + 2].intData = b;
+				s[t + 3].dataType = 1;
+				s[t + 3].intData = p;
+				b = t + 1;
+				p = i.operand1;
 				break;
 			case ini: /* initialize a space in the stack for current activity record */
-				intTmp = 4;
+				intTmp = b + 3;
+				ParameterNum = fctInfo[i.operand2].parameterNum;
+				tablePos = fctInfo[i.operand2].posSymTables;
 				/* initialize the type of local variables */
-				for (int i = 0; i < iterTable; i++)
+				for (int i = 0; i < iterators[tablePos]; i++)
 				{
-					struct tableObject to = table[i];
+					struct tableObject to = functionTable[tablePos][i];
 					int totalSize = 1;
 					for (int i = 0; i < to.dimension; i++)
 					{
@@ -444,6 +457,11 @@ void Interpret ()
 								error (49);
 						}
 					}
+				}
+
+				for (int j = 0; j < ParameterNum; j++)
+				{
+					store (s, b + 3 + j, b - ParameterNum + j);
 				}
 				t = t + i.operand1;
 				break;

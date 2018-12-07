@@ -22,7 +22,7 @@ void expression ()
 			
 			readSymbol ();
 			expression ();
-			gen (sto, offset, 0, 0); /* store the top element in the specfic variable */
+			gen (sto, offset, tableNum, 0); /* store the top element in the specfic variable */
 		}
 		else /* current statement is value_expr */
 		{

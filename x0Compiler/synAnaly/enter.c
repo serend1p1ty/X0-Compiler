@@ -5,13 +5,17 @@
  */
 void enter (enum objectKind k, int offset, int* size, int dimension, double value)
 {
-	strcpy (table[iterTable].name, id);
-	table[iterTable].kind = k;
-	table[iterTable].offset = offset;
+	int iterator = iterators[tableNum];
+
+	strcpy (functionTable[tableNum][iterator].name, id);
+	functionTable[tableNum][iterator].kind = k;
+	functionTable[tableNum][iterator].offset = offset;
 	for (int i = 0; i < dimension; i++)
 	{
-		table[iterTable].size[i] = size[i];
+		functionTable[tableNum][iterator].size[i] = size[i];
 	}
-	table[iterTable].dimension = dimension;
-	table[iterTable++].value = value;
+	functionTable[tableNum][iterator].dimension = dimension;
+	functionTable[tableNum][iterator].value = value;
+
+	iterators[tableNum]++;
 }

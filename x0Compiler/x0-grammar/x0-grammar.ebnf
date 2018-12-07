@@ -1,11 +1,16 @@
-program = "main" "{" const_declaration_list var_declaration_list statement_list "}".
+program = FunctionList "main" "(" ")" "{" const_declaration_list var_declaration_list statement_list "}".
+FunctionList = [Function FunctionList].
+Function = "void" ID "(" ParameterList ")" "{" const_declaration_list var_declaration_list statement_list "}".
+ParameterList = [Parameter {"," Parameter}].
+Parameter = type ID.
 const_declaration_list = [const_declaration_stat const_declaration_list].
 const_declaration_stat = "const" type ID "=" ("intNumber" | "doubleNumber" | "true" | "false") ";".
 var_declaration_list = [var_declaration_stat var_declaration_list].
 var_declaration_stat = type ID {["[" intNumber "]"} ";".
 type = "int" | "char" | "bool" | "double".
 statement_list = [statement statement_list].
-statement = if_stat | while_stat | read_stat | write_stat | compound_stat | expression_stat | for_stat | switch_stat | break_stat | exit_stat | continue_stat | dowhile_stat | repeat_stat.
+statement = if_stat | while_stat | read_stat | write_stat | compound_stat | expression_stat | for_stat | switch_stat | break_stat | exit_stat | continue_stat | dowhile_stat | repeat_stat | functionStat.
+functionStat = ID "(" (expression {"," expression}) ")" ";".
 if_stat = "if" "(" expression ")" statement [ "else" statement].
 while_stat = "while" "(" expression ")" statement.
 read_stat = "read" variable ";".

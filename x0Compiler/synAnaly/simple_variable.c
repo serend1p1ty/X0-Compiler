@@ -8,20 +8,20 @@ void simple_variable (enum objectKind* ptr_kind, int* ptr_offset)
 {
 	if (sym == ident)
 	{
-		int pos = find_position_v1 (id);
+		int pos = find_position_v1 (id, tableNum);
 		if (pos == -1)	/* the identifier hasn't been declared */
 		{
 			error (24);
 		}
-		*ptr_kind = table[pos].kind;
-		*ptr_offset = table[pos].offset;
+		*ptr_kind = functionTable[tableNum][pos].kind;
+		*ptr_offset = functionTable[tableNum][pos].offset;
 		
 		readSymbol ();
 		if (sym == lbracket)
 		{
 			/* identifier isn't array */
-			if (table[pos].kind != intArray && table[pos].kind != charArray
-				&& table[pos].kind != boolArray && table[pos].kind != doubleArray)
+			if (functionTable[tableNum][pos].kind != intArray && functionTable[tableNum][pos].kind != charArray
+				&& functionTable[tableNum][pos].kind != boolArray && functionTable[tableNum][pos].kind != doubleArray)
 			{
 				error (26);
 			}
@@ -39,7 +39,7 @@ void simple_variable (enum objectKind* ptr_kind, int* ptr_offset)
 					if (sym == rbracket)
 					{
 						/* array subscript is out of bound */
-						if (tempNum >= table[pos].size[currentDimension++])
+						if (tempNum >= functionTable[tableNum][pos].size[currentDimension++])
 						{
 							error (51);
 						}
@@ -74,10 +74,10 @@ void simple_variable (enum objectKind* ptr_kind, int* ptr_offset)
 		else
 		{
 			/* identifier isn't {const} variable */
-			if (table[pos].kind != intVar && table[pos].kind != charVar
-				&& table[pos].kind != boolVar && table[pos].kind != doubleVar
-				&& table[pos].kind != constIntVar && table[pos].kind != constCharVar
-				&& table[pos].kind != constBoolVar && table[pos].kind != constDoubleVar)
+			if (functionTable[tableNum][pos].kind != intVar && functionTable[tableNum][pos].kind != charVar
+				&& functionTable[tableNum][pos].kind != boolVar && functionTable[tableNum][pos].kind != doubleVar
+				&& functionTable[tableNum][pos].kind != constIntVar && functionTable[tableNum][pos].kind != constCharVar
+				&& functionTable[tableNum][pos].kind != constBoolVar && functionTable[tableNum][pos].kind != constDoubleVar)
 			{
 				error (25);
 			}
