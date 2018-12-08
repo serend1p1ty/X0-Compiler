@@ -39,11 +39,12 @@
     <ClCompile Include="synAnaly\FindPosition.c" />
     <ClCompile Include="synAnaly\ForStat.c" />
     <ClCompile Include="synAnaly\FunctionList.c" />
-    <ClCompile Include="synAnaly\FunctionStat.c" />
+    <ClCompile Include="synAnaly\FunctionCall.c" />
     <ClCompile Include="synAnaly\GenerateINTCode.c" />
     <ClCompile Include="synAnaly\IfStat.c" />
     <ClCompile Include="synAnaly\ReadStat.c" />
     <ClCompile Include="synAnaly\RepeatStat.c" />
+    <ClCompile Include="synAnaly\ReturnStat.c" />
     <ClCompile Include="synAnaly\SimpleValue.c" />
     <ClCompile Include="synAnaly\SimpleVariable.c" />
     <ClCompile Include="synAnaly\StatementList.c" />

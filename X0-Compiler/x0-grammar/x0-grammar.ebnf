@@ -9,8 +9,9 @@ VarDeclarationList = [VarDeclarationStat VarDeclarationList].
 VarDeclarationStat = type ID {["[" intNumber "]"} ";".
 type = "int" | "char" | "bool" | "double".
 statementList = [statement statementList].
-statement = IfStat | WhileStat | ReadStat | WriteStat | CompoundStat | ExpressionStat | ForStat | SwitchStat | BreakStat | ExitStat | ContinueStat | DoWhileStat | RepeatStat.
+statement = IfStat | WhileStat | ReadStat | WriteStat | CompoundStat | ExpressionStat | ForStat | SwitchStat | BreakStat | ExitStat | ContinueStat | DoWhileStat | RepeatStat | ReturnStat.
 
+ReturnStat = "return" [ValueExpr] ";".
 FunctionCall = ID "(" [expression {"," expression}] ")".
 
 IfStat = "if" "(" expression ")" statement [ "else" statement].
@@ -29,10 +30,8 @@ RepeatStat = "repeat" "{" statementList "}" "until" "(" expression ")" ";".
 expression = SimpleVariable "=" expression | ValueExpr.
 variable = SimpleVariable ["++" | "--"] | ("++" | "--") SimpleVariable.
 SimpleVariable = ID {"[" expression "]"}.
-
-ValueExpr = (SimpleValue {("&&" | "||" | "XOR") SimpleValue}) | FunctionCall.
-
+ValueExpr = SimpleValue {("&&" | "||" | "XOR") SimpleValue}.
 SimpleValue = odd AdditiveExpr | AdditiveExpr [(">" | "<" | ">=" | "<=" | "==" | "!=") AdditiveExpr].
 AdditiveExpr = ["-"] term {("+"|"-") term}.
 term = factor {("*"|"/"|"%") factor}.
-factor = ["!"] ("(" expression ")"| variable | intNumber | doubleNumber | "true" | "false").
+factor = ["!"] ("(" expression ")"| variable | intNumber | doubleNumber | "true" | "false" | FunctionCall).

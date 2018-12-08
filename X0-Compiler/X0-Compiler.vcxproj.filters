@@ -71,9 +71,6 @@
     <ClCompile Include="synAnaly\FunctionList.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
-    <ClCompile Include="synAnaly\FunctionStat.c">
-      <Filter>源文件\synAnaly</Filter>
-    </ClCompile>
     <ClCompile Include="synAnaly\GenerateINTCode.c">
       <Filter>源文件\synAnaly</Filter>
     </ClCompile>
@@ -127,6 +124,12 @@
     </ClCompile>
     <ClCompile Include="Interpret.c">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\ReturnStat.c">
+      <Filter>源文件\synAnaly</Filter>
+    </ClCompile>
+    <ClCompile Include="synAnaly\FunctionCall.c">
+      <Filter>源文件\synAnaly</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -44,7 +44,7 @@ int FindPosition_V2 (int offset, int pos)
  */
 int FindPosition_V3 (char* fctName)
 {
-	for (int i = 0; i < iterFctInfo; i++)
+	for (int i = 0; i <= iterFctInfo; i++)
 	{
 		if (strcmp (fctInfo[i].name, fctName) == 0)
 		{

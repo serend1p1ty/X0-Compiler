@@ -26,7 +26,13 @@ void factor ()
 			ErrorHandler (14);
 		}
 	}
-	else if (sym == ident || sym == incsym || sym == decsym) /* sym belong to first(variable) */
+	/* current statement is FunctionCall if the identifier has been declared in symbol table */
+	else if (sym == ident && FindPosition_V1 (id, tableNum) == -1)
+	{
+		FunctionCall ();
+	}
+	else if ((sym == ident && FindPosition_V1 (id, tableNum) != -1)
+		     || sym == incsym || sym == decsym)
 	{
 		ObjectKind kind;
 		int offset;

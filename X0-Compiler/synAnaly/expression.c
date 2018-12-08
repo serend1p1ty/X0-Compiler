@@ -7,26 +7,33 @@ void expression ()
 {
 	if (sym == ident) /* need to read more symbols to determine whether current statement is assignment statement */
 	{
-		backup (); /* backup the status of lexical analysis */
-		int offset;
-		ObjectKind kind;
-		SimpleVariable (&kind, &offset);
-		if (sym == eql) /* current statement is assignment statement */
+		if (FindPosition_V1 (id, tableNum) != -1)
 		{
-			/* constant can't be modified */
-			if (kind == constIntVar || kind == constCharVar
-				|| kind == constBoolVar || kind == constDoubleVar)
+			backup (); /* backup the status of lexical analysis */
+			int offset;
+			ObjectKind kind;
+			SimpleVariable (&kind, &offset);
+			if (sym == eql) /* current statement is assignment statement */
 			{
-				ErrorHandler (32);
+				/* constant can't be modified */
+				if (kind == constIntVar || kind == constCharVar
+					|| kind == constBoolVar || kind == constDoubleVar)
+				{
+					ErrorHandler (32);
+				}
+
+				ReadSymbol ();
+				expression ();
+				GenerateINTCode (sto, offset, tableNum, 0); /* store the top element in the specfic variable */
 			}
-			
-			ReadSymbol ();
-			expression ();
-			GenerateINTCode (sto, offset, tableNum, 0); /* store the top element in the specfic variable */
+			else /* current statement is ValueExpr */
+			{
+				recover (); /* recover the status of lexical analysis from backups */
+				ValueExpr ();
+			}
 		}
-		else /* current statement is ValueExpr */
+		else /* we are sure current statement is ValueExpr if the identifier a function */
 		{
-			recover (); /* recover the status of lexical analysis from backups */
 			ValueExpr ();
 		}
 	}

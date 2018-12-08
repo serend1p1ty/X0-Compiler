@@ -81,8 +81,10 @@ int ParameterList (int* ptr_offset)
  */
 void function ()
 {
-	if (sym == voidsym)
+	if (sym == voidsym || sym == intsym || sym == charsym
+		|| sym == dblsym || sym == charsym)
 	{
+		Symbol tempSym = sym;
 		ReadSymbol ();
 		if (sym == ident)
 		{
@@ -91,6 +93,27 @@ void function ()
 			strcpy (fctInfo[iterFctInfo].name, id);
 			fctInfo[iterFctInfo].startINTCode = iterCode;
 			fctInfo[iterFctInfo].posSymTables = tableNum;
+
+			switch (tempSym)
+			{
+				case voidsym:
+					fctInfo[iterFctInfo].retType = Void;
+					break;
+				case intsym:
+					fctInfo[iterFctInfo].retType = Int;
+					break;
+				case dblsym:
+					fctInfo[iterFctInfo].retType = Double;
+					break;
+				case charsym:
+					fctInfo[iterFctInfo].retType = Char;
+					break;
+				case bolsym:
+					fctInfo[iterFctInfo].retType = Bool;
+					break;
+				default:
+					break;
+			}
 
 			ReadSymbol ();
 			if (sym == lparen)
@@ -113,7 +136,7 @@ void function ()
 						VarDeclarationList (&offset);
 
 						/* initialize a space in the stack for current activity record */
-						GenerateINTCode (ini, offset, iterFctInfo, 0);
+						GenerateINTCode (ini, iterFctInfo, 0, 0);
 
 						StatementList ();
 
@@ -122,7 +145,7 @@ void function ()
 							ReadSymbol ();
 
 							/* return to the location where current function is called */
-							GenerateINTCode (opr, 0, 0, 0);
+							GenerateINTCode (opr, 0, iterFctInfo, 0);
 						}
 						else /* the lack of '}' */
 						{
@@ -160,7 +183,8 @@ void function ()
  */
 void FunctionList ()
 {
-	while (sym == voidsym)
+	while (sym == voidsym || sym == intsym || sym == charsym
+		   || sym == dblsym || sym == charsym)
 	{
 		function ();
 	}

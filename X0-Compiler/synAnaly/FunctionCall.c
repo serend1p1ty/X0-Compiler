@@ -1,9 +1,9 @@
 #include "../global.h"
 
 /*
- * FunctionStat syntactical analyzer
+ * FunctionCall syntactical analyzer
  */
-void FunctionStat ()
+void FunctionCall ()
 {
 	if (sym == ident)
 	{
@@ -26,27 +26,19 @@ void FunctionStat ()
 				|| sym == falsesym || sym == doublenum)
 			{
 				expression ();
+				while (sym == comma)
+				{
+					ReadSymbol ();
+					expression ();
+				}
 			}
-			
-			while (sym == comma)
-			{
-				ReadSymbol ();
-				expression ();
-			}
+
 			if (sym == rparen)
 			{
 				ReadSymbol ();
-				if (sym == semic)
-				{
-					/* function call */
-					GenerateINTCode (cal, fctInfo[pos].startINTCode, 0, 0);
-					
-					ReadSymbol ();
-				}
-				else /* the lack of ';' */
-				{
-					ErrorHandler (10);
-				}
+
+				/* function call */
+				GenerateINTCode (cal, fctInfo[pos].startINTCode, 0, 0);
 			}
 			else /* the lack of ')' */
 			{

@@ -5,71 +5,60 @@
  */
 void statement ()
 {
-	if (sym == ifsym) /* if statement */
+	if (sym == ifsym) /* 'if' statement */
 	{
 		IfStat ();
 	}
-	else if (sym == whilesym) /* while statement */
+	else if (sym == whilesym) /* 'while' statement */
 	{
 		WhileStat ();
 	}
-	else if (sym == readsym) /* read statement */
+	else if (sym == readsym) /* 'read' statement */
 	{
 		ReadStat ();
 	}
-	else if (sym == writesym) /* write statement */
+	else if (sym == writesym) /* 'write' statement */
 	{
 		WriteStat ();
 	}
-	else if (sym == lbrace)	/* compound statement */
+	else if (sym == lbrace)	/* 'compound' statement */
 	{
 		CompoundStat ();
 	}
-	else if (sym == semic || sym == doublenum
+	else if (sym == semic || sym == ident || sym == doublenum
 		|| sym == lparen || sym == intnum || sym == minus
 		|| sym == incsym || sym == decsym || sym == oddsym
-		|| sym == notsym || sym == truesym || sym == falsesym)	/* expression statement */
+		|| sym == notsym || sym == truesym || sym == falsesym)	/* 'expression' statement */
 	{
 		ExpressionStat ();
 	}
-	/* when sym is ident, we are not sure whether current statement is FunctionStat or ExpressionStat  */
-	else if (sym == ident)
-	{
-		int pos = FindPosition_V1 (id, tableNum);
-
-		/* current statement is ExpressionStat if the identifier has been declared in symbol table */
-		if (pos == -1)
-		{
-			FunctionStat ();
-		}
-		else
-		{
-			ExpressionStat ();
-		}
-	}
-	else if (sym == forsym) /* for statement */
+	else if (sym == forsym) /* 'for' statement */
 	{
 		ForStat ();
 	}
-	else if (sym == brksym) /* break statement */
+	else if (sym == brksym) /* 'break' statement */
 	{
 		BreakStat ();
 	}
-	else if (sym == exitsym) /* exit statement */
+	else if (sym == exitsym) /* 'exit' statement */
 	{
 		ExitStat ();
 	}
-	else if (sym == ctnsym) /* continue statement */
+	else if (sym == ctnsym) /* 'continue' statement */
 	{
 		ContinueStat ();
 	}
-	else if (sym == swtcsym) /* switch statement */
+	else if (sym == swtcsym) /* 'switch' statement */
 	{
 		SwitchStat ();
 	}
 	else if (sym == dosym) /* do-while statement */
 	{
 		DoWhileStat ();
+	}
+	else if (sym == retsym) /* 'return' statement */
+	{
+		ReturnStat ();
 	}
 	else if (sym == reptsym) /* repeat-until statement */
 	{
@@ -86,7 +75,7 @@ void statement ()
  */
 void StatementList ()
 {
-	/* execute statement syntactical analyzer if sym belong to first(statement) */
+	/* execute 'statement' syntactical analyzer if sym belong to first('statement') */
 	while (sym == ifsym || sym == whilesym || sym == readsym
 		|| sym == writesym || sym == lbrace || sym == semic
 		|| sym == ident || sym == lparen || sym == intnum
@@ -94,7 +83,7 @@ void StatementList ()
 		|| sym == incsym || sym == decsym || sym == oddsym
 		|| sym == notsym || sym == brksym || sym == exitsym
 		|| sym == ctnsym || sym == swtcsym || sym == dosym 
-		|| sym == reptsym || sym == truesym || sym == falsesym)
+		|| sym == reptsym || sym == truesym || sym == falsesym || sym == retsym)
 	{
 		statement ();
 	}

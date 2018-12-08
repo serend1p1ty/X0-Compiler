@@ -18,6 +18,7 @@ void compile ()
 		fctInfo[iterFctInfo].startINTCode = iterCode;
 		fctInfo[iterFctInfo].posSymTables = tableNum;
 		fctInfo[iterFctInfo].parameterNum = 0;
+		fctInfo[iterFctInfo].retType = Void;
 
 		ReadSymbol ();
 		if (sym == lparen)
@@ -40,13 +41,14 @@ void compile ()
 					VarDeclarationList (&offset);
 
 					/* initialize a space in the stack for current activity record */
-					GenerateINTCode (ini, offset, iterFctInfo, 0);
+					GenerateINTCode (ini, iterFctInfo, 0, 0);
 
 					StatementList ();
 
 					if (sym == rbrace)
 					{
-						GenerateINTCode (opr, 0, 0, 0); /* return to the location where current function is called */
+						/* return to the location where current function is called */
+						GenerateINTCode (opr, 0, iterFctInfo, 0);
 
 						printf ("\n***************\n");
 						printf ("Compile successfully!\n");
@@ -83,7 +85,7 @@ int main ()
 	//printf ("input x0 file name£º");
 	//scanf ("%s", fileName);
 
-	strcpy (fileName, "../../testSamples/testFunction.txt");
+	strcpy (fileName, "../../testSamples/testBrkCtnExit.txt");
 
 	if ((inputFile = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
@@ -105,8 +107,8 @@ int main ()
 	FILE* fout = fopen ("../../testSamples/output.txt", "w");
 	for (int i = 0; i < iterCode; i++)
 	{
-		fprintf (fout, "[%d] %s %d %d %.2f\n", i, fctCodeString[code[i].fct], code[i].operand1, 
-											code[i].operand2, code[i].operand3);
+		fprintf (fout, "[%d] %s %d %d %.2f\n", i, fctCodeString[code[i].fct], code[i].operand1,
+											   code[i].operand2, code[i].operand3);
 	}
 	fclose (fout);
 
