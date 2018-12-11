@@ -19,51 +19,52 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="global.c" />
-    <ClCompile Include="Interpret.c" />
-    <ClCompile Include="lexAnaly\backup.c" />
-    <ClCompile Include="lexAnaly\ReadSymbol.c" />
-    <ClCompile Include="lexAnaly\recover.c" />
-    <ClCompile Include="synAnaly\AdditiveExpr.c" />
-    <ClCompile Include="synAnaly\BreakStat.c" />
-    <ClCompile Include="synAnaly\CompoundStat.c" />
-    <ClCompile Include="synAnaly\ConstDeclarationList.c" />
-    <ClCompile Include="synAnaly\ContinueStat.c" />
-    <ClCompile Include="synAnaly\DoWhileStat.c" />
-    <ClCompile Include="synAnaly\EnterTable.c" />
-    <ClCompile Include="synAnaly\ErrorHandler.c" />
-    <ClCompile Include="synAnaly\ExitStat.c" />
-    <ClCompile Include="synAnaly\expression.c" />
-    <ClCompile Include="synAnaly\ExpressionStat.c" />
-    <ClCompile Include="synAnaly\factor.c" />
-    <ClCompile Include="synAnaly\FindPosition.c" />
-    <ClCompile Include="synAnaly\ForStat.c" />
-    <ClCompile Include="synAnaly\FunctionList.c" />
-    <ClCompile Include="synAnaly\FunctionCall.c" />
-    <ClCompile Include="synAnaly\GenerateINTCode.c" />
-    <ClCompile Include="synAnaly\IfStat.c" />
-    <ClCompile Include="synAnaly\ReadStat.c" />
-    <ClCompile Include="synAnaly\RepeatStat.c" />
-    <ClCompile Include="synAnaly\ReturnStat.c" />
-    <ClCompile Include="synAnaly\SimpleValue.c" />
-    <ClCompile Include="synAnaly\SimpleVariable.c" />
-    <ClCompile Include="synAnaly\StatementList.c" />
-    <ClCompile Include="synAnaly\SwitchStat.c" />
-    <ClCompile Include="synAnaly\term.c" />
-    <ClCompile Include="synAnaly\type.c" />
-    <ClCompile Include="synAnaly\ValueExpr.c" />
-    <ClCompile Include="synAnaly\VarDeclarationList.c" />
-    <ClCompile Include="synAnaly\variable.c" />
-    <ClCompile Include="synAnaly\WhileStat.c" />
-    <ClCompile Include="synAnaly\WriteStat.c" />
-    <ClCompile Include="X0-Compiler.c" />
+    <ClCompile Include="global.cpp" />
+    <ClCompile Include="Interpret.cpp" />
+    <ClCompile Include="lexAnaly\backup.cpp" />
+    <ClCompile Include="lexAnaly\ReadSymbol.cpp" />
+    <ClCompile Include="lexAnaly\recover.cpp" />
+    <ClCompile Include="synAnaly\AdditiveExpr.cpp" />
+    <ClCompile Include="synAnaly\BreakStat.cpp" />
+    <ClCompile Include="synAnaly\CompoundStat.cpp" />
+    <ClCompile Include="synAnaly\ConstDeclarationList.cpp" />
+    <ClCompile Include="synAnaly\ContinueStat.cpp" />
+    <ClCompile Include="synAnaly\DoWhileStat.cpp" />
+    <ClCompile Include="synAnaly\EnterTable.cpp" />
+    <ClCompile Include="synAnaly\ErrorHandler.cpp" />
+    <ClCompile Include="synAnaly\ExitStat.cpp" />
+    <ClCompile Include="synAnaly\expression.cpp" />
+    <ClCompile Include="synAnaly\ExpressionStat.cpp" />
+    <ClCompile Include="synAnaly\factor.cpp" />
+    <ClCompile Include="synAnaly\FindPosition.cpp" />
+    <ClCompile Include="synAnaly\ForStat.cpp" />
+    <ClCompile Include="synAnaly\FunctionCall.cpp" />
+    <ClCompile Include="synAnaly\FunctionList.cpp" />
+    <ClCompile Include="synAnaly\GenINTCode.cpp" />
+    <ClCompile Include="synAnaly\IfStat.cpp" />
+    <ClCompile Include="synAnaly\ReadStat.cpp" />
+    <ClCompile Include="synAnaly\RepeatStat.cpp" />
+    <ClCompile Include="synAnaly\ReturnStat.cpp" />
+    <ClCompile Include="synAnaly\SimpleValue.cpp" />
+    <ClCompile Include="synAnaly\SimpleVariable.cpp" />
+    <ClCompile Include="synAnaly\StatementList.cpp" />
+    <ClCompile Include="synAnaly\SwitchStat.cpp" />
+    <ClCompile Include="synAnaly\term.cpp" />
+    <ClCompile Include="synAnaly\type.cpp" />
+    <ClCompile Include="synAnaly\ValueExpr.cpp" />
+    <ClCompile Include="synAnaly\VarDeclarationList.cpp" />
+    <ClCompile Include="synAnaly\variable.cpp" />
+    <ClCompile Include="synAnaly\WhileStat.cpp" />
+    <ClCompile Include="synAnaly\WriteStat.cpp" />
+    <ClCompile Include="X0-Compiler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="global.h" />
+    <ClInclude Include="stackobj.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{0507C6F3-074C-41B8-9CAC-607801F401CD}</ProjectGuid>
+    <ProjectGuid>{2A4EE78C-7A45-4553-A296-78D8FE45A070}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>X0Compiler</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
