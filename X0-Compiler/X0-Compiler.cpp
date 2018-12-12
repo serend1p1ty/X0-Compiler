@@ -79,7 +79,7 @@ void compile ()
 int main ()
 {
 
-	strcpy (fileName, "../../testSamples/test19.txt");
+	strcpy (fileName, "../../testSamples/test20.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
