@@ -169,14 +169,14 @@ void ReadSymbol ()
 				break;
 			case '&':
 				ReadCh ();
-				if (ch == '=')
+				if (ch == '&')
 				{
-					sym = greateql;
+					sym = andsym;
 					ReadCh ();
 				}
 				else
 				{
-					sym = great;
+					sym = nul;
 				}
 				break;
 			case '|':

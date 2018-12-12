@@ -34,7 +34,7 @@ Calculate the GCD(greatest common divisor) between two numbers.
 ```c++
 int GCD(int x, int y)
 {
-    if (x % y == 0)
+	if (x % y == 0)
 	{
 		return y;
 	}
@@ -54,7 +54,7 @@ main()
 }
 ```
 
-Calculate   $\sum_{i=1}^{10}{i}$.
+Calculate 1 + 2 + ... + 10.
 
 ```c++
 main()
@@ -86,11 +86,11 @@ void FindPrime(int n)
 	{
   		if (!isPrime[i])
   		{
-    		write i;
+			write i;
   		}
   		for (j = 2 * i; j <= n; j = j + i)
   		{
-    		isPrime[j] = 1;
+			isPrime[j] = 1;
   		}
 	}
 }

@@ -29,7 +29,7 @@ void Interpret ()
 	int paraNum;				    /* the number of function's parameters */
 	int fctIndex;                   /* index of the function in fctInfo */
 
-	printf ("output of x0 program£º\n");
+	printf ("output of x0 program:\n");
 
 	/* set static-link, dynamic-link, return-address of main program to 0 */
 	s[1].dataType = Int;
@@ -201,7 +201,7 @@ void Interpret ()
 				for (int i = 0; i < d; i++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t + 1 - d + i].dataType == 2)
+					if (s[t + 1 - d + i].dataType == Double)
 					{
 						ErrorHandler (46);
 					}
@@ -218,7 +218,7 @@ void Interpret ()
 				for (int i = 0; i < d; i++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t - d + i].dataType == 2)
+					if (s[t - d + i].dataType == Double)
 					{
 						ErrorHandler (46);
 					}
@@ -236,7 +236,7 @@ void Interpret ()
 				for (int i = 0; i < d; i++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t + 1 - d + i].dataType == 2)
+					if (s[t + 1 - d + i].dataType == Double)
 					{
 						ErrorHandler (46);
 					}
@@ -252,7 +252,7 @@ void Interpret ()
 				for (int i = 0; i < d; i++)
 				{
 					/* the subscript of array must be integer */
-					if (s[t + 1 - d + i].dataType == 2)
+					if (s[t + 1 - d + i].dataType == Double)
 					{
 						ErrorHandler (46);
 					}
@@ -262,7 +262,7 @@ void Interpret ()
 				break;
 			case tad: /* add inst.opr1 to the value of top element */
 				/* top element isn't integer, 'tad' instruction can't work */
-				if (s[t].dataType == 2)
+				if (s[t].dataType == Double)
 				{
 					ErrorHandler (53);
 				}
@@ -284,7 +284,7 @@ void Interpret ()
 				/* initialize the type of local variables */
 				for (int i = 0; i < fctInfo[inst.opr1].tableSize; i++)
 				{
-					struct tableObject to = fctInfo[inst.opr1].symTable[i];
+					TableObject to = fctInfo[inst.opr1].symTable[i];
 					int totalSize = 1;
 					for (int j = 0; j < to.d; j++)
 					{
@@ -332,9 +332,9 @@ void Interpret ()
 					}
 				}
 				/* load the parameters of the function */
-				for (int j = 0; j < paraNum; j++)
+				for (int i = 0; i < paraNum; i++)
 				{
-					s[b + 3 + j].assign(s[b - paraNum + j]);
+					s[b + 3 + i].assign(s[b - paraNum + i]);
 				}
 				break;
 			case jmp: /* unconditionaly jump */
@@ -342,9 +342,7 @@ void Interpret ()
 				break;
 			case jpc: /* conditionaly jump */
 				if (!s[t].intData)
-				{
 					p = inst.opr1;
-				}
 				t = t - 1;
 				break;
 			default: /* illegal function code */

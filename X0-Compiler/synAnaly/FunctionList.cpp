@@ -74,6 +74,7 @@ void function ()
 			fctNum++;
 			strcpy (fctInfo[fctNum - 1].name, id);
 			fctInfo[fctNum - 1].startINTCode = codeNum;
+			fctInfo[fctNum - 1].tableSize = 0;
 
 			switch (tempSym)
 			{

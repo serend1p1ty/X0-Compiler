@@ -14,10 +14,11 @@ void compile ()
 	if (sym == mainsym)
 	{
 		fctNum++;
-		strcpy (fctInfo[fctNum].name, id);
-		fctInfo[fctNum].startINTCode = codeNum;
-		fctInfo[fctNum].paraNum = 0;
-		fctInfo[fctNum].retType = retVoid;
+		strcpy (fctInfo[fctNum - 1].name, id);
+		fctInfo[fctNum - 1].startINTCode = codeNum;
+		fctInfo[fctNum - 1].paraNum = 0;
+		fctInfo[fctNum - 1].tableSize = 0;
+		fctInfo[fctNum - 1].retType = retVoid;
 
 		ReadSymbol ();
 		if (sym == lparen)
@@ -78,8 +79,9 @@ void compile ()
 
 int main ()
 {
-
-	strcpy (fileName, "../../testSamples/test20.txt");
+	printf ("Input file path: ");
+	scanf ("%s", fileName);
+	//strcpy (fileName, "../../X0-Compiler-GUI/data/input.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
@@ -98,14 +100,15 @@ int main ()
 
 	compile ();
 
-	FILE* fout = fopen ("../../testSamples/INT-Code.txt", "w");
-	for (int i = 0; i < codeNum; i++)
-	{
-		fprintf (fout, "[%d] %s %d %.2f\n", i, fctCodeString[code[i].fct], code[i].opr1, code[i].opr2);
-	}
+	Interpret ();
+
+	/*FILE* fout = fopen ("./data/code.bin", "wb");
+	fwrite (code, sizeof (code[0]), codeNum, fout);
 	fclose (fout);
 
-	Interpret ();
+	fout = fopen ("./data/fctInfo.bin", "wb");
+	fwrite (fctInfo, sizeof (fctInfo[0]), fctNum, fout);
+	fclose (fout);*/
 
 	return 0;
 }

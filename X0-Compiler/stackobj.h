@@ -60,13 +60,13 @@ public:
 		}
 	}
 
-	StackObject operator = (const StackObject& s)
+	/*StackObject operator = (const StackObject& s)
 	{
 		dataType = s.dataType;
 		intData = s.intData;
 		dblData = s.dblData;
 		return *this;
-	}
+	}*/
 
 	StackObject operator + (const StackObject& s)
 	{
@@ -156,8 +156,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			== (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			== (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
@@ -165,8 +165,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			!= (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			!= (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
@@ -174,8 +174,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			> (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			> (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
@@ -183,8 +183,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			>= (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			>= (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
@@ -192,8 +192,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			< (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			< (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
@@ -201,8 +201,8 @@ public:
 	{
 		StackObject res;
 		res.dataType = Bool;
-		res.intData = (dataType != 2 ? intData : dblData)
-			<= (s.dataType != 2 ? s.intData : s.dblData);
+		res.intData = (dataType != Double ? intData : dblData)
+			<= (s.dataType != Double ? s.intData : s.dblData);
 		return res;
 	}
 
