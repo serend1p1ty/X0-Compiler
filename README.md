@@ -46,11 +46,11 @@ int GCD(int x, int y)
 
 main()
 {
-    int a;
-    int b;
-    read a;
-    read b;
-    write GCD(a, b);
+	int a;
+	int b;
+	read a;
+	read b;
+	write GCD(a, b);
 }
 ```
 
