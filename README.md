@@ -1,5 +1,5 @@
 # X0-Compiler
-This is a compiler written by c++ for x0-language which is a kind of programming language like c.
+This is a compiler written by c++ for x0-language which is a kind of programming language like c. You can also use it's GUI in [X0-Compiler-GUI](https://github.com/GooCoder/X0-Compiler-GUI) .
 
 ## Installation
 
