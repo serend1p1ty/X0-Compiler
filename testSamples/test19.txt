@@ -1,0 +1,6 @@
+main()
+{
+	char c;
+	c = 97;
+	write 1 + c;	
+}

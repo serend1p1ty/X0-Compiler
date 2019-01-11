@@ -1,0 +1,35 @@
+main()
+{
+	int i;
+	int ans;
+	ans = 0;
+	for (i = 1; i <= 6; i++)
+	{
+		if (i % 2)
+		{
+			continue;
+		}
+		ans = ans + i;
+	}
+	write ans;
+	
+	ans = 0;
+	for (i = 1; i <= 10; i++)
+	{
+		if (i % 2)
+		{
+			break;
+		}
+		ans = ans + i;
+	}
+	write ans;
+	
+	for (i = 1; i <= 10; i++)
+	{
+		write i;
+		if (i % 2)
+		{
+			exit(0);
+		}
+	}
+}

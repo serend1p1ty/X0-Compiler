@@ -1,0 +1,10 @@
+main()
+{
+	int x;
+	int y;
+	int m[3];
+	read x;
+	read y;
+	m[0] = y - x;
+	write m[0];
+}

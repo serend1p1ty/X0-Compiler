@@ -1,0 +1,40 @@
+main()
+{
+	int i;
+	int j;
+	int k;
+	int tmp;
+	int a[3][4];
+	
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			a[i][j] = 4 - j;
+		}
+	}
+	
+	for (k = 0; k < 3; k++)
+	{
+		for (i = 0; i < 4; i++)
+		{
+			for (j = i + 1; j < 4; j++)
+			{
+				if (a[k][i] > a[k][j])
+				{
+					tmp = a[k][i];
+					a[k][i] = a[k][j];
+					a[k][j] = tmp;
+				}
+			}
+		}
+	}
+	
+	for (i = 0; i < 3; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			write a[i][j];
+		}
+	}
+}

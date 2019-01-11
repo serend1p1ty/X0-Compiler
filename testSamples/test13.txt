@@ -1,0 +1,23 @@
+int sub(int a, int b)
+{
+	return a - b;
+}
+
+int add(int a, int b)
+{
+	int c;
+	int d;
+	c = 3;
+	d = 10;
+	write sub(c * d,  c - d);
+	return a + b;
+}
+
+main()
+{
+	int a;
+	int b;
+	a = 3;
+	b = 2;
+	write add(a * b,  a + b);
+}

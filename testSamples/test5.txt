@@ -1,0 +1,23 @@
+main()
+{
+	int i;
+	int j;
+	char c;
+	c = 97;
+	for(i = 0; i < 10; i++)
+	{
+		for(j = 0; j < 10;)
+		{        
+			if(j>i) 
+			{
+				write(10 * i + j);
+			}
+			else
+			{
+				write(j);
+			}
+			j++;
+		}
+    }   
+	write(c);
+}

@@ -1,0 +1,12 @@
+main()
+{
+	bool a;
+	bool b;
+	bool c;
+	a = b = 1;
+	c = 0;
+	write a && b;
+	write a && c;
+	write a || c;
+	write a xor c;
+}

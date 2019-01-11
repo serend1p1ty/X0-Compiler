@@ -1,0 +1,12 @@
+main()
+{
+	int i;
+	int ans;
+	ans = 0;
+	i = 1;
+	do
+	{
+		ans = ans + i++;
+	} while (i <= 10);
+	write ans;
+}

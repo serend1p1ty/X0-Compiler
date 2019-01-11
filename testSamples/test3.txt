@@ -1,0 +1,14 @@
+main()
+{
+	char c;
+	int x;
+	int y;
+	int m;
+	read x;
+	read y;
+	m = (x * x + y * y) / 2;
+	c = 97;
+	write m;
+	write c;
+	write (c + 1);
+}

@@ -1,0 +1,18 @@
+double add(double a, double b, int c)
+{
+	int i;
+	double ret;
+	ret = 0;
+	for (i = 1; i <= c; i++)
+	{
+		ret = ret + a;
+		a = a + b;
+	}
+	return ret;
+}
+
+main()
+{
+	
+	write add(1, 0.1, 3);
+}

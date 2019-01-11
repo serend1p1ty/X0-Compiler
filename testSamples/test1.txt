@@ -1,0 +1,21 @@
+main()
+{
+	int x;
+	int y;
+	int m[3];
+	read x;
+	read y;
+	if(x > y) 
+	{
+		m[0] = x - y;
+	}
+	else 
+	{
+		m[0] = y - x;
+	}
+	m[1] = x + y;
+	m[2] = x * y;
+	write m[0];
+	write m[1];
+	write m[2];
+}

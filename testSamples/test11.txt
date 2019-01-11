@@ -1,0 +1,6 @@
+main()
+{
+	const double a = 1.5;
+	read a;
+	write a;
+}

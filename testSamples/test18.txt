@@ -1,0 +1,16 @@
+main()
+{
+	int i;
+	int ans;
+	ans = 0;
+	i = 1;
+	repeat
+	{
+		ans = ans + ++i;
+		if (i == 4)
+		{
+			break;
+		}
+	} until (i > 10);
+	write ans;
+}

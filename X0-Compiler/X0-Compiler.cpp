@@ -79,9 +79,9 @@ void compile ()
 
 int main ()
 {
-	printf ("Input file path: ");
-	scanf ("%s", fileName);
-	//strcpy (fileName, "../../X0-Compiler-GUI/data/input.txt");
+	/*printf ("Input file path: ");
+	scanf ("%s", fileName);*/
+	strcpy (fileName, "../../X0-Compiler-GUI/data/input.txt");
 
 	if ((fin = fopen (fileName, "r")) == NULL) /* can't open this file */
 	{
